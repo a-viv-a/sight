@@ -8,13 +8,14 @@
     stroke-width: .05em;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: 1s ease-in-out;
-    animation-name: heartbeat;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: cubic-bezier(.43,.05,.52,.95);
+    animation: cubic-bezier(.43,.05,.52,.95) 2s heartbeat infinite alternate;
   }
+  opacity: 50%;
+  &:hover {
+    opacity: 100%;
+  }
+  transition: opacity .25s ease-in-out;
+  animation: cubic-bezier(.78,-0.01,.63,.92) 10s fade-in;
 }
 
 @keyframes heartbeat {
@@ -24,5 +25,14 @@
 
   to {
     d: path("M1.5,2 L5,5.5 L8.5,2");
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 50%;
   }
 }
