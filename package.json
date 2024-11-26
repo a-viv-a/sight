@@ -1,14 +1,6 @@
 {
-  "name": "example-basic",
+  "name": "sight",
   "type": "module",
-  "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
-    "start": "vinxi start",
-    "version": "vinxi version",
-    "preview": "npm run build && npx wrangler pages dev",
-    "deploy": "npm run build && wrangler pages deploy"
-  },
   "dependencies": {
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.0",
@@ -17,10 +9,9 @@
     "vinxi": "^0.4.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241112.0",
-    "wrangler": "^3.90.0"
   }
 }
