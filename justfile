@@ -22,4 +22,4 @@ check:
     tsc --noEmit --watch
 
 # test:
-#     npx vitest --exclude ".direnv/**"
+#     vitest --exclude ".direnv/**"
