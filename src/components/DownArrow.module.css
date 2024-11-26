@@ -1,0 +1,28 @@
+.downArrow {
+  margin: .5em;
+  width: 1em;
+  height: 1em;
+  & path {
+    fill: none;
+    stroke: #333333;
+    stroke-width: .05em;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: 1s ease-in-out;
+    animation-name: heartbeat;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(.43,.05,.52,.95);
+  }
+}
+
+@keyframes heartbeat {
+  from {
+    d: path("M2,2 L5,6 L8,2");
+  }
+
+  to {
+    d: path("M1.5,2 L5,5.5 L8.5,2");
+  }
+}
