@@ -1,14 +1,13 @@
-vinxi COMMAND:
-    npx vinxi {{COMMAND}}
+export PATH := "./node_modules/.bin:" + env_var('PATH')
 
 dev:
-    just vinxi dev
+    vinxi dev
 
 build:
-    just vinxi build
+    vinxi build
 
 version:
-    just vinxi version
+    vinxi version
 
 preview: build
     wrangler pages dev
