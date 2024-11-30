@@ -8,6 +8,7 @@ const Email: Component<{ address: string }> = props =>
 
 export default function Home() {
   const [sliding, setSliding] = createSignal(false);
+  let details!: HTMLDivElement;
 
   return (
     <main>
@@ -16,10 +17,26 @@ export default function Home() {
         <h1>Aviva Ruben</h1>
         <Email address="aviva@rubenfamily.com" />
         <DownArrow squish={sliding()} onClick={
-          () => { setSliding(v => !v) }
+          () => {
+            const whenDone = () => {
+              setSliding(false)
+            }
+
+            if (window.onscrollend !== undefined) {
+              addEventListener("scrollend", whenDone, { once: true });
+            }
+            else {
+              // safari fallback... :3
+              // https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event#browser_compatibility
+              setTimeout(whenDone, 250)
+            }
+            
+            setSliding(true)
+            details.scrollIntoView()
+          }
         } />
       </div>
-      <div class={styles.card}>
+      <div class={styles.card} ref={details}>
         hi
       </div>
     </main>

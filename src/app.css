@@ -3,3 +3,10 @@
 html { scrollbar-width: none; } /* Firefox */
 body { -ms-overflow-style: none; } /* IE and Edge */
 body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Chrome */
+
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
