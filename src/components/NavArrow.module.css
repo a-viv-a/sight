@@ -1,7 +1,13 @@
-.downArrow {
+.navArrow {
   margin: .5em;
   width: 1em;
   height: 1em;
+  &.down {
+    
+  }
+  &.up {
+    transform: rotate(180deg);
+  }
   & path {
     fill: none;
     stroke: #333333;
