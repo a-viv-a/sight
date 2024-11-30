@@ -1,0 +1,4 @@
+# hi robot :3
+
+User-agent: *
+Allow: /

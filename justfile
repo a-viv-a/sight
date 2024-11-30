@@ -1,6 +1,6 @@
 export PATH := "./node_modules/.bin:" + env_var('PATH')
 
-dev flags:
+dev *flags:
     vinxi dev {{flags}}
 
 build:
