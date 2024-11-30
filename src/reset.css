@@ -31,7 +31,7 @@ ol[role='list'] {
 body {
   /* diverging from the reset... but whatever */
   min-height: 100svh;
-  line-height: 1.5;
+  line-height: var(--ratio);
 }
 
 /* Set shorter line heights on headings and interactive elements */

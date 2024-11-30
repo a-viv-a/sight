@@ -10,3 +10,42 @@ body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Ch
     scroll-behavior: smooth;
   }
 }
+
+:root {
+    /* https://every-layout.dev/rudiments/modular-scale/ */
+    --font-plain: Helvetica Neue,Helvetica,Arial,sans-serif;
+    --font-serif: Georgia,serif;
+    /* --font-special: Barlow Condensed,Helvetica,sans-serif; */
+    --font-mono: Menlo,Courier,Courier New,Andale Mono,monospace;
+    --color-dark: #050505;
+    --color-darkish: #404040;
+    --color-lightish: #e6e6e6;
+    --color-light: #fafafa;
+    --color-mid: grey;
+    --ratio: 1.5;
+    --s-5: calc(var(--s-4) / var(--ratio));
+    --s-4: calc(var(--s-3) / var(--ratio));
+    --s-3: calc(var(--s-2) / var(--ratio));
+    --s-2: calc(var(--s-1) / var(--ratio));
+    --s-1: calc(var(--s0) / var(--ratio));
+    --s0: 1rem;
+    --s1: calc(var(--s0) * var(--ratio));
+    --s2: calc(var(--s1) * var(--ratio));
+    --s3: calc(var(--s2) * var(--ratio));
+    --s4: calc(var(--s3) * var(--ratio));
+    --s5: calc(var(--s4) * var(--ratio));
+    --measure: 65ch;
+    --line-height: var(--ratio);
+    --line-height-small: calc(0.8*var(--ratio));
+    --border-thin: var(--s-5);
+    --border-thick: var(--s-2);
+    line-height: var(--ratio);
+    font-size: calc(.333vw + 1em);
+    font-family: var(--font-plain);
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+
+code {
+  font-family: var(--font-mono);
+}

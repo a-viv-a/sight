@@ -2,9 +2,9 @@
 
 .file {
   background-color: #f9f8f4;
-  padding: 1em;
-  border-radius: .5em;
-  line-height: 1.5;
+  padding: var(--s1);
+  border-radius: .25ch;
+  border: solid 1px var(--color-mid);
 }
 
 .groupHead {
@@ -14,7 +14,7 @@
 .groupBody {
   display: grid;
   grid-template-columns: min-content 1fr;
-  column-gap: 1em;
+  column-gap: 1ch;
   overflow: hidden;
 }
 
