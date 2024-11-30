@@ -8,8 +8,13 @@
     stroke-width: .05em;
     stroke-linecap: round;
     stroke-linejoin: round;
-    @media (prefers-reduced-motion: no-preference) {
-      animation: cubic-bezier(.43,.05,.52,.95) 2s heartbeat infinite alternate;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    &.squish path {
+        animation: ease-in-out .1s forwards squish 1;
+    }
+    &:not(.squish) path {
+        animation: cubic-bezier(.43,.05,.52,.95) 2s heartbeat infinite alternate;
     }
   }
   opacity: 50%;
@@ -17,6 +22,7 @@
     opacity: 100%;
   }
   transition: opacity .25s ease-in-out;
+  cursor: pointer;
 }
 
 @keyframes heartbeat {
@@ -26,5 +32,14 @@
 
   to {
     d: path("M1.5,2 L5,5.5 L8.5,2");
+  }
+}
+
+@keyframes squish {
+  from {
+    d: path("M2,2 L5,6 L8,2");
+  }
+  to {
+    d: path("M4,1 L5,7 L6,1");
   }
 }
