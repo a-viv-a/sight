@@ -11,7 +11,7 @@
 .page {
   align-items: start;
   padding: 0 var(--s2) var(--s2);
-  & > * + * {
+  & > *:not(svg) + * {
   	margin-top: var(--s1);
   }
 }
@@ -26,15 +26,16 @@
   user-select: none;
   color: var(--color-dark);
   &.single {
-  /* @media (prefers-reduced-motion: no-preference) { */
-    color: var(--color-darkish);
-    animation: cubic-bezier(.43,.05,.52,.95) 2s pulse infinite alternate;
-  /* } */
+    @media (prefers-reduced-motion: no-preference) {
+      color: var(--color-darkish);
+      animation: cubic-bezier(.43,.05,.52,.95) 2s pulse infinite alternate;
+    }
   }
 }
 @keyframes pulse {
   from {
     color: var(--color-darkish);
+    transform: rotate(180deg);
   }
   to {
     color: var(--color-dark);
