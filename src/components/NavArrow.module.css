@@ -2,6 +2,7 @@
   margin: var(--s1);
   width: var(--s0);
   height: var(--s0);
+  align-self: center;
   &.down {
     
   }

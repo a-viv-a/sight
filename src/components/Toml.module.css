@@ -4,7 +4,8 @@
   background-color: #f9f8f4;
   padding: var(--s1);
   border-radius: .25ch;
-  border: solid 1px var(--color-mid);
+  border: solid var(--s-6) var(--color-lightish);
+  width: 100%;
 }
 
 .groupHead {

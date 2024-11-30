@@ -23,6 +23,7 @@ body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Ch
     --color-light: #fafafa;
     --color-mid: grey;
     --ratio: 1.5;
+    --s-6: calc(var(--s-5) / var(--ratio));
     --s-5: calc(var(--s-4) / var(--ratio));
     --s-4: calc(var(--s-3) / var(--ratio));
     --s-3: calc(var(--s-2) / var(--ratio));
@@ -48,4 +49,16 @@ body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Ch
 
 code {
   font-family: var(--font-mono);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+figcaption {
+  max-inline-size: var(--measure);
 }
