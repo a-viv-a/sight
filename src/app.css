@@ -1,1 +1,5 @@
 @import url("reset.css");
+
+html { scrollbar-width: none; } /* Firefox */
+body { -ms-overflow-style: none; } /* IE and Edge */
+body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Chrome */
