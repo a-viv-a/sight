@@ -1,0 +1,44 @@
+/* https://github.com/xaverh/theme-ysgrifennwr/blob/master/themes/ysgrifennwr.json */
+
+.file {
+  background-color: #f9f8f4;
+  padding: 1em;
+  border-radius: .5em;
+  line-height: 1.5;
+}
+
+.groupHead {
+  color: #7B4474;
+}
+
+.groupBody {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 1em;
+  overflow: hidden;
+}
+
+.key {
+  color: #B062A7;
+}
+
+.val {
+  & * {
+    color: #2C65B5;
+  }
+  & a {
+    text-decoration-skip-ink: auto;
+    transition: color ease-in-out .35s;
+    &:hover {
+      color: #A25D0E;
+    }
+  }
+}
+
+.comment {
+  color: #B8B8B8;
+}
+
+.fullwidth {
+  grid-column: -1/1;
+}
