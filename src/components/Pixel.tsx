@@ -61,16 +61,30 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     ctx.putImageData(imageData, 0, 0)
   })
 
-  return <canvas ref={canvas} width={width} height={width} class={styles.canvas} onClick={props.handleTouch === undefined ? undefined : (e) => {
-    // TODO: save / cache?
+  const [mouseDown, setMouseDown] = createSignal(false)
+
+  const eventToIndex = (e: { offsetX: number, offsetY: number }): number => {
     const rect = canvas.getBoundingClientRect()
     const x = Math.floor(e.offsetX / rect.width * width),
-          y = Math.floor(e.offsetY / rect.height * width)
+      y = Math.floor(e.offsetY / rect.height * width)
 
-    const i = y * width + x
+    return y * width + x
+  }
 
-    props.handleTouch!([i])
-  }}/>
+  return <canvas ref={canvas} width={width} height={width} class={styles.canvas} {...(
+    props.handleTouch === undefined ? {} : {
+      onmousedown: (e) => { 
+        setMouseDown(true)
+        props.handleTouch!([eventToIndex(e)])
+      },
+      onmouseup: () => { setMouseDown(false) },
+      onmousemove: (e: MouseEvent) => {
+        if (mouseDown()) {
+          props.handleTouch!([eventToIndex(e)])
+        }
+      }
+    }
+  )} />
 }
 
 const PaintButton: Component = props =>
@@ -106,9 +120,9 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
         newData[point] = color()
       }
       p.setData(newData)
-    }}/>
+    }} />
     <div class={styles.palette}>
-      <Index each={palette}>{(rgba, i) => 
+      <Index each={palette}>{(rgba, i) =>
         <button
           classList={{
             [styles.selectedColor]: i === color()
@@ -117,8 +131,8 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
           onClick={() => {
             setColor(i)
           }}
-          
-          />
+
+        />
       }</Index>
     </div>
   </div>
