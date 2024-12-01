@@ -3,6 +3,7 @@ import { Component, createSignal, Index } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
+import Pixel, { Render } from "~/components/Pixel";
 
 const Email: Component<{ address: string }> = props =>
   <a class={styles.email} href={`mailto:${props.address}`} title={props.address}>{props.address}</a>
@@ -57,8 +58,14 @@ export default function Home() {
   let landing!: HTMLDivElement;
   let details!: HTMLDivElement;
 
+  const data = new Uint8Array(64)
+  for (let i = 0; i < 64; i++) {
+    data[i] = i % 6
+  }
+
   return (
     <main>
+      <Pixel.Render data={data}/>
       <div class={styles.card} ref={landing}>
         <Title>Aviva Ruben</Title>
         <h1>Aviva Ruben</h1>
