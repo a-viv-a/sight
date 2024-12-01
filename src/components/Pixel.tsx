@@ -1,8 +1,8 @@
-import { Component, createEffect, Index } from "solid-js"
+import { Component, createEffect, For, Index } from "solid-js"
 import styles from "./Pixel.module.css"
 
 const hexToRGBA = (hex: string) => {
-  const 
+  const
     a = parseInt(hex.slice(0, 2), 16),
     r = parseInt(hex.slice(2, 4), 16),
     g = parseInt(hex.slice(4, 6), 16),
@@ -28,7 +28,7 @@ FFffeecc
 FFffb0a3
 FFff6973
 `
-// primative parser
+  // primative parser
   .split("\n")
   .filter(l => !l.startsWith(";") && l.length === 8)
   .map(hexToRGBA)
@@ -51,7 +51,7 @@ export const Render: Component<{ data: Uint8Array }> = props => {
     // Iterate through every pixel
     for (let src = 0, dest = 0; src < props.data.length && dest < imageData.data.length; src += 1, dest += 4) {
       const [r, g, b, a] = palette[Math.min(depth, props.data[src])]
-      console.log({r, g, b, a})
+      // console.log({r, g, b, a})
       imageData.data[dest + 0] = r; // R value
       imageData.data[dest + 1] = g; // G value
       imageData.data[dest + 2] = b; // B value
@@ -64,13 +64,27 @@ export const Render: Component<{ data: Uint8Array }> = props => {
   return <canvas ref={canvas} width={width} height={width} class={styles.canvas} />
 }
 
-export const Gallery: Component<{ paintings: Uint8Array[] }> = props =>
-  <div class={styles.gallery}>
+const PaintButton: Component = props =>
+  <a href="/create" title="create new pixel art painting" class={styles.create}>
+    <svg viewBox="0 0 10 10">
+      <path d="M5,2 L5,8" />
+      <path d="M2,5 L8,5" />
+    </svg>
+  </a>
+
+export const Gallery: Component<{ paintings: Uint8Array[] }> = props => {
+
+  return <div class={styles.gallery}>
+    {/* pack such that neighbors are consistent... */}
+    <For each={new Array((props.paintings.length) % width - 1)}>{() =>
+      <div></div>
+    }</For>
+    <PaintButton />
     <Index each={props.paintings}>{(data, i) =>
       <Render data={data()} />
     }</Index>
   </div>
-
+}
 export default {
   Render,
   Gallery
