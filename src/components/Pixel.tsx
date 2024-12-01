@@ -1,4 +1,4 @@
-import { Component, createEffect } from "solid-js"
+import { Component, createEffect, Index } from "solid-js"
 import styles from "./Pixel.module.css"
 
 const hexToRGBA = (hex: string) => {
@@ -64,6 +64,14 @@ export const Render: Component<{ data: Uint8Array }> = props => {
   return <canvas ref={canvas} width={width} height={width} class={styles.canvas} />
 }
 
+export const Gallery: Component<{ paintings: Uint8Array[] }> = props =>
+  <div>
+    <Index each={props.paintings}>{(data, i) =>
+      <Render data={data()} />
+    }</Index>
+  </div>
+
 export default {
-  Render
+  Render,
+  Gallery
 }
