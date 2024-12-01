@@ -36,7 +36,7 @@ FFff6973
 const depth = palette.length - 1
 
 
-export const Render: Component<{ data: Uint8Array }> = props => {
+export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void }> = props => {
   let canvas!: HTMLCanvasElement;
 
   createEffect(() => {
@@ -61,7 +61,16 @@ export const Render: Component<{ data: Uint8Array }> = props => {
     ctx.putImageData(imageData, 0, 0)
   })
 
-  return <canvas ref={canvas} width={width} height={width} class={styles.canvas} />
+  return <canvas ref={canvas} width={width} height={width} class={styles.canvas} onClick={props.handleTouch === undefined ? undefined : (e) => {
+    // TODO: save / cache?
+    const rect = canvas.getBoundingClientRect()
+    const x = Math.floor(e.offsetX / rect.width * width),
+          y = Math.floor(e.offsetY / rect.height * width)
+
+    const i = y * width + x
+
+    props.handleTouch!([i])
+  }}/>
 }
 
 const PaintButton: Component = props =>
@@ -86,11 +95,18 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => {
   </div>
 }
 
-export const Paint: Component<{ data: Accessor<Uint8Array[]>, setData: Setter<Uint8Array[]> }> = p => {
+export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint8Array> }> = p => {
   const [color, setColor] = createSignal(0)
 
   return <div class={styles.paint}>
-    <Render data={p.data()[p.data().length - 1]} />
+    <Render data={p.data()} handleTouch={(points) => {
+      const data = p.data();
+      const newData = new Uint8Array(data)
+      for (const point of points) {
+        newData[point] = color()
+      }
+      p.setData(newData)
+    }}/>
     <div class={styles.palette}>
       <Index each={palette}>{(rgba, i) => 
         <button
