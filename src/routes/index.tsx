@@ -58,14 +58,8 @@ export default function Home() {
   let landing!: HTMLDivElement;
   let details!: HTMLDivElement;
 
-  const data = new Uint8Array(64)
-  for (let i = 0; i < 64; i++) {
-    data[i] = i % 6
-  }
-
   return (
     <main>
-      <Pixel.Render data={data}/>
       <div class={styles.card} ref={landing}>
         <Title>Aviva Ruben</Title>
         <h1>Aviva Ruben</h1>
