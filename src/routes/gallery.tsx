@@ -32,6 +32,12 @@ for (let p = 0; p <= 8; p++) {
     paint[i] = i %2 + i % 3 + i % 4
   }
 }
+for (let p = 1; p <= 24; p++) {
+  let paint = paintings[paintings.length] = new Uint8Array(64)
+  for (let i = 0; i < 64; i++) {
+    paint[i] = i % p / 4
+  }
+}
 
 export default function NotFound() {
   return (

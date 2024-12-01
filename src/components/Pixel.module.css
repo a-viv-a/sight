@@ -1,4 +1,10 @@
 .canvas {
-  width: 128px;
   image-rendering: pixelated;
+  width: 100%
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
 }

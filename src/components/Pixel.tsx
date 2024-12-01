@@ -65,7 +65,7 @@ export const Render: Component<{ data: Uint8Array }> = props => {
 }
 
 export const Gallery: Component<{ paintings: Uint8Array[] }> = props =>
-  <div>
+  <div class={styles.gallery}>
     <Index each={props.paintings}>{(data, i) =>
       <Render data={data()} />
     }</Index>
