@@ -1,4 +1,4 @@
-import { Component, createEffect, For, Index } from "solid-js"
+import { Accessor, Component, createEffect, createSignal, For, Index, Setter } from "solid-js"
 import styles from "./Pixel.module.css"
 
 const hexToRGBA = (hex: string) => {
@@ -65,7 +65,7 @@ export const Render: Component<{ data: Uint8Array }> = props => {
 }
 
 const PaintButton: Component = props =>
-  <a href="/create" title="create new pixel art painting" class={styles.create}>
+  <a href="/paint" title="create new pixel art painting" class={styles.create}>
     <svg viewBox="0 0 10 10">
       <path d="M5,2 L5,8" />
       <path d="M2,5 L8,5" />
@@ -85,6 +85,29 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => {
     }</Index>
   </div>
 }
+
+export const Paint: Component<{ data: Accessor<Uint8Array[]>, setData: Setter<Uint8Array[]> }> = p => {
+  const [color, setColor] = createSignal(0)
+
+  return <div class={styles.paint}>
+    <Render data={p.data()[p.data().length - 1]} />
+    <div class={styles.palette}>
+      <Index each={palette}>{(rgba, i) => 
+        <button
+          classList={{
+            [styles.selectedColor]: i === color()
+          }}
+          style={`background-color: rgba(${rgba()[0]}, ${rgba()[1]}, ${rgba()[2]}, ${rgba()[3]})`}
+          onClick={() => {
+            setColor(i)
+          }}
+          
+          />
+      }</Index>
+    </div>
+  </div>
+}
+
 export default {
   Render,
   Gallery

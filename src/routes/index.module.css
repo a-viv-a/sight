@@ -11,6 +11,9 @@
 .page {
   align-items: start;
   padding: 0 var(--s2) var(--s2);
+  &.padtop {
+    padding-top: var(--s2);
+  }
   & > *:not(svg) + * {
   	margin-top: var(--s1);
   }

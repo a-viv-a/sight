@@ -29,7 +29,7 @@ for (let p = 0; p <= 2; p++) {
 for (let p = 0; p <= 8; p++) {
   let paint = paintings[paintings.length] = new Uint8Array(64)
   for (let i = 0; i < 64; i++) {
-    paint[i] = i %2 + i % 3 + i % 4
+    paint[i] = i % 2 + i % 3 + i % 4
   }
 }
 for (let p = 1; p <= 24; p++) {
@@ -39,14 +39,14 @@ for (let p = 1; p <= 24; p++) {
   }
 }
 
-export default function NotFound() {
+export default function GalleryRoute() {
   return (
-    <main class={styles.page}>
+    <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
       <Title>Gallery</Title>
       <p>
         This is user generated content. If there is something really bad please reach out and let me know.
       </p>
-      <Gallery paintings={paintings}/>
+      <Gallery paintings={paintings} />
     </main>
   );
 }
