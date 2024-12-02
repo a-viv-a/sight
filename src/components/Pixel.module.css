@@ -28,24 +28,33 @@
 
 .paint {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 6fr 1fr;
+  justify-content: center;
   max-width: var(--measure);
   max-height: 100svh;
   align-self: center;
+  height: 100%;
+  width: 100%;
+  /* width: min(100%, var(--measure)); */
+  /* width: 100vmin; */
+  & > * {
+    max-height: 100svh;
+  }
   & .canvas {
     height: 100%;
+    max-width: 100svh;
+    aspect-ratio: 1 / 1;
   }
   & .palette {
-    flex-grow: 1;
     margin-left: var(--s-3);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     & button {
-      min-width: var(--s2);
-      min-height: var(--s2);
       aspect-ratio: 1 / 1;
       flex-grow: 1;
+      flex-shrink: 1;
       transition: margin-left ease-in-out .1s;
       border: var(--border-thin) solid var(--color-dark);
       & code {

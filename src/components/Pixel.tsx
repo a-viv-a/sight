@@ -139,9 +139,8 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
           onClick={() => {
             setColor(i)
           }}
-
-        ><code>{i}</code></button>
-      }</Index>
+        />
+    }</Index>
     </div>
   </div>
 }
