@@ -35,6 +35,8 @@ FFff6973
 
 const depth = palette.length - 1
 
+const fclamp = (min: number, v: number, max: number) =>
+  Math.floor(Math.max(min, Math.min(max, v)))
 
 export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void }> = props => {
   let canvas!: HTMLCanvasElement;
@@ -65,10 +67,10 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
 
   const eventToIndex = (e: { offsetX: number, offsetY: number }): number => {
     const rect = canvas.getBoundingClientRect()
-    const x = Math.floor(e.offsetX / rect.width * width),
-      y = Math.floor(e.offsetY / rect.height * width)
+    const x = e.offsetX / rect.width * width,
+      y = e.offsetY / rect.height * width
 
-    return y * width + x
+    return fclamp(0, y, width - 1) * width + fclamp(0 , x, width - 1)
   }
 
   return <canvas ref={canvas} width={width} height={width} class={styles.canvas} {...(
