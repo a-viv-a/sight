@@ -5,7 +5,7 @@ import { Paint } from "~/components/Pixel";
 
 export default function PaintRoute() {
   const [data, setData] = createSignal(new Uint8Array(64))
-  
+
   return (
     <main class={styles.page}>
       <Title>Paint</Title>

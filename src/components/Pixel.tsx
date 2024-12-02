@@ -1,5 +1,6 @@
-import { Accessor, Component, createEffect, createSignal, For, Index, Setter } from "solid-js"
+import { Accessor, batch, Component, createEffect, createSignal, For, Index, Setter } from "solid-js"
 import styles from "./Pixel.module.css"
+import { makeEventListener } from "@solid-primitives/event-listener";
 
 const hexToRGBA = (hex: string) => {
   const
@@ -70,16 +71,21 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     const x = e.offsetX / rect.width * width,
       y = e.offsetY / rect.height * width
 
-    return fclamp(0, y, width - 1) * width + fclamp(0 , x, width - 1)
+    return fclamp(0, y, width - 1) * width + fclamp(0, x, width - 1)
   }
+
+  if (props.handleTouch !== undefined && typeof window !== 'undefined') makeEventListener(window.document, "mouseup", (e) => {
+    setMouseDown(false)
+  })
 
   return <canvas ref={canvas} width={width} height={width} class={styles.canvas} {...(
     props.handleTouch === undefined ? {} : {
-      onmousedown: (e) => { 
-        setMouseDown(true)
-        props.handleTouch!([eventToIndex(e)])
+      onmousedown: (e) => {
+        batch(() => {
+          setMouseDown(true)
+          props.handleTouch!([eventToIndex(e)])
+        })
       },
-      onmouseup: () => { setMouseDown(false) },
       onmousemove: (e: MouseEvent) => {
         if (mouseDown()) {
           props.handleTouch!([eventToIndex(e)])
