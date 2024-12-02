@@ -19,10 +19,14 @@
   font-size: 0;
   & path {
     fill: none;
+    transition: stroke .25s ease;
     stroke: var(--color-mid);
     stroke-width: var(--s-7);
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+  &:hover path {
+    stroke: var(--color-light);
   }
 }
 

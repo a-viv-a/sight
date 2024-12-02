@@ -44,7 +44,7 @@ export default function GalleryRoute() {
     <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
       <Title>Gallery</Title>
       <p>
-        This is user generated content. If there is something really bad please reach out and let me know.
+        User generated content. Leave your mark!
       </p>
       <Gallery paintings={paintings} />
     </main>
