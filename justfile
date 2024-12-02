@@ -18,6 +18,9 @@ deploy: build
 deploy-main: build
     wrangler pages deploy --branch=main
 
+typegen:
+    wrangler types --env-interface Wenv
+
 check:
     tsc --noEmit --watch
 
