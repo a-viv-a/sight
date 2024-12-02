@@ -28,24 +28,33 @@
 
 .paint {
   display: flex;
+  flex-direction: row;
   flex-wrap: nowrap;
   flex-direction: row;
+  width: 100%;
+  max-width: 95vmin;
+  align-self: center;
   & .canvas {
     flex-grow: 5;
-    width: 256px;
   }
   & .palette {
     flex-grow: 1;
     margin-left: var(--s-3);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 10%;
+    min-height: 100%;
     & button {
-      width: var(--s2);
-      height: var(--s2);
+      min-width: var(--s2);
+      min-height: var(--s2);
+      /* padding-bottom: 100%; */
+      aspect-ratio: 1 / 1;
       flex-grow: 1;
       transition: margin-left ease-in-out .1s;
       border: var(--border-thin) solid var(--color-dark);
+      & code {
+        color: black;
+      }
       &:not(.selectedColor) {
         margin-left: var(--s-1);
       }

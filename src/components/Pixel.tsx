@@ -140,7 +140,7 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
             setColor(i)
           }}
 
-        />
+        ><code>{i}</code></button>
       }</Index>
     </div>
   </div>
