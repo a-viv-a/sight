@@ -26,44 +26,39 @@
   }
 }
 
+/* this is... a mess. come back! */
+/* TODO: make this not awful */
 .paint {
-  display: grid;
-  grid-template-columns: 6fr 1fr;
-  justify-content: center;
-  max-width: var(--measure);
-  max-height: 100svh;
+  display: flex;
   align-self: center;
-  height: 100%;
-  width: 100%;
-  /* width: min(100%, var(--measure)); */
-  /* width: 100vmin; */
-  & > * {
-    max-height: 100svh;
-  }
+  gap: var(--s-3);
+  flex-direction: row;
+  width: fit-content;
   & .canvas {
-    height: 100%;
-    max-width: 100svh;
-    aspect-ratio: 1 / 1;
+    /* height: 80vmin; */
+    /* width: 80vmin; */
+    max-width: 256px;
+    width: 100vmin;
+    flex: 1 1 auto;
+    border: solid var(--border-thin) var(--color-dark);
   }
   & .palette {
-    margin-left: var(--s-3);
+    flex: 1 0 var(--s3);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     width: 100%;
+    max-width: var(--s4);
     & button {
-      aspect-ratio: 1 / 1;
       flex-grow: 1;
       flex-shrink: 1;
-      transition: margin-left ease-in-out .1s;
+      transition: margin ease-in-out .1s;
       border: var(--border-thin) solid var(--color-dark);
-      & code {
-        color: black;
-        user-select: none;
-        -webkit-user-select: none;
-      }
       &:not(.selectedColor) {
         margin-left: var(--s-1);
+      }
+      &.selectedColor {
+        margin-right: var(--s-1);
       }
     }
   }
