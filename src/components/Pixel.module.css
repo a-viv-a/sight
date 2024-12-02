@@ -8,7 +8,7 @@
   grid-template-columns: repeat(8, 1fr);
   width: 100%;
   max-width: var(--measure);
-  gap: var(--s-6);
+  /* gap: var(--s-6); */
   padding: var(--s-5);
   background-color: var(--color-dark);
 }
