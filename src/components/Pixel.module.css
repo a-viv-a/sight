@@ -27,33 +27,31 @@
 }
 
 .paint {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  width: 100%;
-  max-width: 95vmin;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  max-width: var(--measure);
+  max-height: 100svh;
   align-self: center;
   & .canvas {
-    flex-grow: 5;
+    height: 100%;
   }
   & .palette {
     flex-grow: 1;
     margin-left: var(--s-3);
     display: flex;
     flex-direction: column;
-    width: 10%;
-    min-height: 100%;
+    width: 100%;
     & button {
       min-width: var(--s2);
       min-height: var(--s2);
-      /* padding-bottom: 100%; */
       aspect-ratio: 1 / 1;
       flex-grow: 1;
       transition: margin-left ease-in-out .1s;
       border: var(--border-thin) solid var(--color-dark);
       & code {
         color: black;
+        user-select: none;
+        -webkit-user-select: none;
       }
       &:not(.selectedColor) {
         margin-left: var(--s-1);

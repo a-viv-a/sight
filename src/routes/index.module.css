@@ -27,6 +27,7 @@
 .pronoun {
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
   color: var(--color-dark);
   &.single {
     @media (prefers-reduced-motion: no-preference) {
