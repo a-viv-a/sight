@@ -37,14 +37,16 @@ export const getPaintings = async () => {
 
 export const addPainting = action(async (painting: Uint8Array) => {
   "use server"
-  const { env, request, clientAddress } = event()
-  if (typeof clientAddress !== "string") {
-    console.error("missing client address...")
+  const { env, request } = event()
+  const ip = request.headers.get('CF-Connecting-IP')
+  if (ip === null) {
+    console.error("missing ip address in headers...")
+    console.error(request.headers)
     return `missing ip address?`
   }
   const result = await env.DB.prepare(
     `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
-  ).bind(painting, clientAddress)
+  ).bind(painting, ip)
     .run()
   // console.log(result)
 
