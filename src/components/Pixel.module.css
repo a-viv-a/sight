@@ -2,7 +2,8 @@
   image-rendering: pixelated;
   width: 100%;
   &[aria-disabled="true"] {
-    opacity: 0.8;
+    opacity: 0.5;
+    background-color: unset;
   }
 }
 
