@@ -34,6 +34,9 @@ FFff6973
   .filter(l => !l.startsWith(";") && l.length === 8)
   .map(hexToRGBA)
 
+const rgbaString = (rgba: readonly [number, number, number, number]) =>
+  `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`
+
 const depth = palette.length - 1
 
 const fclamp = (min: number, v: number, max: number) =>
@@ -78,21 +81,26 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     setMouseDown(false)
   })
 
-  return <canvas ref={canvas} width={width} height={width} class={styles.canvas} {...(
-    props.handleTouch === undefined ? {} : {
-      onmousedown: (e) => {
-        batch(() => {
-          setMouseDown(true)
-          props.handleTouch!([eventToIndex(e)])
-        })
-      },
-      onmousemove: (e: MouseEvent) => {
-        if (mouseDown()) {
-          props.handleTouch!([eventToIndex(e)])
+  return <canvas ref={canvas} width={width} height={width} class={styles.canvas}
+    style={{
+      // make SSR work better for paint!
+      "background-color": rgbaString(palette[0])
+    }}
+    {...(
+      props.handleTouch === undefined ? {} : {
+        onmousedown: (e) => {
+          batch(() => {
+            setMouseDown(true)
+            props.handleTouch!([eventToIndex(e)])
+          })
+        },
+        onmousemove: (e: MouseEvent) => {
+          if (mouseDown()) {
+            props.handleTouch!([eventToIndex(e)])
+          }
         }
       }
-    }
-  )} />
+    )} />
 }
 
 const PaintButton: Component<{ col: number }> = props =>
@@ -103,18 +111,21 @@ const PaintButton: Component<{ col: number }> = props =>
     </svg>
   </a>
 
-export const Gallery: Component<{ paintings: Uint8Array[] }> = props => {
-
-  return <div class={styles.gallery}>
+export const Gallery: Component<{ paintings: Uint8Array[] }> = props => <>
+  <p>
+    User generated content. Leave your mark!
+  </p>
+  <div class={styles.gallery}>
     <PaintButton col={width - ((props.paintings.length) % width)} />
     <Index each={props.paintings}>{(data, i) =>
       <Render data={data()} />
     }</Index>
   </div>
-}
+</>
+
 
 export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint8Array> }> = p => {
-  const [color, setColor] = createSignal(0)
+  const [color, setColor] = createSignal(palette.length - 1)
 
   return <div class={styles.paint}>
     <Render data={p.data()} handleTouch={(points) => {
@@ -131,7 +142,7 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
           classList={{
             [styles.selectedColor]: i === color()
           }}
-          style={{ "background-color": `rgba(${rgba()[0]}, ${rgba()[1]}, ${rgba()[2]}, ${rgba()[3]})` }}
+          style={{ "background-color": rgbaString(rgba()) }}
           onClick={() => {
             setColor(i)
           }}

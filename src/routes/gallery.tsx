@@ -1,8 +1,7 @@
 import { Title } from "@solidjs/meta";
 import styles from "./index.module.css"
 import { Gallery } from "~/components/Pixel";
-import { useAction } from "@solidjs/router";
-import { createResource, Suspense } from "solid-js";
+import { createResource } from "solid-js";
 import { getPaintings } from "~/paintingServer";
 
 // const paintings: Uint8Array[] = []
@@ -48,9 +47,6 @@ export default function GalleryRoute() {
   return (
     <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
       <Title>Gallery</Title>
-      <p>
-        User generated content. Leave your mark!
-      </p>
       <Gallery paintings={paintings() ?? []} />
     </main>
   );
