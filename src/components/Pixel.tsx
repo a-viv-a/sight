@@ -42,7 +42,7 @@ const depth = palette.length - 1
 const fclamp = (min: number, v: number, max: number) =>
   Math.floor(Math.max(min, Math.min(max, v)))
 
-export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean}> = props => {
+export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean }> = props => {
   let canvas!: HTMLCanvasElement;
 
   createEffect(() => {
@@ -137,7 +137,7 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
         newData[point] = color()
       }
       props.setData(newData)
-    }} />
+    }} disabled={props.disabled} />
     <div class={styles.palette}>
       <Index each={palette}>{(rgba, i) =>
         <button
