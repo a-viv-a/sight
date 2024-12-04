@@ -3,19 +3,25 @@ import { getRequestEvent } from "solid-js/web";
 
 // reasons i don't understand prevent file level use server from working...
 
-const env = (): Wenv => {
+const event = () => {
   const event = getRequestEvent()
-  // fallback to process.env for local development
-  const env = event?.nativeEvent.context.cloudflare.env
-  if (env === undefined) {
-    throw new Error("missing environment")
+  if (event === undefined) {
+    throw new Error("missing event details")
   }
-  return env
+  const cf = event?.nativeEvent.context.cloudflare
+  if (cf === undefined) {
+    throw new Error("missing cloudflare event details")
+  }
+  if (event.request === undefined) {
+    throw new Error("missing request details")
+  }
+  return { env: cf.env, ...event}
 }
 
 export const getPaintings = async () => {
   "use server"
-  const result = await env().DB.prepare(
+  const { env } = event()
+  const result = await env.DB.prepare(
     `SELECT data from Paintings ORDER BY id DESC`
   ).all<{
     data: ArrayBuffer
@@ -31,9 +37,16 @@ export const getPaintings = async () => {
 
 export const addPainting = action(async (painting: Uint8Array) => {
   "use server"
-  const result = await env().DB.prepare(
+  const { env, request  } = event()
+  const ip = request.headers.get('CF-Connecting-IP')
+  if (ip === null) {
+    console.error("missing ip address in headers...")
+    console.error(request.headers)
+    return `missing ip address?`
+  }
+  const result = await env.DB.prepare(
     `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
-  ).bind(painting, ":3")
+  ).bind(painting, ip)
     .run()
   // console.log(result)
 
