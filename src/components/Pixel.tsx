@@ -107,7 +107,7 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => {
 
   return <div class={styles.gallery}>
     {/* pack such that neighbors are consistent... */}
-    <For each={new Array((props.paintings.length) % width - 1)}>{() =>
+    <For each={new Array(props.paintings.length === 0 ? width - 1 : (props.paintings.length) % width - 1)}>{() =>
       <div></div>
     }</For>
     <PaintButton />
