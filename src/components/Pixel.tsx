@@ -95,8 +95,8 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
   )} />
 }
 
-const PaintButton: Component = props =>
-  <a href="/paint" title="create new pixel art painting" class={styles.create}>
+const PaintButton: Component<{ col: number }> = props =>
+  <a href="/paint" title="create new pixel art painting" class={styles.create} style={{ "grid-column-start": props.col }}>
     <svg viewBox="0 0 10 10">
       <path d="M5,2 L5,8" />
       <path d="M2,5 L8,5" />
@@ -106,11 +106,7 @@ const PaintButton: Component = props =>
 export const Gallery: Component<{ paintings: Uint8Array[] }> = props => {
 
   return <div class={styles.gallery}>
-    {/* pack such that neighbors are consistent... */}
-    <For each={new Array(props.paintings.length === 0 ? width - 1 : (props.paintings.length) % width - 1)}>{() =>
-      <div></div>
-    }</For>
-    <PaintButton />
+    <PaintButton col={width - ((props.paintings.length) % width)} />
     <Index each={props.paintings}>{(data, i) =>
       <Render data={data()} />
     }</Index>
@@ -135,12 +131,12 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
           classList={{
             [styles.selectedColor]: i === color()
           }}
-          style={`background-color: rgba(${rgba()[0]}, ${rgba()[1]}, ${rgba()[2]}, ${rgba()[3]})`}
+          style={{ "background-color": `rgba(${rgba()[0]}, ${rgba()[1]}, ${rgba()[2]}, ${rgba()[3]})` }}
           onClick={() => {
             setColor(i)
           }}
         />
-    }</Index>
+      }</Index>
     </div>
   </div>
 }
