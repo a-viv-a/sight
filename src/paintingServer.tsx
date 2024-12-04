@@ -15,7 +15,7 @@ const event = () => {
   if (event.request === undefined) {
     throw new Error("missing request details")
   }
-  return { env: cf.env, ...event}
+  return { env: cf.env, ...event }
 }
 
 export const getPaintings = async () => {
@@ -37,8 +37,9 @@ export const getPaintings = async () => {
 
 export const addPainting = action(async (painting: Uint8Array) => {
   "use server"
-  const { env, request  } = event()
-  const ip = request.headers.get('CF-Connecting-IP')
+  const { env, request } = event()
+  const ip = request.headers.get("X-Forwarded-For")
+    ?? request.headers.get('CF-Connecting-IP')
   if (ip === null) {
     console.error("missing ip address in headers...")
     console.error(request.headers)

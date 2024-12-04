@@ -42,7 +42,7 @@ const depth = palette.length - 1
 const fclamp = (min: number, v: number, max: number) =>
   Math.floor(Math.max(min, Math.min(max, v)))
 
-export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void }> = props => {
+export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean}> = props => {
   let canvas!: HTMLCanvasElement;
 
   createEffect(() => {
@@ -81,7 +81,7 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     setMouseDown(false)
   })
 
-  return <canvas ref={canvas} width={width} height={width} class={styles.canvas}
+  return <canvas ref={canvas} width={width} height={width} aria-disabled={props.disabled} class={styles.canvas}
     style={{
       // make SSR work better for paint!
       "background-color": rgbaString(palette[0])
@@ -89,12 +89,14 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     {...(
       props.handleTouch === undefined ? {} : {
         onmousedown: (e) => {
+          if (props.disabled) return
           batch(() => {
             setMouseDown(true)
             props.handleTouch!([eventToIndex(e)])
           })
         },
         onmousemove: (e: MouseEvent) => {
+          if (props.disabled) return
           if (mouseDown()) {
             props.handleTouch!([eventToIndex(e)])
           }
@@ -124,17 +126,17 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => <>
 </>
 
 
-export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint8Array> }> = p => {
+export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint8Array>, disabled?: boolean }> = props => {
   const [color, setColor] = createSignal(palette.length - 1)
 
   return <div class={styles.paint}>
-    <Render data={p.data()} handleTouch={(points) => {
-      const data = p.data();
+    <Render data={props.data()} handleTouch={(points) => {
+      const data = props.data();
       const newData = new Uint8Array(data)
       for (const point of points) {
         newData[point] = color()
       }
-      p.setData(newData)
+      props.setData(newData)
     }} />
     <div class={styles.palette}>
       <Index each={palette}>{(rgba, i) =>
@@ -142,6 +144,7 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
           classList={{
             [styles.selectedColor]: i === color()
           }}
+          disabled={props.disabled}
           style={{ "background-color": rgbaString(rgba()) }}
           onClick={() => {
             setColor(i)

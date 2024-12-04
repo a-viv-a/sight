@@ -1,6 +1,9 @@
 .canvas {
   image-rendering: pixelated;
-  width: 100%
+  width: 100%;
+  &[aria-disabled="true"] {
+    opacity: 0.8;
+  }
 }
 
 .gallery {
