@@ -1,5 +1,3 @@
-"use server"
-
 import { action, json, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { DEPTH, WIDTH } from "./components/Pixel";
@@ -7,6 +5,7 @@ import { DEPTH, WIDTH } from "./components/Pixel";
 // reasons i don't understand prevent file level use server from working...
 
 const event = () => {
+  "use server"
   const event = getRequestEvent()
   if (event === undefined) {
     throw new Error("missing event details")
