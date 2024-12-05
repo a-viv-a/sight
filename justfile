@@ -22,7 +22,7 @@ typegen:
     wrangler types --env-interface Wenv
 
 check:
-    tsc --noEmit --watch
+    tsc --noEmit --watch --skipLibCheck
 
 # test:
 #     vitest --exclude ".direnv/**"

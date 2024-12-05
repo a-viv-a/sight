@@ -1,6 +1,6 @@
 "use server"
 
-import { action, redirect } from "@solidjs/router";
+import { action, json, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { DEPTH, WIDTH } from "./components/Pixel";
 
@@ -45,13 +45,13 @@ export const addPainting = action(async (painting: Uint8Array) => {
   if (ip === null) {
     console.error("missing ip address in headers...")
     console.error(request.headers)
-    return `missing ip address?`
+    return json({ error: 'ip header error' } as const, { status: 500 })
   }
   if (
     painting.length !== Math.pow(WIDTH, 2)
     || !painting.every(c => c <= DEPTH)
   ) {
-    return `validation error`
+    return json({ error: "validation error" } as const, { status: 400 })
   }
   const result = await env.DB.prepare(
     `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
@@ -61,7 +61,7 @@ export const addPainting = action(async (painting: Uint8Array) => {
 
   if (!result.success) {
     console.error(result)
-    return `failed to insert painting...`
+    return json({ error: 'db error' } as const, { status: 500 })
   }
 
   throw redirect("/gallery")

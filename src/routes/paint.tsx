@@ -1,16 +1,16 @@
 import { Title } from "@solidjs/meta";
 import styles from "./index.module.css"
-import { batch, createSignal } from "solid-js";
+import { batch, createSignal, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
 import { addPainting } from "~/paintingServer";
-import { useAction } from "@solidjs/router";
+import { useAction, useSubmission } from "@solidjs/router";
 
 export default function PaintRoute() {
   const [data, setData] = createSignal(new Uint8Array(64))
-  const [pending, setPending] = createSignal(false)
 
-  const submit = useAction(addPainting);
-  
+  const addPaintingAction = useAction(addPainting);
+  const adding = useSubmission(addPainting)
+
   return (
     <main classList={{
       [styles.page]: true,
@@ -23,15 +23,13 @@ export default function PaintRoute() {
         <br />
         No more than once a week?
       </p>
-      <Paint data={data} setData={setData} disabled={pending()} />
+      <Paint data={data} setData={setData} disabled={adding.pending} />
+      <Show when={adding.result}>{(result) =>
+        <code>error: {result().error}</code>
+      }</Show>
       <button class={styles.button} onClick={() => {
-        batch(() => {
-          submit(data()).then(() => {
-            setPending(false)
-          })
-          setPending(true)
-        })
-      }} disabled={pending()}>
+        addPaintingAction(data())
+      }} disabled={adding.pending}>
         Submit Painting
       </button>
     </main>

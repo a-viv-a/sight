@@ -126,7 +126,7 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => <>
 </>
 
 
-export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint8Array>, disabled?: boolean }> = props => {
+export const Paint: Component<{ data: Accessor<Uint8Array<ArrayBuffer>>, setData: Setter<Uint8Array<ArrayBuffer>>, disabled?: boolean }> = props => {
   const [color, setColor] = createSignal(PALETTE.length - 1)
 
   return <div class={styles.paint}>

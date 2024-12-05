@@ -17,9 +17,6 @@
     "isolatedModules": true,
     "paths": {
       "~/*": ["./src/*"]
-    },
-    "include": [
-      "worker-configuration.d.ts"
-    ]
+    }
   }
 }
