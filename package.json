@@ -3,7 +3,6 @@
   "type": "module",
   "dependencies": {
     "@solid-primitives/event-listener": "^2.3.3",
-    "@solid-primitives/workers": "^0.3.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.10",

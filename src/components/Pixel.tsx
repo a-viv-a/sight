@@ -2,7 +2,6 @@ import { Accessor, batch, Component, createEffect, createResource, createSignal,
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { getPaintings } from "~/paintingServer";
-import { createWorker } from "@solid-primitives/workers";
 
 const hexToRGBA = (hex: string) => {
   const
@@ -47,7 +46,15 @@ const fclamp = (min: number, v: number, max: number) =>
 export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean }> = props => {
   let canvas!: HTMLCanvasElement;
 
-  const [worker, start, stop] = createWorker(function render (data: Uint8Array, imageData: ImageData) {
+  createEffect(() => {
+    const ctx = canvas.getContext("2d")
+    if (ctx === null) {
+      console.error("ctx is null!")
+      return
+    }
+
+    const imageData = ctx.createImageData(8, 8,)
+
     // Iterate through every pixel
     for (let src = 0, dest = 0; src < props.data.length && dest < imageData.data.length; src += 1, dest += 4) {
       const [r, g, b, a] = PALETTE[Math.min(DEPTH, props.data[src])]
@@ -58,21 +65,7 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
       imageData.data[dest + 3] = a; // A value
     }
 
-    return imageData
-  })
-
-  createEffect(() => {
-    const ctx = canvas.getContext("2d")
-    if (ctx === null) {
-      console.error("ctx is null!")
-      return
-    }
-
-    const imageData = ctx.createImageData(8, 8,)
-
-    worker.render(props.data, imageData).then(imageData => {
-      ctx.putImageData(imageData, 0, 0)
-    })
+    ctx.putImageData(imageData, 0, 0)
   })
 
   const [mouseDown, setMouseDown] = createSignal(false)
