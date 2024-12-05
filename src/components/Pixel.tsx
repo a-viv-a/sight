@@ -12,11 +12,11 @@ const hexToRGBA = (hex: string) => {
   return [r, g, b, a] as const
 }
 
-const width = 8
+export const WIDTH = 8
 
 // https://lospec.com/palette-list/curiosities
 // paint.net txt format
-const palette = `
+export const PALETTE = `
 ;paint.net Palette File
 ;Downloaded from Lospec.com/palette-list
 ;Palette Name: curiosities
@@ -37,7 +37,7 @@ FFff6973
 const rgbaString = (rgba: readonly [number, number, number, number]) =>
   `rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, ${rgba[3]})`
 
-const depth = palette.length - 1
+export const DEPTH = PALETTE.length - 1
 
 const fclamp = (min: number, v: number, max: number) =>
   Math.floor(Math.max(min, Math.min(max, v)))
@@ -56,7 +56,7 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
 
     // Iterate through every pixel
     for (let src = 0, dest = 0; src < props.data.length && dest < imageData.data.length; src += 1, dest += 4) {
-      const [r, g, b, a] = palette[Math.min(depth, props.data[src])]
+      const [r, g, b, a] = PALETTE[Math.min(DEPTH, props.data[src])]
       // console.log({r, g, b, a})
       imageData.data[dest + 0] = r; // R value
       imageData.data[dest + 1] = g; // G value
@@ -71,20 +71,20 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
 
   const eventToIndex = (e: { offsetX: number, offsetY: number }): number => {
     const rect = canvas.getBoundingClientRect()
-    const x = e.offsetX / rect.width * width,
-      y = e.offsetY / rect.height * width
+    const x = e.offsetX / rect.width * WIDTH,
+      y = e.offsetY / rect.height * WIDTH
 
-    return fclamp(0, y, width - 1) * width + fclamp(0, x, width - 1)
+    return fclamp(0, y, WIDTH - 1) * WIDTH + fclamp(0, x, WIDTH - 1)
   }
 
   if (props.handleTouch !== undefined && typeof window !== 'undefined') makeEventListener(window.document, "mouseup", (e) => {
     setMouseDown(false)
   })
 
-  return <canvas ref={canvas} width={width} height={width} aria-disabled={props.disabled} class={styles.canvas}
+  return <canvas ref={canvas} width={WIDTH} height={WIDTH} aria-disabled={props.disabled} class={styles.canvas}
     style={{
       // make SSR work better for paint!
-      "background-color": rgbaString(palette[0])
+      "background-color": rgbaString(PALETTE[0])
     }}
     {...(
       props.handleTouch === undefined ? {} : {
@@ -118,7 +118,7 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => <>
     User generated content. Leave your mark!
   </p>
   <div class={styles.gallery}>
-    <PaintButton col={width - ((props.paintings.length) % width)} />
+    <PaintButton col={WIDTH - ((props.paintings.length) % WIDTH)} />
     <Index each={props.paintings}>{(data, i) =>
       <Render data={data()} />
     }</Index>
@@ -127,7 +127,7 @@ export const Gallery: Component<{ paintings: Uint8Array[] }> = props => <>
 
 
 export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint8Array>, disabled?: boolean }> = props => {
-  const [color, setColor] = createSignal(palette.length - 1)
+  const [color, setColor] = createSignal(PALETTE.length - 1)
 
   return <div class={styles.paint}>
     <Render data={props.data()} handleTouch={(points) => {
@@ -139,7 +139,7 @@ export const Paint: Component<{ data: Accessor<Uint8Array>, setData: Setter<Uint
       props.setData(newData)
     }} disabled={props.disabled} />
     <div class={styles.palette}>
-      <Index each={palette}>{(rgba, i) =>
+      <Index each={PALETTE}>{(rgba, i) =>
         <button
           classList={{
             [styles.selectedColor]: i === color()

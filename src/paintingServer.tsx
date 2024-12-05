@@ -1,5 +1,8 @@
+"use server"
+
 import { action, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
+import { DEPTH, WIDTH } from "./components/Pixel";
 
 // reasons i don't understand prevent file level use server from working...
 
@@ -43,6 +46,12 @@ export const addPainting = action(async (painting: Uint8Array) => {
     console.error("missing ip address in headers...")
     console.error(request.headers)
     return `missing ip address?`
+  }
+  if (
+    painting.length !== Math.pow(WIDTH, 2)
+    || !painting.every(c => c <= DEPTH)
+  ) {
+    return `validation error`
   }
   const result = await env.DB.prepare(
     `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
