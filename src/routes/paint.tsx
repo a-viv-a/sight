@@ -1,11 +1,26 @@
 import { Title } from "@solidjs/meta";
 import styles from "./index.module.css"
-import { batch, createSignal, Show } from "solid-js";
+import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
 import { addPainting } from "~/paintingServer";
-import { useAction, useSubmission } from "@solidjs/router";
+import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
 
 export default function PaintRoute() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [goto, setGoto] = createSignal("/gallery")
+
+  onMount(() => {
+    const gotoParam = searchParams.goto
+    if (gotoParam !== undefined && typeof gotoParam == "string") {
+      batch(() => {
+        setGoto(gotoParam)
+        setSearchParams({
+          goto: null
+        })
+      })
+    }
+  })
+
   const [data, setData] = createSignal(new Uint8Array(64))
 
   const addPaintingAction = useAction(addPainting);
@@ -28,7 +43,7 @@ export default function PaintRoute() {
         <code>error: {result().error}</code>
       }</Show>
       <button class={styles.button} onClick={() => {
-        addPaintingAction(data())
+        addPaintingAction(data(), goto())
       }} disabled={adding.pending}>
         Submit Painting
       </button>

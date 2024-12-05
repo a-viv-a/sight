@@ -37,7 +37,7 @@ export const getPaintings = async () => {
   return result.results.map(v => new Uint8Array(v.data))
 }
 
-export const addPainting = action(async (painting: Uint8Array) => {
+export const addPainting = action(async (painting: Uint8Array, goto: string) => {
   "use server"
   const { env, request } = event()
   const ip = request.headers.get('CF-Connecting-IP')
@@ -63,5 +63,8 @@ export const addPainting = action(async (painting: Uint8Array) => {
     return json({ error: 'db error' } as const, { status: 500 })
   }
 
-  throw redirect("/gallery")
+  if (["/", "/gallery"].includes(goto)) {
+    return redirect(goto)
+  }
+  return json({ error: 'goto error' }, { status: 400 })
 })

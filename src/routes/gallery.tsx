@@ -42,12 +42,11 @@ import { getPaintings } from "~/paintingServer";
 // }
 
 export default function GalleryRoute() {
-  const [paintings] = createResource(getPaintings)
 
   return (
     <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
       <Title>Gallery</Title>
-      <Gallery paintings={paintings() ?? []} />
+      <Gallery />
     </main>
   );
 }

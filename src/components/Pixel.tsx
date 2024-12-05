@@ -1,6 +1,7 @@
-import { Accessor, batch, Component, createEffect, createSignal, For, Index, Setter } from "solid-js"
+import { Accessor, batch, Component, createEffect, createResource, createSignal, For, Index, Setter } from "solid-js"
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
+import { getPaintings } from "~/paintingServer";
 
 const hexToRGBA = (hex: string) => {
   const
@@ -105,26 +106,29 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     )} />
 }
 
-const PaintButton: Component<{ col: number }> = props =>
-  <a href="/paint" title="create new pixel art painting" class={styles.create} style={{ "grid-column-start": props.col }}>
+const PaintButton: Component<{ col: number, goto?: string }> = props =>
+  <a href={props.goto !== undefined ? `/paint?goto=${props.goto}` : "/paint"} title="create new pixel art painting" class={styles.create} style={{ "grid-column-start": props.col }}>
     <svg viewBox="0 0 10 10">
       <path d="M5,2 L5,8" />
       <path d="M2,5 L8,5" />
     </svg>
   </a>
 
-export const Gallery: Component<{ paintings: Uint8Array[] }> = props => <>
-  <p>
-    User generated content. Leave your mark!
-  </p>
-  <div class={styles.gallery}>
-    <PaintButton col={WIDTH - ((props.paintings.length) % WIDTH)} />
-    <Index each={props.paintings}>{(data, i) =>
-      <Render data={data()} />
-    }</Index>
-  </div>
-</>
+export const Gallery: Component<{goto?: string }> = props => {
+  const [paintings] = createResource(getPaintings)
 
+  return <>
+    <p>
+      User generated content. Leave your mark!
+    </p>
+    <div class={styles.gallery}>
+      <PaintButton col={WIDTH - ((paintings()?.length ?? 0) % WIDTH)} goto={props.goto} />
+      <Index each={paintings()}>{(data, i) =>
+        <Render data={data()} />
+      }</Index>
+    </div>
+  </>
+}
 
 export const Paint: Component<{ data: Accessor<Uint8Array<ArrayBuffer>>, setData: Setter<Uint8Array<ArrayBuffer>>, disabled?: boolean }> = props => {
   const [color, setColor] = createSignal(PALETTE.length - 1)
