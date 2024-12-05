@@ -1,8 +1,6 @@
 import { Title } from "@solidjs/meta";
 import styles from "./index.module.css"
 import { Gallery } from "~/components/Pixel";
-import { createResource } from "solid-js";
-import { getPaintings } from "~/paintingServer";
 
 // const paintings: Uint8Array[] = []
 

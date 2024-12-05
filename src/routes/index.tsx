@@ -1,15 +1,12 @@
 import { Title } from "@solidjs/meta";
-import { Component, createSignal, Index, lazy } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
+import { Gallery } from "~/components/Pixel";
 
 const Email: Component<{ address: string }> = props =>
   <a class={styles.email} href={`mailto:${props.address}`} title={props.address}>{props.address}</a>
-
-const Gallery = lazy(async () => ({
-  default: (await import("~/components/Pixel")).Gallery
-}))
 
 const pronounsList = [
   "she",
@@ -86,7 +83,7 @@ export default function Home() {
           </Toml.Group>
         </Toml.File>
 
-        <Gallery goto="/"/>
+        <Gallery goto="/" />
       </div>
     </main>
   );
