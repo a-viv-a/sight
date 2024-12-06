@@ -1,4 +1,4 @@
-import { action, json, redirect } from "@solidjs/router";
+import { action, json, query, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { DEPTH, WIDTH } from "./components/Pixel";
 
@@ -37,6 +37,18 @@ export const getPaintings = async () => {
   return result.results.map(v => new Uint8Array(v.data))
 }
 
+export const getPainting = query(async (id: number) => {
+  "use server"
+  const { env } = event()
+  const result = await env.DB.prepare(
+    `SELECT data from Paintings WHERE id = ?`
+  ).first<{
+    data: ArrayBuffer
+  }>("data")
+
+  return result === null ? null : new Uint8Array(result.data)
+}, "getPainting")
+
 export const addPainting = action(async (painting: Uint8Array, goto: string) => {
   "use server"
   const { env, request } = event()
@@ -59,7 +71,7 @@ export const addPainting = action(async (painting: Uint8Array, goto: string) => 
   // console.log(result)
 
   if (!result.success) {
-    console.error(result)
+    console.error("addPainting failed", result)
     return json({ error: 'db error' } as const, { status: 500 })
   }
 
