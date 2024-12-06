@@ -2,6 +2,7 @@ import { Accessor, batch, Component, createEffect, createResource, createSignal,
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { getPaintings } from "~/paintingServer";
+import { isServer } from "solid-js/web";
 
 const hexToRGBA = (hex: string) => {
   const
@@ -78,7 +79,7 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     return fclamp(0, y, WIDTH - 1) * WIDTH + fclamp(0, x, WIDTH - 1)
   }
 
-  if (props.handleTouch !== undefined && typeof window !== 'undefined') makeEventListener(window.document, "mouseup", (e) => {
+  if (!isServer && props.handleTouch !== undefined) makeEventListener(window.document, "mouseup", (e) => {
     setMouseDown(false)
   })
 
