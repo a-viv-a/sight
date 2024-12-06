@@ -86,7 +86,9 @@ export default function Home() {
             <Toml.KV key="email" val="aviva@rubenfamily.com" link="mailto:aviva@rubenfamily.com" />
           </Toml.Group>
         </Toml.File>
-        <Gallery goto="/" fallback={<code class={styles.center}>loading gallery...</code>} />
+        <Suspense fallback={<code class={styles.center}>loading gallery...</code>}>
+          <Gallery goto="/" />
+        </Suspense>
       </div>
     </main>
   );
