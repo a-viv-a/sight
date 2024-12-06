@@ -54,6 +54,8 @@ const Pronoun: Component = props => {
   </span>
 }
 
+// Gallery does enough main thread work inside an effect (canvas painting) to cause FOUC so load it client only
+// this defers rendering to after hydration
 const Gallery = clientOnly(async () => ({
   default: ((await import("~/components/Pixel")).Gallery)
 }))
@@ -86,6 +88,11 @@ export default function Home() {
             <Toml.KV key="email" val="aviva@rubenfamily.com" link="mailto:aviva@rubenfamily.com" />
           </Toml.Group>
         </Toml.File>
+        {/*
+        suspense will trip when awaiting the import
+        the suspense will resolve before the gallery is rendered so we need both fallbacks
+        this ensures no flashes and that SSR includes the fallback
+        */}
         <Suspense fallback={<code class={styles.center}>loading gallery...</code>}>
           <Gallery goto="/" fallback={<code class={styles.center}>loading gallery...</code>} />
         </Suspense>
