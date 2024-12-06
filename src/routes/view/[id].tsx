@@ -14,6 +14,8 @@ export default function ViewIdRoute() {
     }
     return getPainting(id)
   })
+
+  console.log(painting())
   
   return (
     <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
