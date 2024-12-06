@@ -24,7 +24,9 @@ const useSecretSession = async (env: Wenv) => {
   return useSession<{
     lastActionMS?: number
   }>({
-    password: env.SESSION_SECRET,
+    password: typeof env.SESSION_SECRET === "string" && env.SESSION_SECRET.length > 0
+      ? env.SESSION_SECRET
+      : "placeholderpreviewsecret",
     maxAge: maxAgeMS / 1e3,
     cookie: {
       secure: true,
