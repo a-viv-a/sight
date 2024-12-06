@@ -1,4 +1,4 @@
-import { Accessor, batch, Component, createEffect, createSignal, Index, Setter } from "solid-js"
+import { Accessor, batch, Component, createDeferred, createEffect, createSignal, Index, Setter } from "solid-js"
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { getPaintings } from "~/paintingServer";
@@ -45,8 +45,12 @@ export const DEPTH = PALETTE.length - 1
 const fclamp = (min: number, v: number, max: number) =>
   Math.floor(Math.max(min, Math.min(max, v)))
 
-export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean }> = props => {
+export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean, defer?: boolean }> = props => {
   let canvas!: HTMLCanvasElement;
+
+  const readData = !props.defer ? () => props.data : createDeferred(() => props.data, {
+    timeoutMs: 1_000
+  })
 
   createEffect(() => {
     const ctx = canvas.getContext("2d")
@@ -56,10 +60,11 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     }
 
     const imageData = ctx.createImageData(8, 8,)
+    const data = readData()
 
     // Iterate through every pixel
-    for (let src = 0, dest = 0; src < props.data.length && dest < imageData.data.length; src += 1, dest += 4) {
-      const [r, g, b, a] = PALETTE[Math.min(DEPTH, props.data[src])]
+    for (let src = 0, dest = 0; src < data.length && dest < imageData.data.length; src += 1, dest += 4) {
+      const [r, g, b, a] = PALETTE[Math.min(DEPTH, data[src])]
       // console.log({r, g, b, a})
       imageData.data[dest + 0] = r; // R value
       imageData.data[dest + 1] = g; // G value
@@ -126,7 +131,7 @@ export const Gallery: Component<{ goto?: string }> = props => {
     <div class={styles.gallery}>
       <PaintButton col={WIDTH - ((paintings()?.length ?? 0) % WIDTH)} goto={props.goto} />
       <Index each={paintings()}>{(data, i) =>
-        <Render data={data()} />
+        <Render data={data()} defer />
       }</Index>
     </div>
   </>
