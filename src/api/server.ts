@@ -1,6 +1,7 @@
 "use server"
 import { json, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
+import { useSession } from "vinxi/http";
 import { DEPTH, WIDTH } from "~/components/Pixel";
 
 const event = () => {
@@ -18,7 +19,7 @@ const event = () => {
   return { env: cf.env, ...event }
 }
 
-const useSecretSession = async (env: Wenv) => (await import("vinxi/http")).useSession<{
+const useSecretSession = async (env: Wenv) => useSession<{
   lastActionMS?: number
 }>({
   password: env.SESSION_SECRET
