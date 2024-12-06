@@ -1,7 +1,7 @@
 export PATH := "./node_modules/.bin:" + env_var('PATH')
 # https://github.com/solidjs/solid-start/issues/1670
-# export COMPATIBILITY_DATE := \
-#     `sed -En 's/compatibility_date[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' wrangler.toml | head -1`
+export COMPATIBILITY_DATE := \
+    `sed -En 's/compatibility_date[[:space:]]*=[[:space:]]*"([^"]+)"/\1/p' wrangler.toml | head -1`
 
 dev *flags:
     vinxi dev {{flags}}
