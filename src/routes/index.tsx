@@ -3,7 +3,7 @@ import { Component, createSignal, lazy, Suspense } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
-import { DeferRender } from "~/util";
+import { clientOnly } from "@solidjs/start";
 
 const Email: Component<{ address: string }> = props =>
   <a class={styles.email} href={`mailto:${props.address}`} title={props.address}>{props.address}</a>
@@ -54,7 +54,7 @@ const Pronoun: Component = props => {
   </span>
 }
 
-const Gallery = lazy(async () => ({
+const Gallery = clientOnly(async () => ({
   default: ((await import("~/components/Pixel")).Gallery)
 }))
 
@@ -86,9 +86,7 @@ export default function Home() {
             <Toml.KV key="email" val="aviva@rubenfamily.com" link="mailto:aviva@rubenfamily.com" />
           </Toml.Group>
         </Toml.File>
-        <DeferRender fallback={<code class={styles.center}>loading gallery...</code>}>
-          <Gallery goto="/" />
-        </DeferRender>
+        <Gallery goto="/" fallback={<code class={styles.center}>loading gallery...</code>} />
       </div>
     </main>
   );
