@@ -20,7 +20,7 @@ const event = () => {
   return { env: cf.env, ...event }
 }
 
-export const getPaintings = async () => {
+export const getPaintings = query(async () => {
   "use server"
   const { env } = event()
   const result = await env.DB.prepare(
@@ -35,17 +35,7 @@ export const getPaintings = async () => {
 
   // console.log(result.results)
   return result.results.map(v => new Uint8Array(v.data))
-}
-
-export const getPainting = query(async (id: number) => {
-  "use server"
-  const { env } = event()
-  const data = await env.DB.prepare(
-    `SELECT data from Paintings WHERE id = ?`
-  ).bind(id).first<ArrayBuffer>("data")
-
-  return data === null ? null : new Uint8Array(data)
-}, "getPainting")
+}, "getPaintings")
 
 export const addPainting = action(async (painting: Uint8Array, goto: string) => {
   "use server"
