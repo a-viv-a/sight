@@ -19,12 +19,21 @@ const event = () => {
   return { env: cf.env, ...event }
 }
 
-const useSecretSession = async (env: Wenv) => useSession<{
-  lastActionMS?: number
-}>({
-  password: env.SESSION_SECRET
-})
-
+const useSecretSession = async (env: Wenv) => {
+  const maxAgeMS = env.ACTION_DELAY_MS * 2
+  return useSession<{
+    lastActionMS?: number
+  }>({
+    password: env.SESSION_SECRET,
+    maxAge: maxAgeMS / 1e3,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      maxAge: maxAgeMS / 1e3,
+      expires: new Date(Date.now() + maxAgeMS)
+    }
+  })
+}
 export const getPaintingsRPC = async () => {
   const { env } = event()
   const result = await env.DB.prepare(
@@ -39,7 +48,7 @@ export const getPaintingsRPC = async () => {
 
   // console.log(result.results)
   return result.results.map(v => new Uint8Array(v.data))
-} 
+}
 
 export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
   const { env, request } = event()
@@ -57,6 +66,8 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
   }
   const session = await useSecretSession(env)
   const now = Date.now()
+  // @ts-expect-error
+  console.log(now - session.data.lastActionMS)
   if (session.data.lastActionMS !== undefined && now - session.data.lastActionMS < env.ACTION_DELAY_MS) {
     return json({ error: `took action too recently`, remainingMs: now - session.data.lastActionMS } as const, {
       status: 429,
