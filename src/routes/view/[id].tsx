@@ -6,7 +6,7 @@ import { getPainting } from "~/paintingServer";
 import { createResource, Show } from "solid-js";
 
 export default function ViewIdRoute() {
-  const params = useParams<{id: string}>()
+  const params = useParams<{ id: string }>()
   const painting = createAsync(() => {
     const id = parseInt(params.id)
     if (isNaN(id) || id < 0) {
@@ -15,13 +15,11 @@ export default function ViewIdRoute() {
     return getPainting(id)
   })
 
-  console.log(painting())
-  
   return (
     <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
       <Title>View {params.id}</Title>
       <Show fallback={<code>painting is null / undefined</code>} when={painting()}>{painting =>
-        <Render data={painting()}/>
+        <Render data={painting()} />
       }</Show>
     </main>
   );

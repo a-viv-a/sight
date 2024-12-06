@@ -40,13 +40,11 @@ export const getPaintings = async () => {
 export const getPainting = query(async (id: number) => {
   "use server"
   const { env } = event()
-  const result = await env.DB.prepare(
+  const data = await env.DB.prepare(
     `SELECT data from Paintings WHERE id = ?`
-  ).bind(id).first<{
-    data: ArrayBuffer
-  }>("data")
+  ).bind(id).first<ArrayBuffer>("data")
 
-  return result === null ? null : new Uint8Array(result.data)
+  return data === null ? null : new Uint8Array(data)
 }, "getPainting")
 
 export const addPainting = action(async (painting: Uint8Array, goto: string) => {
