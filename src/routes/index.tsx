@@ -87,7 +87,7 @@ export default function Home() {
           </Toml.Group>
         </Toml.File>
         <Suspense fallback={<code class={styles.center}>loading gallery...</code>}>
-          <Gallery goto="/" />
+          <Gallery goto="/" fallback={<code class={styles.center}>loading gallery...</code>} />
         </Suspense>
       </div>
     </main>
