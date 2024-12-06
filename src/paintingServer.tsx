@@ -42,7 +42,7 @@ export const getPainting = query(async (id: number) => {
   const { env } = event()
   const result = await env.DB.prepare(
     `SELECT data from Paintings WHERE id = ?`
-  ).first<{
+  ).bind(id).first<{
     data: ArrayBuffer
   }>("data")
 
