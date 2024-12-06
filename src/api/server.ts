@@ -2,7 +2,7 @@
 import { json, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { useSession } from "vinxi/http";
-import { DEPTH, WIDTH } from "~/components/Pixel";
+import { DEPTH, WIDTH } from "~/pixelConfig";
 
 const event = () => {
   const event = getRequestEvent()
