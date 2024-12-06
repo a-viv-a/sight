@@ -1,4 +1,5 @@
 
 export const loadEvent = new Promise<void>((res) => {
-  window.addEventListener("load", () => res())
+  if (document.readyState === "complete") res()
+  else window.addEventListener("load", () => res())
 })
