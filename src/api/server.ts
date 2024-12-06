@@ -81,7 +81,7 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
       `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
     ).bind(painting, ip)
       .run(),
-    session.update(() => ({ lastActionMS: now }))
+    session.update(({ lastActionMS: now }))
   ])
 
   if (!result.success) {
