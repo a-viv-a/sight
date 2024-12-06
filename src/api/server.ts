@@ -24,9 +24,10 @@ const useSecretSession = async (env: Wenv) => {
   return useSession<{
     lastActionMS?: number
   }>({
+    // TODO: ewwww but no way to get secrets into pages preview
     password: typeof env.SESSION_SECRET === "string" && env.SESSION_SECRET.length > 0
       ? env.SESSION_SECRET
-      : "placeholderpreviewsecret",
+      : "veryevilpreviewsecretthatneedstobelongenough",
     maxAge: maxAgeMS / 1e3,
     cookie: {
       secure: true,
