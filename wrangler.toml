@@ -14,8 +14,8 @@ pages_build_output_dir = "./dist"
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#environment-variables
-# [vars]
-# MY_VARIABLE = "production_value"
+[vars]
+ACTION_DELAY_MS = 604_800_000
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#workers-ai

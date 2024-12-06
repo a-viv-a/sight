@@ -1,6 +1,7 @@
 import { action, json, query, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { DEPTH, WIDTH } from "./components/Pixel";
+import { useSession } from "vinxi/http";
 
 // reasons i don't understand prevent file level use server from working...
 
@@ -19,6 +20,12 @@ const event = () => {
   }
   return { env: cf.env, ...event }
 }
+
+const useSecretSession = (env: Wenv) => useSession<{
+  lastActionMS?: number
+}>({
+  password: env.SESSION_SECRET
+})
 
 export const getPaintings = query(async () => {
   "use server"
@@ -52,11 +59,20 @@ export const addPainting = action(async (painting: Uint8Array, goto: string) => 
   ) {
     return json({ error: "validation error" } as const, { status: 400 })
   }
-  const result = await env.DB.prepare(
-    `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
-  ).bind(painting, ip)
-    .run()
-  // console.log(result)
+  const session = await useSecretSession(env)
+  const now = Date.now()
+  if (session.data.lastActionMS !== undefined && now - session.data.lastActionMS < env.ACTION_DELAY_MS) {
+    return json({ error: `took action too recently`, remainingMs: now - session.data.lastActionMS } as const, {
+      status: 429,
+    })
+  }
+  const [result] = await Promise.all([
+    env.DB.prepare(
+      `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
+    ).bind(painting, ip)
+      .run(),
+    session.update(() => ({ lastActionMS: now }))
+  ])
 
   if (!result.success) {
     console.error("addPainting failed", result)
