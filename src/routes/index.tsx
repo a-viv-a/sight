@@ -3,7 +3,7 @@ import { Component, createSignal, lazy, Suspense } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
-import { loadEvent } from "~/util";
+import { DeferRender } from "~/util";
 
 const Email: Component<{ address: string }> = props =>
   <a class={styles.email} href={`mailto:${props.address}`} title={props.address}>{props.address}</a>
@@ -54,13 +54,9 @@ const Pronoun: Component = props => {
   </span>
 }
 
-const Gallery = lazy(async () => {
-  // don't get in the way of initial paint...
-  await loadEvent
-  return {
-    default: ((await import("~/components/Pixel")).Gallery)
-  }
-})
+const Gallery = lazy(async () => ({
+  default: ((await import("~/components/Pixel")).Gallery)
+}))
 
 export default function Home() {
   let landing!: HTMLDivElement;
@@ -90,9 +86,9 @@ export default function Home() {
             <Toml.KV key="email" val="aviva@rubenfamily.com" link="mailto:aviva@rubenfamily.com" />
           </Toml.Group>
         </Toml.File>
-        <Suspense fallback={<code class={styles.center}>loading gallery...</code>}>
+        <DeferRender fallback={<code class={styles.center}>loading gallery...</code>}>
           <Gallery goto="/" />
-        </Suspense>
+        </DeferRender>
       </div>
     </main>
   );
