@@ -1,5 +1,5 @@
 import { Title } from "@solidjs/meta";
-import { Component, createSignal, lazy } from "solid-js";
+import { Component, createSignal, lazy, Suspense } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
@@ -90,8 +90,9 @@ export default function Home() {
             <Toml.KV key="email" val="aviva@rubenfamily.com" link="mailto:aviva@rubenfamily.com" />
           </Toml.Group>
         </Toml.File>
-
-        <Gallery goto="/" />
+        <Suspense fallback={<p>loading gallery...</p>}>
+          <Gallery goto="/" />
+        </Suspense>
       </div>
     </main>
   );
