@@ -1,3 +1,5 @@
+"use server"
+
 import { action, json, query, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { DEPTH, WIDTH } from "./components/Pixel";
