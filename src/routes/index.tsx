@@ -1,9 +1,9 @@
 import { Title } from "@solidjs/meta";
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, lazy } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
-import { Gallery } from "~/components/Pixel";
+import { loadEvent } from "~/util";
 
 const Email: Component<{ address: string }> = props =>
   <a class={styles.email} href={`mailto:${props.address}`} title={props.address}>{props.address}</a>
@@ -53,6 +53,14 @@ const Pronoun: Component = props => {
     ]}`}
   </span>
 }
+
+const Gallery = lazy(async () => {
+  // don't get in the way of initial paint...
+  await loadEvent
+  return {
+    default: ((await import("~/components/Pixel")).Gallery)
+  }
+})
 
 export default function Home() {
   let landing!: HTMLDivElement;
