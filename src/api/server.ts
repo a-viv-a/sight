@@ -1,6 +1,7 @@
-import { action, json, query, redirect } from "@solidjs/router";
+"use server"
+import { json, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
-import { DEPTH, WIDTH } from "./components/Pixel";
+import { DEPTH, WIDTH } from "~/components/Pixel";
 
 const event = () => {
   const event = getRequestEvent()
@@ -17,15 +18,13 @@ const event = () => {
   return { env: cf.env, ...event }
 }
 
-// dynamic import because otherwise treeshaking throws a fit...
 const useSecretSession = async (env: Wenv) => (await import("vinxi/http")).useSession<{
   lastActionMS?: number
 }>({
   password: env.SESSION_SECRET
 })
 
-export const getPaintings = query(async () => {
-  "use server"
+export const getPaintingsRPC = async () => {
   const { env } = event()
   const result = await env.DB.prepare(
     `SELECT data from Paintings ORDER BY id DESC`
@@ -39,10 +38,9 @@ export const getPaintings = query(async () => {
 
   // console.log(result.results)
   return result.results.map(v => new Uint8Array(v.data))
-}, "getPaintings")
+} 
 
-export const addPainting = action(async (painting: Uint8Array, goto: string) => {
-  "use server"
+export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
   const { env, request } = event()
   const ip = request.headers.get('CF-Connecting-IP')
   if (ip === null) {
@@ -80,4 +78,4 @@ export const addPainting = action(async (painting: Uint8Array, goto: string) => 
     return redirect(goto)
   }
   return json({ error: 'goto error' }, { status: 400 })
-})
+}

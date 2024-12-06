@@ -1,9 +1,9 @@
 import { Accessor, batch, Component, createDeferred, createEffect, createSignal, Index, Setter } from "solid-js"
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
-import { getPaintings } from "~/paintingServer";
 import { isServer } from "solid-js/web";
 import { createAsync } from "@solidjs/router";
+import { getPaintings } from "~/api";
 
 const hexToRGBA = (hex: string) => {
   const

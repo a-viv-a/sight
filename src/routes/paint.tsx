@@ -2,8 +2,8 @@ import { Title } from "@solidjs/meta";
 import styles from "./index.module.css"
 import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
-import { addPainting } from "~/paintingServer";
 import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
+import { addPainting } from "~/api";
 
 export default function PaintRoute() {
   const [searchParams, setSearchParams] = useSearchParams();
