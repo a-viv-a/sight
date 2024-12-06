@@ -1,14 +1,8 @@
-"use server"
-
 import { action, json, query, redirect } from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 import { DEPTH, WIDTH } from "./components/Pixel";
-import { useSession } from "vinxi/http";
-
-// reasons i don't understand prevent file level use server from working...
 
 const event = () => {
-  "use server"
   const event = getRequestEvent()
   if (event === undefined) {
     throw new Error("missing event details")
@@ -23,7 +17,8 @@ const event = () => {
   return { env: cf.env, ...event }
 }
 
-const useSecretSession = (env: Wenv) => useSession<{
+// dynamic import because otherwise treeshaking throws a fit...
+const useSecretSession = async (env: Wenv) => (await import("vinxi/http")).useSession<{
   lastActionMS?: number
 }>({
   password: env.SESSION_SECRET
