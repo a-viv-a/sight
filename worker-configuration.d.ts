@@ -2,6 +2,5 @@
 
 interface Wenv {
 	ACTION_DELAY_MS: 604800000;
-	SESSION_SECRET: string;
 	DB: D1Database;
 }

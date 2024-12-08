@@ -4,3 +4,8 @@ CREATE TABLE IF NOT EXISTS Paintings (
     author_ip TEXT NOT NULL,
     overwritten BOOLEAN DEFAULT FALSE
 );
+
+CREATE TABLE IF NOT EXISTS Ratelimits (
+	key TEXT PRIMARY KEY,
+	tat INTEGER NOT NULL
+)
