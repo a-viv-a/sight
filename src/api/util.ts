@@ -18,12 +18,12 @@ export const event = () => {
 
 export type RatelimitBacking<K> = {
   readKey: (key: K) => Promise<number | null>
-  writeKey: (key: K, tat: number) => Promise<boolean>
+  writeKey: (key: K, tat: number) => Promise<void>
   getTime: () => number
 }
 
 export type RatelimitConfig = {
-  /* should be greater than 1... */
+  /** should be greater than 1... */
   limit: number
   period: number
 }
@@ -34,7 +34,7 @@ export const ratelimit = async <K>(
   arrivedAt: number,
   cfg: RatelimitConfig,
   backing: RatelimitBacking<K>
-): Promise<{ accept: true } | { accept: false, retryAfter: number }> => {
+): Promise<{ accept: true } | { accept: false, retryAfter?: number }> => {
 
   const quantity = 1
   // amount allowed per period

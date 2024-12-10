@@ -4,28 +4,21 @@ import { ratelimit, RatelimitBacking, RatelimitConfig } from "./util"
 const rl_it = it.extend<{
   backing: RatelimitBacking<string> & {
     advanceTime: (amount: number) => void,
-    injectFault: (status: boolean) => void
   },
   cfg: RatelimitConfig
 }>({
   backing: async ({ }, use) => {
     let internal = {
       time: 10_000,
-      injectFault: false,
       kv: new Map<string, number>()
     }
 
     await use({
-      readKey: async key => (internal.injectFault ? null : internal.kv.get(key)) ?? null,
-      writeKey: async (key, tat) => {
-        if (internal.injectFault) return false
-        internal.kv.set(key, tat)
-        return true
-      },
+      readKey: async key => internal.kv.get(key) ?? null,
+      writeKey: async (key, tat) => { internal.kv.set(key, tat) },
       getTime: () => internal.time,
 
       advanceTime: (amount) => { internal.time += amount },
-      injectFault: (status) => { internal.injectFault = status }
     })
 
   },
@@ -77,15 +70,25 @@ describe("ratelimit", () => {
         backing.advanceTime(cfg.period / cfg.limit + 5)
       }
     })
-  })
-  describe("edge cases", () => {
-    rl_it("should start allowing more requests if limit increases", async ({ cfg, backing }) => {
-      while((await ratelimit("key", backing.getTime(), cfg, backing)).accept) {
+    rl_it("should rate limit per key", async ({ cfg, backing }) => {
+      while ((await ratelimit("key", backing.getTime(), cfg, backing)).accept) {
         backing.advanceTime(1)
       }
       expect.soft(await ratelimit("key", backing.getTime(), cfg, backing)).toMatchObject({ accept: false })
 
-      
+      expect(await ratelimit("key2", backing.getTime(), cfg, backing)).toMatchObject({ accept: true })
+
+      expect(await ratelimit("key", backing.getTime(), cfg, backing)).toMatchObject({ accept: false })
+    })
+  })
+  describe("edge cases", () => {
+    rl_it("should start allowing more requests if limit increases", async ({ cfg, backing }) => {
+      while ((await ratelimit("key", backing.getTime(), cfg, backing)).accept) {
+        backing.advanceTime(1)
+      }
+      expect.soft(await ratelimit("key", backing.getTime(), cfg, backing)).toMatchObject({ accept: false })
+
+
       expect(await ratelimit("key", backing.getTime(), {
         ...cfg,
         limit: 10
@@ -93,12 +96,12 @@ describe("ratelimit", () => {
     })
     // since decreasing the period doesn't actually change the amount of requests that have happened...
     rl_it("should not start allowing more requests if period decreases", async ({ cfg, backing }) => {
-      while((await ratelimit("key", backing.getTime(), cfg, backing)).accept) {
+      while ((await ratelimit("key", backing.getTime(), cfg, backing)).accept) {
         backing.advanceTime(1)
       }
       expect.soft(await ratelimit("key", backing.getTime(), cfg, backing)).toMatchObject({ accept: false })
 
-      
+
       expect(await ratelimit("key", backing.getTime(), {
         ...cfg,
         period: 10
