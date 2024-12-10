@@ -16,25 +16,27 @@ export const event = () => {
 }
 
 
-type RatelimitBacking<K> = {
+export type RatelimitBacking<K> = {
   readKey: (key: K) => Promise<number | null>
   writeKey: (key: K, tat: number) => Promise<boolean>
   getTime: () => number
 }
 
-type RatelimitConfig = {
+export type RatelimitConfig = {
+  /* should be greater than 1... */
   limit: number
   period: number
 }
 
-const ratelimit = async <K>(
+// https://blog.ian.stapletoncordas.co/2018/12/understanding-generic-cell-rate-limiting
+export const ratelimit = async <K>(
   key: K,
   arrivedAt: number,
-  quantity = 1,
   cfg: RatelimitConfig,
   backing: RatelimitBacking<K>
 ): Promise<{ accept: true } | { accept: false, retryAfter: number }> => {
 
+  const quantity = 1
   // amount allowed per period
   const emissionInterval = cfg.period / cfg.limit
   const delayVariationTolerance = cfg.period

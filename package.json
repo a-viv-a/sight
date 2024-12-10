@@ -13,6 +13,7 @@
     "node": ">=20"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241112.0"
+    "@cloudflare/workers-types": "^4.20241112.0",
+    "vitest": "^2.1.8"
   }
 }

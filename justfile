@@ -27,5 +27,5 @@ typegen:
 check:
     tsc --noEmit --watch --skipLibCheck
 
-# test:
-#     vitest --exclude ".direnv/**"
+test:
+    vitest --exclude ".direnv/**"
