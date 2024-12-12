@@ -64,7 +64,7 @@ export const ratelimit = async <K>(
 export const d1backing = (env: Wenv) => ({
   readKey: async (key) => env.DB.prepare(
     `SELECT tat FROM Ratelimits WHERE key = ?`
-  ).bind(key).first<number>("key"),
+  ).bind(key).first<number>("tat"),
   writeKey: async (key, tat) => {
     env.DB.prepare(
       `INSERT INTO Ratelimits (key, tat) VALUES (?1, ?2) ON CONFLICT (key) DO UPDATE SET tat=?2`
