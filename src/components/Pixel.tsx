@@ -43,7 +43,7 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
     ctx.putImageData(imageData, 0, 0)
   })
 
-  const [mouseDown, setMouseDown] = createSignal(false)
+  const [pointerDown, setPointerDown] = createSignal(false)
 
   const eventToIndex = (e: { offsetX: number, offsetY: number }): number => {
     const rect = canvas.getBoundingClientRect()
@@ -54,26 +54,27 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
   }
 
   if (!isServer && props.handleTouch !== undefined) makeEventListener(window.document, "mouseup", (e) => {
-    setMouseDown(false)
+    setPointerDown(false)
   })
 
   return <canvas ref={canvas} width={WIDTH} height={WIDTH} aria-disabled={props.disabled} class={styles.canvas}
     style={{
       // make SSR work better for paint!
-      "background-color": rgbaString(PALETTE[0])
+      "background-color": rgbaString(PALETTE[0]),
+      "touch-action": props.handleTouch === undefined ? undefined : 'none'
     }}
     {...(
       props.handleTouch === undefined ? {} : {
-        onmousedown: (e) => {
+        onpointerdown: (e) => {
           if (props.disabled) return
           batch(() => {
-            setMouseDown(true)
+            setPointerDown(true)
             props.handleTouch!([eventToIndex(e)])
           })
         },
-        onmousemove: (e: MouseEvent) => {
+        onpointermove: (e: MouseEvent) => {
           if (props.disabled) return
-          if (mouseDown()) {
+          if (pointerDown()) {
             props.handleTouch!([eventToIndex(e)])
           }
         }
