@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import { Meta, Title } from "@solidjs/meta";
 import styles from "./index.module.css"
 import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
@@ -33,6 +33,8 @@ export default function PaintRoute() {
       [styles.padtop]: true
     }}>
       <Title>Paint</Title>
+      <Meta property="og:title" content="Paint" />
+      <Meta property="og:description" content="Create pixel art to leave your permanent mark on my website. Like a guestbook!" />
       <p>
         Leave your mark. Nothing I'll need to remove, please.
         Sort of like signing a guestbook.

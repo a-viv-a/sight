@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import { Meta, Title } from "@solidjs/meta";
 import styles from "./index.module.css"
 import { Gallery } from "~/components/Pixel";
 
@@ -44,6 +44,8 @@ export default function GalleryRoute() {
   return (
     <main classList={{ [styles.page]: true, [styles.padtop]: true }}>
       <Title>Gallery</Title>
+      <Meta property="og:title" content="Gallery" />
+      <Meta property="og:description" content="Standalone page for viewing all the cool pixel art users uploaded" />
       <Gallery />
     </main>
   );
