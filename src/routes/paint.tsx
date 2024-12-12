@@ -4,6 +4,7 @@ import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
 import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
 import { addPainting } from "~/api";
+import { narrow } from "~/api/util";
 
 export default function PaintRoute() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,7 +41,14 @@ export default function PaintRoute() {
       </p>
       <Paint data={data} setData={setData} disabled={adding.pending} />
       <Show when={adding.result}>{(result) =>
-        <code>error: {result().error}</code>
+        <>
+          <code>error: {result().error}</code>
+          <Show when={narrow(result, r => "remainingSeconds" in r)}>{result =>
+            <p>You should retry at {new Intl.DateTimeFormat(undefined, {
+              timeStyle: "long"
+            }).format(new Date(Date.now() + result().remainingSeconds * 1e4))}</p>
+          }</Show>
+        </>
       }</Show>
       <button class={styles.button} onClick={() => {
         addPaintingAction(data(), goto())
