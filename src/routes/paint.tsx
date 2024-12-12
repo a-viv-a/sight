@@ -44,9 +44,11 @@ export default function PaintRoute() {
         <>
           <code>error: {result().error}</code>
           <Show when={narrow(result, r => "remainingSeconds" in r)}>{result =>
-            <p>You should retry at {new Intl.DateTimeFormat(undefined, {
+            <p>You shouldn't retry before {new Intl.DateTimeFormat(undefined, {
               timeStyle: "long"
-            }).format(new Date(Date.now() + result().remainingSeconds * 1e4))}</p>
+            }).format(new Date(Date.now() + result().remainingSeconds * 1e4))}.
+            If you think this is probably a mistake, please <a href="/">reach out!</a>
+            </p>
           }</Show>
         </>
       }</Show>
