@@ -46,7 +46,7 @@ export default function PaintRoute() {
           <Show when={narrow(result, r => "remainingSeconds" in r)}>{result =>
             <p>You shouldn't retry before {new Intl.DateTimeFormat(undefined, {
               timeStyle: "long"
-            }).format(new Date(Date.now() + result().remainingSeconds * 1e4))}.
+            }).format(new Date(Date.now() + result().remainingSeconds * 1e3))}.
             If you think this is probably a mistake, please <a href="/">reach out!</a>
             </p>
           }</Show>
