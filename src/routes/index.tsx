@@ -1,4 +1,4 @@
-import { Title } from "@solidjs/meta";
+import { Meta, Title } from "@solidjs/meta";
 import { Component, createSignal, lazy, Suspense } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
@@ -68,6 +68,7 @@ export default function Home() {
     <main>
       <div class={styles.card} ref={landing}>
         <Title>Aviva Ruben</Title>
+        <Meta name="og:description" content="CS student at UW Madison. We should get in touch!"/>
         <h1>Aviva Ruben</h1>
         <Email address="aviva@rubenfamily.com" />
         <NavArrow goto={() => details} direction="down" />
