@@ -1,7 +1,7 @@
 "use server"
 import { json, redirect } from "@solidjs/router";
 import { DEPTH, WIDTH } from "~/pixelConfig";
-import { event } from "./util"
+import { d1backing, event, ratelimit } from "./util"
 
 export const getPaintingsRPC = async () => {
   const { env } = event()
@@ -20,6 +20,7 @@ export const getPaintingsRPC = async () => {
 }
 
 export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
+  const arrivedAt = Date.now()
   const { env, request } = event()
   const ip = request.headers.get('CF-Connecting-IP')
   if (ip === null) {
@@ -27,17 +28,34 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
     console.error(request.headers)
     return json({ error: 'ip header error' } as const, { status: 500 })
   }
+  
+  const status = await ratelimit(
+    `addpaintings/${ip}`,
+    arrivedAt,
+    // 2.5 actions per hour
+    {
+      limit: 15,
+      // 6 hours
+      period: 2.16e7
+    },
+    d1backing(env)
+  )
+  if (!status.accept) {
+    return json({ error: `ip ratelimiting`, remainingMs: status.retryAfter } as const, {
+      status: 429,
+      headers: {
+        "Retry-After": status.retryAfter.toString()
+      }
+    })
+  }
+
   if (
     painting.length !== Math.pow(WIDTH, 2)
     || !painting.every(c => c <= DEPTH)
   ) {
     return json({ error: "validation error" } as const, { status: 400 })
   }
-  // if (session.data.lastActionMS !== undefined && now - session.data.lastActionMS < env.ACTION_DELAY_MS) {
-  //   return json({ error: `took action too recently`, remainingMs: now - session.data.lastActionMS } as const, {
-  //     status: 429,
-  //   })
-  // }
+
   const result = await env.DB.prepare(
     `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
   ).bind(painting, ip).run()
@@ -52,4 +70,4 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
     return redirect(goto)
   }
   return json({ error: 'goto error' }, { status: 400 })
-}
+} 

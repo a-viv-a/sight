@@ -25,6 +25,7 @@ export type RatelimitBacking<K> = {
 export type RatelimitConfig = {
   /** should be greater than 1... */
   limit: number
+  /** period of limit in ms */
   period: number
 }
 
@@ -34,7 +35,7 @@ export const ratelimit = async <K>(
   arrivedAt: number,
   cfg: RatelimitConfig,
   backing: RatelimitBacking<K>
-): Promise<{ accept: true } | { accept: false, retryAfter?: number }> => {
+): Promise<{ accept: true } | { accept: false, retryAfter: number }> => {
 
   const quantity = 1
   // amount allowed per period
@@ -53,9 +54,21 @@ export const ratelimit = async <K>(
 
   if (remaining < 1) {
     backing.writeKey(key, tat)
-    return { accept: false, retryAfter: emissionInterval - (arrivedAt - allowAt)}
+    return { accept: false, retryAfter: (emissionInterval - (arrivedAt - allowAt)) / 1000 }
   }
 
   backing.writeKey(key, newTat)
   return { accept: true }
 }
+
+export const d1backing = (env: Wenv) => ({
+  readKey: async (key) => env.DB.prepare(
+    `SELECT tat FROM Ratelimits WHERE key = ?`
+  ).bind(key).first<number>("key"),
+  writeKey: async (key, tat) => {
+    env.DB.prepare(
+      `INSERT INTO Ratelimits (key, tat) VALUES (?1, ?2) ON CONFLICT (key) DO UPDATE SET tat=?2`
+    ).bind(key, tat)
+  },
+  getTime: Date.now,
+} satisfies RatelimitBacking<string>)
