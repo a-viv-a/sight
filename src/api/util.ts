@@ -53,11 +53,11 @@ export const ratelimit = async <K>(
   )
 
   if (remaining < 1) {
-    backing.writeKey(key, tat)
+    await backing.writeKey(key, tat)
     return { accept: false, retryAfter: (emissionInterval - (arrivedAt - allowAt)) / 1000 }
   }
 
-  backing.writeKey(key, newTat)
+  await backing.writeKey(key, newTat)
   return { accept: true }
 }
 
