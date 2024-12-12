@@ -9,6 +9,9 @@ dev *flags:
 build:
     vinxi build
 
+prodconfig:
+    sed -i 's/true/false/g' src/mode.ts
+
 version:
     vinxi version
 

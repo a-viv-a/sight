@@ -1,14 +1,21 @@
 import type { Accessor } from "solid-js"
 import { getRequestEvent } from "solid-js/web"
+import { H3EventContext } from "vinxi/server"
+import { IS_PRODUCTION } from "~/mode"
 
-export const event = () => {
+export const event = async () => {
   const event = getRequestEvent()
   if (event === undefined) {
     throw new Error("missing event details")
   }
-  const cf = event?.nativeEvent.context.cloudflare
+
+  let cf = event?.nativeEvent.context.cloudflare
   if (cf === undefined) {
-    throw new Error("missing cloudflare event details")
+    if (IS_PRODUCTION)
+      throw new Error("missing cloudflare event details")
+
+    console.warn("mocking out cloudflare with wrangler platform proxy")
+    cf = await (await import("wrangler")).getPlatformProxy() as H3EventContext["Cloudflare"]
   }
   if (event.request === undefined) {
     throw new Error("missing request details")
