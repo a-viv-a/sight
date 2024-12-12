@@ -1,5 +1,5 @@
 import { Meta, Title } from "@solidjs/meta";
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 
 const defaults = {
   title: "Aviva Ruben",
@@ -25,5 +25,8 @@ const Metadata: Component<{
   <Title>{read(props, "title")}</Title>
   <Og key="title" params={props} />
   <Og key="description" params={props} />
+  <Show when={props.description}>{description =>
+    <Meta name="description" content={description()} />
+  }</Show>
 </>
 export default Metadata
