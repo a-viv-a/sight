@@ -68,7 +68,7 @@ export const d1backing = (env: Wenv) => ({
   writeKey: async (key, tat) => {
     env.DB.prepare(
       `INSERT INTO Ratelimits (key, tat) VALUES (?1, ?2) ON CONFLICT (key) DO UPDATE SET tat=?2`
-    ).bind(key, tat)
+    ).bind(key, tat).run()
   },
   getTime: Date.now,
 } satisfies RatelimitBacking<string>)
