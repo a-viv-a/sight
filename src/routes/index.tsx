@@ -1,9 +1,9 @@
-import { Meta, Title } from "@solidjs/meta";
 import { Component, createSignal, lazy, Suspense } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
 import { clientOnly } from "@solidjs/start";
+import Metadata from "~/components/Metadata";
 
 const Email: Component<{ address: string }> = props =>
   <a class={styles.email} href={`mailto:${props.address}`} title={props.address}>{props.address}</a>
@@ -67,8 +67,9 @@ export default function Home() {
   return (
     <main>
       <div class={styles.card} ref={landing}>
-        <Title>Aviva Ruben</Title>
-        <Meta name="og:description" content="CS student at UW Madison. We should get in touch!"/>
+        <Metadata 
+          description="CS student at UW Madison. We should get in touch!"
+        />
         <h1>Aviva Ruben</h1>
         <Email address="aviva@rubenfamily.com" />
         <NavArrow goto={() => details} direction="down" />

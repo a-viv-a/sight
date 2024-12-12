@@ -15,18 +15,6 @@ export default function App() {
             content="/pfp.png"
           />
           <Meta
-            property="og:title"
-            content="Aviva Ruben"
-          />
-          <Meta
-            property="og:first_name"
-            content="Aviva"
-            />
-          <Meta
-            property="og:last_name"
-            content="Ruben"
-            />
-          <Meta
             property="og:type"
             content="website"
             />
