@@ -72,3 +72,11 @@ export const d1backing = (env: Wenv) => ({
   },
   getTime: Date.now,
 } satisfies RatelimitBacking<string>)
+
+// 2.5 actions per hour 
+export const restrictiveRatelimit = {
+  limit: 15,
+  // 6 hours
+  period: 2.16e7
+} satisfies RatelimitConfig
+

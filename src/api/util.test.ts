@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { ratelimit, RatelimitBacking, RatelimitConfig } from "./util"
+import { ratelimit, RatelimitBacking, RatelimitConfig, restrictiveRatelimit } from "./util"
 
 const rl_it = it.extend<{
   backing: RatelimitBacking<string> & {
@@ -106,6 +106,22 @@ describe("ratelimit", () => {
         ...cfg,
         period: 10
       }, backing)).toMatchObject({ accept: false })
+    })
+  })
+
+  describe("server config", () => {
+    rl_it("should not allow spam", async ({ backing }) => {
+      expect.soft(
+        (restrictiveRatelimit.limit / restrictiveRatelimit.period) * 3.6e6 /* ms in an hour */,
+        "actions per hour"
+      ).lessThan(5)
+      
+      for (let i = 0; i < restrictiveRatelimit.limit + 1; i++) {
+        await ratelimit("key", backing.getTime(), restrictiveRatelimit, backing)
+        backing.advanceTime(3)
+      }
+
+      expect(await ratelimit("key", backing.getTime(), restrictiveRatelimit, backing)).toMatchObject({ accept: false })
     })
   })
 

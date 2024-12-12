@@ -1,7 +1,7 @@
 "use server"
 import { json, redirect } from "@solidjs/router";
 import { DEPTH, WIDTH } from "~/pixelConfig";
-import { d1backing, event, ratelimit } from "./util"
+import { d1backing, event, ratelimit, RatelimitConfig, restrictiveRatelimit } from "./util"
 
 export const getPaintingsRPC = async () => {
   const { env } = event()
@@ -28,20 +28,15 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
     console.error(request.headers)
     return json({ error: 'ip header error' } as const, { status: 500 })
   }
-  
+
   const status = await ratelimit(
     `addpaintings/${ip}`,
     arrivedAt,
-    // 2.5 actions per hour
-    {
-      limit: 15,
-      // 6 hours
-      period: 2.16e7
-    },
+    restrictiveRatelimit,
     d1backing(env)
   )
   if (!status.accept) {
-    return json({ error: `ip ratelimiting`, remainingMs: status.retryAfter } as const, {
+    return json({ error: `ip ratelimiting`, remainingSeconds: status.retryAfter } as const, {
       status: 429,
       headers: {
         "Retry-After": status.retryAfter.toString()
