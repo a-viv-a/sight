@@ -29,8 +29,9 @@ ol[role='list'] {
 
 /* Set core body defaults */
 body {
-  /* diverging from the reset... but whatever */
-  min-height: 100svh;
+  min-height: 100vh;
+  /* future proofing? use lvh when supported */
+  min-height: 100lvh;
   line-height: var(--ratio);
 }
 
