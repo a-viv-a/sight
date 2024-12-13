@@ -1,4 +1,4 @@
-import { Accessor, batch, Component, createDeferred, createEffect, createSignal, Index, onCleanup, Setter } from "solid-js"
+import { Accessor, batch, Component, createDeferred, createEffect, createSignal, Index, onCleanup, Setter, untrack } from "solid-js"
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { isServer } from "solid-js/web";
@@ -16,14 +16,21 @@ const fclamp = (min: number, v: number, max: number) =>
 type LinkElementWithStorage = HTMLLinkElement & { hrefStorage?: string }
 
 // TODO: refactor into multiple componenets?
-export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number[]) => void, disabled?: boolean, defer?: boolean, asFavicon?: boolean }> = props => {
+export const Render: Component<{
+  data: Uint8Array,
+  defaultBackground?: number,
+  handleTouch?: (points: number[]) => void,
+  disabled?: boolean,
+  defer?: boolean,
+  asFavicon?: boolean
+}> = props => {
   let canvas!: HTMLCanvasElement;
 
   const readData = !props.defer ? () => props.data : createDeferred(() => props.data, {
     timeoutMs: 1_000
   })
 
-  const faviconLink = () => props.asFavicon
+  const faviconLink = () => !isServer && props.asFavicon
     ? document.querySelector<LinkElementWithStorage>("link[rel*=icon]")
     : null
 
@@ -51,11 +58,11 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
 
     const link = faviconLink()
     if (link) {
-        // keep old favicon state
-        if (!link.hrefStorage) {
-          link.hrefStorage = link.href
-        }
-        link.href = canvas.toDataURL()
+      // keep old favicon state
+      if (!link.hrefStorage) {
+        link.hrefStorage = link.href
+      }
+      link.href = canvas.toDataURL()
     }
   })
 
@@ -85,7 +92,7 @@ export const Render: Component<{ data: Uint8Array, handleTouch?: (points: number
   return <canvas ref={canvas} width={WIDTH} height={WIDTH} aria-disabled={props.disabled} class={styles.canvas}
     style={{
       // make SSR work better for paint!
-      "background-color": rgbaString(PALETTE[0]),
+      "background-color": rgbaString(PALETTE[props.defaultBackground ?? 0]),
       // TODO: put in style?
       "touch-action": props.handleTouch === undefined ? undefined : 'none'
     }}
@@ -132,8 +139,16 @@ export const Gallery: Component<{ goto?: string }> = props => {
   </>
 }
 
-export const Paint: Component<{ data: Accessor<Uint8Array<ArrayBuffer>>, setData: Setter<Uint8Array<ArrayBuffer>>, disabled?: boolean }> = props => {
-  const [color, setColor] = createSignal(PALETTE.length - 1)
+export const Paint: Component<{
+  data: Accessor<Uint8Array<ArrayBuffer>>,
+  setData: Setter<Uint8Array<ArrayBuffer>>,
+  default: {
+    color: number,
+    backgroundColor: number
+  }
+  disabled?: boolean
+}> = props => {
+  const [color, setColor] = createSignal(props.default.color)
 
   return <div class={styles.paint}>
     <Render data={props.data()} handleTouch={(points) => {
@@ -143,7 +158,7 @@ export const Paint: Component<{ data: Accessor<Uint8Array<ArrayBuffer>>, setData
         newData[point] = color()
       }
       props.setData(newData)
-    }} disabled={props.disabled} asFavicon />
+    }} disabled={props.disabled} asFavicon defaultBackground={props.default.backgroundColor} />
     <div class={styles.palette}>
       <Index each={PALETTE}>{(rgba, i) =>
         <button

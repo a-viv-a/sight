@@ -3,12 +3,26 @@ import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
 import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
 import { addPainting } from "~/api";
-import { narrow } from "~/api/util";
+import { useRandom, narrow } from "~/api/util";
 import Metadata from "~/components/Metadata";
+import { PALETTE } from "~/pixelConfig";
+
 
 export default function PaintRoute() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [goto, setGoto] = createSignal("/gallery")
+
+  const random = useRandom()
+
+  const randomColorExcluding = (exclude: number) => {
+    const choices = Array.from({ length: PALETTE.length }, (_, i) => i)
+      .filter(n => n !== exclude)
+
+    return choices[random(choices.length - 1)]
+  }
+
+  const color = random(PALETTE.length - 1)
+  const backgroundColor = randomColorExcluding(color)
 
   onMount(() => {
     const gotoParam = searchParams.goto
@@ -22,7 +36,9 @@ export default function PaintRoute() {
     }
   })
 
-  const [data, setData] = createSignal(new Uint8Array(64))
+  const [data, setData] = createSignal(new Uint8Array(64).fill(
+    backgroundColor
+  ))
 
   const addPaintingAction = useAction(addPainting);
   const adding = useSubmission(addPainting)
@@ -42,7 +58,10 @@ export default function PaintRoute() {
         <br />
         No more than once a week?
       </p>
-      <Paint data={data} setData={setData} disabled={adding.pending} />
+      <Paint data={data} setData={setData} disabled={adding.pending} default={{
+        color,
+        backgroundColor
+      }} />
       <Show when={adding.result}>{(result) =>
         <>
           <code>error: {result().error}</code>
@@ -50,7 +69,7 @@ export default function PaintRoute() {
             <p>You shouldn't retry before {new Intl.DateTimeFormat(undefined, {
               timeStyle: "long"
             }).format(new Date(Date.now() + result().remainingSeconds * 1e3))}.
-            If you think this is probably a mistake, please <a href="/">reach out!</a>
+              If you think this is probably a mistake, please <a href="/">reach out!</a>
             </p>
           }</Show>
         </>
