@@ -3,9 +3,9 @@ import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
 import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
 import { addPainting } from "~/api";
-import { useRandom, narrow } from "~/api/util";
 import Metadata from "~/components/Metadata";
 import { PALETTE } from "~/pixelConfig";
+import { narrow, useRandom } from "~/utils";
 
 
 export default function PaintRoute() {

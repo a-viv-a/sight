@@ -1,11 +1,12 @@
 "use server"
 import { json, redirect } from "@solidjs/router";
 import { DEPTH, WIDTH } from "~/pixelConfig";
-import { d1backing, event, ratelimit, RatelimitConfig, restrictiveRatelimit } from "./util"
 import { IS_DEVELOPMENT } from "~/mode";
+import { useEvent } from "./serverUtils";
+import { d1backing, ratelimit, restrictiveRatelimit } from "./ratelimit";
 
 export const getPaintingsRPC = async () => {
-  const { env } = await event()
+  const { env } = await useEvent()
   const result = await env.DB.prepare(
     `SELECT data from Paintings ORDER BY id DESC`
   ).all<{
@@ -22,7 +23,7 @@ export const getPaintingsRPC = async () => {
 
 export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
   const arrivedAt = Date.now()
-  const { env, request } = await event()
+  const { env, request } = await useEvent()
   const ip = IS_DEVELOPMENT ? "localhost" : request.headers.get('CF-Connecting-IP')
   if (ip === null) {
     console.error("missing ip address in headers...")
