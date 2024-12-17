@@ -22,7 +22,6 @@ export const getPaintingsRPC = async () => {
 }
 
 export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
-  const arrivedAt = Date.now()
   const { env, request } = await useEvent()
   const ip = IS_DEVELOPMENT ? "localhost" : request.headers.get('CF-Connecting-IP')
   if (ip === null) {
@@ -33,7 +32,6 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
 
   const status = await ratelimit(
     `addpaintings/${ip}`,
-    arrivedAt,
     restrictiveRatelimit,
     d1backing(env)
   )

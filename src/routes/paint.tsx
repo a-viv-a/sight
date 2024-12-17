@@ -5,7 +5,8 @@ import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
 import { addPainting } from "~/api";
 import Metadata from "~/components/Metadata";
 import { PALETTE } from "~/pixelConfig";
-import { narrow, useRandom } from "~/utils";
+import { narrow } from "~/utils";
+import { useRandom } from "~/rng";
 
 
 export default function PaintRoute() {

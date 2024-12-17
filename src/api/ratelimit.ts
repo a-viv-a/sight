@@ -1,69 +1,68 @@
+import { clamp } from "../utils"
+
 export type RatelimitBacking<K> = {
-  readKey: (key: K) => Promise<number | null>
-  writeKey: (key: K, tat: number) => Promise<void>
-  /** should be in ms */
+  readKeyTime: (key: K) => Promise<number | null>
+  writeKeyTime: (key: K, time: number) => Promise<void>
+  /** should be in seconds */
   getTime: () => number
 }
 
 export type RatelimitConfig = {
-  /** should be greater than 1... */
-  limit: number
-  /** period of limit in ms */
-  period: number
+  /** number of requests allowed per second */
+  ratePerSecond: number
+  /**
+  multiplier allowed beyond steady state, "bucket size"
+
+  conceptually, burstFactor * ratePerSecond can be exceeded in a burst before rejection
+  */
+  burstFactor: number
 }
 
-// https://blog.ian.stapletoncordas.co/2018/12/understanding-generic-cell-rate-limiting
 // https://dotat.at/@/2024-08-30-gcra.html
 export const ratelimit = async <K>(
   key: K,
-  arrivedAt: number,
   cfg: RatelimitConfig,
-  backing: RatelimitBacking<K>
+  backing: RatelimitBacking<K>,
 ): Promise<{ accept: true } | {
   accept: false,
   /** time to retry after in seconds, used in http header */
   retryAfter: number
 }> => {
+  const windowSize = cfg.burstFactor / cfg.ratePerSecond
+  const now = backing.getTime()
 
-  const quantity = 1
-  // amount allowed per period
-  const emissionInterval = cfg.period / cfg.limit
-  const delayVariationTolerance = cfg.period
-  const increment = emissionInterval * quantity
+  const time = clamp(
+    now - windowSize,
+    await backing.readKeyTime(key) ?? 0,
+    now
+  ) + (1 / cfg.ratePerSecond)
 
-  // tat is theoretical arrival time
-  const tat = await backing.readKey(key) ?? arrivedAt
-  const newTat = Math.max(tat, arrivedAt) + increment
-  const allowAt = newTat - delayVariationTolerance
-
-  const remaining = Math.floor(
-    ((arrivedAt - allowAt) / emissionInterval) + 0.5
-  )
-
-  if (remaining < 1) {
-    const retryAfterMs = arrivedAt - allowAt
-    return { accept: false, retryAfter: retryAfterMs / 1e3 }
+  if (now < time) return {
+    accept: false,
+    retryAfter: time - now
   }
 
-  await backing.writeKey(key, newTat)
+  // TODO: consider awaiting?
+  backing.writeKeyTime(key, time)
   return { accept: true }
 }
 
 export const d1backing = (env: Wenv) => ({
-  readKey: async (key) => env.DB.prepare(
-    `SELECT tat FROM Ratelimits WHERE key = ?`
-  ).bind(key).first<number>("tat"),
-  writeKey: async (key, tat) => {
+  readKeyTime: async (key) => env.DB.prepare(
+    `SELECT time FROM Ratelimits WHERE key = ?`
+  ).bind(key).first<number>("time"),
+  writeKeyTime: async (key, time) => {
     env.DB.prepare(
-      `INSERT INTO Ratelimits (key, tat) VALUES (?1, ?2) ON CONFLICT (key) DO UPDATE SET tat=?2`
-    ).bind(key, tat).run()
+      `INSERT INTO Ratelimits (key, time) VALUES (?1, ?2) ON CONFLICT (key) DO UPDATE SET time=?2`
+    ).bind(key, time).run()
   },
-  getTime: Date.now,
+  getTime: () => Date.now() / 1e3,
 } satisfies RatelimitBacking<string>)
 
-// 2.5 actions per hour 
+/** 2 per hour + 5 burst */
 export const restrictiveRatelimit = {
-  limit: 15,
-  // 6 hours
-  period: 2.16e7
+  // 2 per hour
+  ratePerSecond: 1 / (2 * 3600),
+  // 2.5x burst, 5 burst capacity per hour
+  burstFactor: 2.5
 } satisfies RatelimitConfig
