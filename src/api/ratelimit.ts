@@ -1,6 +1,7 @@
 export type RatelimitBacking<K> = {
   readKey: (key: K) => Promise<number | null>
   writeKey: (key: K, tat: number) => Promise<void>
+  /** should be in ms */
   getTime: () => number
 }
 
@@ -12,12 +13,17 @@ export type RatelimitConfig = {
 }
 
 // https://blog.ian.stapletoncordas.co/2018/12/understanding-generic-cell-rate-limiting
+// https://dotat.at/@/2024-08-30-gcra.html
 export const ratelimit = async <K>(
   key: K,
   arrivedAt: number,
   cfg: RatelimitConfig,
   backing: RatelimitBacking<K>
-): Promise<{ accept: true } | { accept: false, retryAfter: number }> => {
+): Promise<{ accept: true } | {
+  accept: false,
+  /** time to retry after in seconds, used in http header */
+  retryAfter: number
+}> => {
 
   const quantity = 1
   // amount allowed per period
@@ -35,7 +41,8 @@ export const ratelimit = async <K>(
   )
 
   if (remaining < 1) {
-    return { accept: false, retryAfter: (allowAt - arrivedAt) / 1e3 }
+    const retryAfterMs = arrivedAt - allowAt
+    return { accept: false, retryAfter: retryAfterMs / 1e3 }
   }
 
   await backing.writeKey(key, newTat)

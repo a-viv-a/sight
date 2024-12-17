@@ -30,5 +30,5 @@ typegen:
 check:
     tsc --noEmit --watch --skipLibCheck
 
-test:
-    vitest --exclude ".direnv/**"
+test *flags:
+    vitest --exclude ".direnv/**" {{flags}}

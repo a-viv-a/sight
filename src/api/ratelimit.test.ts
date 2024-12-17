@@ -9,7 +9,8 @@ const rl_it = it.extend<{
 }>({
   backing: async ({ }, use) => {
     let internal = {
-      time: 10_000,
+      // year 2000 in seconds to ms
+      time: 946684800 * 1e3,
       kv: new Map<string, number>()
     }
 
@@ -115,6 +116,33 @@ describe("retryAfter", () => {
     }
 
     expect(await ratelimit("key", backing.getTime(), cfg, backing)).toHaveProperty("retryAfter")
+  })
+  rl_it("should not accept before duration", async ({ backing }) => {
+    const cfg = {
+      limit: 4,
+      // 5 minutes
+      period: 300000
+    } satisfies RatelimitConfig
+
+    while ((await ratelimit("key", backing.getTime(), cfg, backing)).accept) {
+      backing.advanceTime(cfg.period / cfg.limit - 5_000)
+    }
+    // @ts-expect-error might not have retry after!
+    const retryAfter = (await ratelimit("key", backing.getTime(), cfg, backing)).retryAfter
+
+    console.log({ retryAfter, time: backing.getTime() })
+
+    const stopEarlyBy = 10
+    expect.soft(retryAfter).toBeGreaterThan(stopEarlyBy * 2)
+
+    expect((await ratelimit("key", backing.getTime(), cfg, backing)).accept).toBe(false)
+    backing.advanceTime( (retryAfter - stopEarlyBy) * 1e3)
+    expect.soft(await ratelimit("key", backing.getTime(), cfg, backing)).toMatchObject({
+      accept: false,
+      retryAfter: stopEarlyBy
+    })
+    backing.advanceTime(stopEarlyBy * 1e3)
+    expect((await ratelimit("key", backing.getTime(), cfg, backing)).accept).toBe(true)
   })
 })
 
