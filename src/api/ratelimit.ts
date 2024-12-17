@@ -3,19 +3,15 @@ import { clamp } from "../utils"
 export type RatelimitBacking<K> = {
   readKeyTime: (key: K) => Promise<number | null>
   writeKeyTime: (key: K, time: number) => Promise<void>
-  /** should be in seconds */
+  /** WARNING: must be in seconds */
   getTime: () => number
 }
 
 export type RatelimitConfig = {
-  /** number of requests allowed per second */
-  ratePerSecond: number
-  /**
-  multiplier allowed beyond steady state, "bucket size"
-
-  conceptually, burstFactor * ratePerSecond can be exceeded in a burst before rejection
-  */
-  burstFactor: number
+  /** minimum number of seconds between events at steady state */
+  secondsBetweenEvents: number
+  /** number of "burst" events to tolerate before ratelimiting */
+  burstEvents: number
 }
 
 // https://dotat.at/@/2024-08-30-gcra.html
@@ -28,14 +24,14 @@ export const ratelimit = async <K>(
   /** time to retry after in seconds, used in http header */
   retryAfter: number
 }> => {
-  const windowSize = cfg.burstFactor / cfg.ratePerSecond
+  const windowSize = cfg.burstEvents * cfg.secondsBetweenEvents
   const now = backing.getTime()
 
   const time = clamp(
     now - windowSize,
     await backing.readKeyTime(key) ?? 0,
     now
-  ) + (1 / cfg.ratePerSecond)
+  ) + cfg.secondsBetweenEvents
 
   if (now < time) return {
     accept: false,
@@ -59,10 +55,9 @@ export const d1backing = (env: Wenv) => ({
   getTime: () => Date.now() / 1e3,
 } satisfies RatelimitBacking<string>)
 
-/** 2 per hour + 5 burst */
+/** 2 per hour + 8 burst events */
 export const restrictiveRatelimit = {
   // 2 per hour
-  ratePerSecond: 1 / (2 * 3600),
-  // 2.5x burst, 5 burst capacity per hour
-  burstFactor: 2.5
+  secondsBetweenEvents: 3600 / 2,
+  burstEvents: 8
 } satisfies RatelimitConfig

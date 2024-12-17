@@ -24,20 +24,17 @@ const rl_it = it.extend<{
 
   },
   cfg: {
-    ratePerSecond: 1/20,
-    burstFactor: 2 
+    secondsBetweenEvents: 20,
+    burstEvents: 5
   } satisfies RatelimitConfig
 })
-
-const computeBurstCapacity = (cfg: RatelimitConfig )=> 
-  1 / (cfg.burstFactor * (1 / cfg.ratePerSecond))
 
 describe("basic behavior", () => {
   rl_it("should always allow first request", async ({ cfg, backing }) => {
     expect(await ratelimit("key", cfg, backing)).toMatchObject({ accept: true })
   })
   rl_it("should start rejecting after burst exceeds limit", async ({ cfg, backing }) => {
-    for (let i = 0; i < computeBurstCapacity(cfg) + 1; i++) {
+    for (let i = 0; i < cfg.burstEvents; i++) {
       expect(
         await ratelimit("key", cfg, backing),
         `burst setup pt ${i}`
@@ -48,7 +45,7 @@ describe("basic behavior", () => {
       accept: false
     })
 
-    backing.advanceTime(1 / cfg.ratePerSecond)
+    backing.advanceTime(cfg.secondsBetweenEvents)
     expect(await ratelimit("key", cfg, backing)).toMatchObject({
       accept: true
     })
@@ -59,7 +56,7 @@ describe("basic behavior", () => {
         await ratelimit("key", cfg, backing),
         `request ${i}`
       ).toMatchObject({ accept: true })
-      backing.advanceTime(1 / cfg.ratePerSecond)
+      backing.advanceTime(cfg.secondsBetweenEvents)
     }
   })
   rl_it("should never deny request slower than appropriate rate", async ({ cfg, backing }) => {
@@ -68,7 +65,7 @@ describe("basic behavior", () => {
         await ratelimit("key", cfg, backing),
         `request ${i}`
       ).toMatchObject({ accept: true })
-      backing.advanceTime(1 / cfg.ratePerSecond + 5)
+      backing.advanceTime(cfg.secondsBetweenEvents + 5)
     }
   })
   rl_it("should rate limit per key", async ({ cfg, backing }) => {
@@ -116,7 +113,7 @@ describe("retryAfter", () => {
 describe("server config", () => {
   rl_it("should not allow spam", async ({ backing }) => {
     expect.soft(
-      restrictiveRatelimit.ratePerSecond * 3600,
+      restrictiveRatelimit.secondsBetweenEvents / 3600,
       "actions per hour"
     ).lessThan(5)
 
@@ -126,6 +123,9 @@ describe("server config", () => {
       backing.advanceTime(30)
     }
 
-    expect(await ratelimit("key", restrictiveRatelimit, backing)).toMatchObject({ accept: false })
+    let resp: Awaited<ReturnType<typeof ratelimit>>
+    expect(resp = await ratelimit("key", restrictiveRatelimit, backing)).toMatchObject({ accept: false })
+    if (resp.accept) expect.fail("no retryAfter")
+    expect(resp.retryAfter, "retry after").toBeGreaterThan(15 * 60)
   })
 })
