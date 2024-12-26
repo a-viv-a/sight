@@ -14,7 +14,7 @@ export default function NotFound() {
     <main class={styles.card}>
       <Metadata
         title="Not Found"
-        description={lyrics}  
+        description={lyrics}
       />
       <HttpStatusCode code={404} />
       <h1>Page Not Found</h1>

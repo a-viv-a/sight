@@ -69,6 +69,7 @@ export default function Home() {
       <div class={styles.card} ref={landing}>
         <Metadata 
           description="CS student at UW Madison. We should get in touch!"
+          canonical="https://aviva.gay"
         />
         <h1>Aviva Ruben</h1>
         <Email address="aviva@rubenfamily.com" />

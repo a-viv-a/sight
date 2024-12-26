@@ -9,6 +9,7 @@ export default function GalleryRoute() {
       <Metadata
         title="Gallery"
         description="Standalone page for viewing all the cool pixel art users uploaded"
+        canonical="https://aviva.gay/gallery"
       />
       <Gallery />
     </main>

@@ -52,6 +52,7 @@ export default function PaintRoute() {
       <Metadata
         title="Paint"
         description="Create pixel art to leave your permanent mark on my website. Like a guestbook!"
+        canonical="https://aviva.gay/paint"
       />
       <p>
         Leave your mark. Nothing I'll need to remove, please.
