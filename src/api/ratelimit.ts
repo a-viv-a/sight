@@ -57,7 +57,7 @@ export const d1backing = (env: Wenv) => ({
 
 /** 2 per hour + 8 burst events */
 export const restrictiveRatelimit = {
-  // 2 per hour
-  secondsBetweenEvents: 3600 / 2,
-  burstEvents: 8
+  // 1 per 6 hours
+  secondsBetweenEvents: 3600 * 6,
+  burstEvents: 2
 } satisfies RatelimitConfig
