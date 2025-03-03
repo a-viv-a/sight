@@ -51,6 +51,12 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
     return json({ error: "validation error" } as const, { status: 400 })
   }
 
+  if ((await env.DB.prepare(
+    `SELECT id from Paintings WHERE data = ? AND id > ((SELECT max(id) from Paintings) - 10)`,
+  ).bind(painting).run()).results.length > 0) {
+    return json({error: "too similar to recent painting"} as const, { status: 400 });
+  }
+
   const result = await env.DB.prepare(
     `INSERT INTO Paintings (data, author_ip) VALUES (?, ?)`
   ).bind(painting, ip).run()
