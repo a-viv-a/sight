@@ -55,7 +55,7 @@ export const d1backing = (env: Wenv) => ({
   getTime: () => Date.now() / 1e3,
 } satisfies RatelimitBacking<string>)
 
-/** 2 per hour + 8 burst events */
+/** 1 per 6 hours + 2 burst events */
 export const restrictiveRatelimit = {
   // 1 per 6 hours
   secondsBetweenEvents: 3600 * 6,

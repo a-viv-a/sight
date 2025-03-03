@@ -113,9 +113,9 @@ describe("retryAfter", () => {
 describe("server config", () => {
   rl_it("should not allow spam", async ({ backing }) => {
     expect.soft(
-      restrictiveRatelimit.secondsBetweenEvents / 3600,
+      restrictiveRatelimit.secondsBetweenEvents,
       "actions per hour"
-    ).lessThan(5)
+    ).greaterThan(3600)
 
     // 15 requests, every 30 seconds
     for (let i = 0; i < 15; i++) {
