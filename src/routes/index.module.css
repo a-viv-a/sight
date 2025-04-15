@@ -54,3 +54,12 @@
     color: var(--color-dark);
   }
 }
+
+.subtle {
+  color: oklch(0.37 0.1401 257.55);
+  text-decoration-skip-ink: auto;
+  transition: color ease-in-out .35s;
+  &:hover {
+    color: #A25D0E;
+  }
+}
