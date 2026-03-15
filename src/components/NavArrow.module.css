@@ -15,6 +15,8 @@
     stroke-width: .05em;
     stroke-linecap: round;
     stroke-linejoin: round;
+    transform-box: fill-box;
+    transform-origin: center;
   }
   @media (prefers-reduced-motion: no-preference) {
     &.squish path {
@@ -34,19 +36,19 @@
 
 @keyframes heartbeat {
   from {
-    d: path("M2,2 L5,6 L8,2");
+    transform: scale(1);
   }
 
   to {
-    d: path("M1.5,2 L5,5.5 L8.5,2");
+    transform: scaleX(1.167) scaleY(0.875);
   }
 }
 
 @keyframes squish {
   from {
-    d: path("M2,2 L5,6 L8,2");
+    transform: scale(1);
   }
   to {
-    d: path("M4,1 L5,7 L6,1");
+    transform: scaleX(0.333) scaleY(1.5);
   }
 }

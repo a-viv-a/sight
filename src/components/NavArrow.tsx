@@ -25,7 +25,7 @@ const NavArrow: Component<{ direction: Direction, goto: () => HTMLElement }> = (
     }
 
     setSliding(true)
-    props.goto().scrollIntoView()
+    props.goto().scrollIntoView({ behavior: "smooth" })
   }
   }>
     <path d="M2,2 L5,6 L8,2" />
