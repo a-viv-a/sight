@@ -1,5 +1,29 @@
 import { clamp } from "../utils"
 
+const IPV6_GROUPS = 8
+const IPV6_PREFIX_GROUPS = 4 // /64
+
+function expandIPv6(ip: string): string[] {
+  const halves = ip.split('::')
+  let groups: string[]
+
+  if (halves.length === 2) {
+    const left = halves[0] ? halves[0].split(':') : []
+    const right = halves[1] ? halves[1].split(':') : []
+    const fill = IPV6_GROUPS - left.length - right.length
+    groups = [...left, ...Array<string>(fill).fill('0'), ...right]
+  } else {
+    groups = ip.split(':')
+  }
+
+  return groups.map(g => g.padStart(4, '0').toLowerCase())
+}
+
+export function normalizeIpForRatelimit(ip: string): string {
+  if (!ip.includes(':')) return ip
+  return expandIPv6(ip).slice(0, IPV6_PREFIX_GROUPS).join(':')
+}
+
 export type RatelimitBacking<K> = {
   readKeyTime: (key: K) => Promise<number | null>
   writeKeyTime: (key: K, time: number) => Promise<void>

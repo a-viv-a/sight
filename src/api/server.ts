@@ -3,7 +3,7 @@ import { json, redirect } from "@solidjs/router";
 import { DEPTH, WIDTH } from "~/pixelConfig";
 import { IS_DEVELOPMENT } from "~/mode";
 import { useEvent } from "./serverUtils";
-import { d1backing, ratelimit, restrictiveRatelimit } from "./ratelimit";
+import { d1backing, normalizeIpForRatelimit, ratelimit, restrictiveRatelimit } from "./ratelimit";
 
 export const getPaintingsRPC = async () => {
   const { env } = await useEvent()
@@ -31,7 +31,7 @@ export const addPaintingRPC = async (painting: Uint8Array, goto: string) => {
   }
 
   const status = await ratelimit(
-    `addpaintings/${ip}`,
+    `addpaintings/${normalizeIpForRatelimit(ip)}`,
     restrictiveRatelimit,
     d1backing(env)
   )

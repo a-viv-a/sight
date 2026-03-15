@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { ratelimit, RatelimitBacking, RatelimitConfig, restrictiveRatelimit } from "./ratelimit"
+import { normalizeIpForRatelimit, ratelimit, RatelimitBacking, RatelimitConfig, restrictiveRatelimit } from "./ratelimit"
 
 const rl_it = it.extend<{
   backing: RatelimitBacking<string> & {
@@ -127,5 +127,49 @@ describe("server config", () => {
     expect(resp = await ratelimit("key", restrictiveRatelimit, backing)).toMatchObject({ accept: false })
     if (resp.accept) expect.fail("no retryAfter")
     expect(resp.retryAfter, "retry after").toBeGreaterThan(15 * 60)
+  })
+})
+
+describe("normalizeIpForRatelimit", () => {
+  it("passes through IPv4", () => {
+    expect(normalizeIpForRatelimit("1.2.3.4")).toBe("1.2.3.4")
+  })
+  it("passes through localhost", () => {
+    expect(normalizeIpForRatelimit("localhost")).toBe("localhost")
+  })
+  it("truncates full IPv6 to /64", () => {
+    expect(normalizeIpForRatelimit("2a0d:5600:0046:6000:d136:e972:1a0d:31a0"))
+      .toBe("2a0d:5600:0046:6000")
+  })
+  it("expands :: in middle", () => {
+    expect(normalizeIpForRatelimit("2001:db8::1")).toBe("2001:0db8:0000:0000")
+  })
+  it("expands :: at end", () => {
+    expect(normalizeIpForRatelimit("2001:db8::")).toBe("2001:0db8:0000:0000")
+  })
+  it("expands :: alone", () => {
+    expect(normalizeIpForRatelimit("::")).toBe("0000:0000:0000:0000")
+  })
+  it("expands multiple zero groups", () => {
+    expect(normalizeIpForRatelimit("2001:0:0:1::")).toBe("2001:0000:0000:0001")
+  })
+  it("pads leading zeros", () => {
+    expect(normalizeIpForRatelimit("2001:db8:46:1::")).toBe("2001:0db8:0046:0001")
+  })
+  it("lowercases hex", () => {
+    expect(normalizeIpForRatelimit("2A0D:5600:46:1::")).toBe("2a0d:5600:0046:0001")
+  })
+  it("normalizes loopback", () => {
+    expect(normalizeIpForRatelimit("::1")).toBe("0000:0000:0000:0000")
+  })
+  it("groups addresses from the same /64", () => {
+    const a = normalizeIpForRatelimit("2a0d:5600:0046:6000:d136:e972:1a0d:31a0")
+    const b = normalizeIpForRatelimit("2a0d:5600:0046:6000:aaaa:bbbb:cccc:dddd")
+    expect(a).toBe(b)
+  })
+  it("separates addresses from different /64s", () => {
+    const a = normalizeIpForRatelimit("2a0d:5600:0046:6000:d136:e972:1a0d:31a0")
+    const b = normalizeIpForRatelimit("2a0d:5600:0045:f000:9c6a:c54b:5c44:4aa7")
+    expect(a).not.toBe(b)
   })
 })
