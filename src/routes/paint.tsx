@@ -1,7 +1,7 @@
 import styles from "./index.module.css"
 import { batch, createSignal, onMount, Show } from "solid-js";
 import { Paint } from "~/components/Pixel";
-import { useAction, useSearchParams, useSubmission } from "@solidjs/router";
+import { A, useAction, useSearchParams, useSubmission } from "@solidjs/router";
 import { addPainting } from "~/api";
 import Metadata from "~/components/Metadata";
 import { PALETTE } from "~/pixelConfig";
@@ -72,7 +72,7 @@ export default function PaintRoute() {
             <p>You shouldn't retry before {new Intl.DateTimeFormat(undefined, {
               timeStyle: "long"
             }).format(new Date(Date.now() + result().remainingSeconds * 1e3))}.
-              If you think this is probably a mistake, please <a href="/">reach out!</a>
+              If you think this is probably a mistake, please <A href="/">reach out!</A>
             </p>
           }</Show>
         </>

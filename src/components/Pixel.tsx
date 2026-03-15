@@ -2,7 +2,7 @@ import { Accessor, batch, Component, createDeferred, createEffect, createSignal,
 import styles from "./Pixel.module.css"
 import { makeEventListener } from "@solid-primitives/event-listener";
 import { isServer } from "solid-js/web";
-import { createAsync } from "@solidjs/router";
+import { A, createAsync } from "@solidjs/router";
 import { getPaintings } from "~/api";
 import { DEPTH, PALETTE, WIDTH } from "~/pixelConfig";
 
@@ -116,12 +116,12 @@ export const Render: Component<{
 }
 
 const PaintButton: Component<{ col: number, goto?: string }> = props =>
-  <a href={props.goto !== undefined ? `/paint?goto=${props.goto}` : "/paint"} title="create new pixel art painting" class={styles.create} style={{ "grid-column-start": props.col }}>
+  <A href={props.goto !== undefined ? `/paint?goto=${props.goto}` : "/paint"} title="create new pixel art painting" class={styles.create} style={{ "grid-column-start": props.col }}>
     <svg viewBox="0 0 10 10">
       <path d="M5,2 L5,8" />
       <path d="M2,5 L8,5" />
     </svg>
-  </a>
+  </A>
 
 export const Gallery: Component<{ goto?: string }> = props => {
   const paintings = createAsync(() => getPaintings())
