@@ -5,7 +5,7 @@ export default defineConfig({
     preset: "cloudflare-pages",
 
     rollupConfig: {
-      external: ["node:async_hooks"]
+      external: ["node:async_hooks", "wrangler"]
     }
   }
 });

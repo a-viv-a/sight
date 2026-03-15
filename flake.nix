@@ -20,7 +20,7 @@
           with pkgs;
           mkShell {
             buildInputs = [
-              nodejs_20
+              nodejs_22
               wrangler
               just
               typescript
