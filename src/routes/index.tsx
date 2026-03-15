@@ -1,4 +1,4 @@
-import { Component, createSignal, lazy, ParentComponent, Suspense } from "solid-js";
+import { Component, createSignal, Index, lazy, ParentComponent, Suspense } from "solid-js";
 import styles from "./index.module.css"
 import NavArrow from "~/components/NavArrow";
 import Toml from "~/components/Toml";
@@ -32,6 +32,10 @@ const pronounsList = [
   "shamrock",
 ] as const
 
+const pronounStyles: Partial<Record<string, string>> = {
+  "sherbert": styles.misspelled,
+}
+
 const punctuationMark = [
   ".", ".", ".", "…", "!", ".", "?", "‽"
 ]
@@ -48,9 +52,9 @@ const Pronoun: Component = props => {
     [styles.pronoun]: true,
     [styles.single]: pronouns().length <= 1
   }}>
-    {`${pronouns().join(' / ')}${punctuationMark[
-      pronouns().length % punctuationMark.length
-    ]}`}
+    <Index each={pronouns()}>{(entry, i) =>
+      <>{i > 0 && " / "}<span class={pronounStyles[entry()]}>{entry()}</span></>
+    }</Index>{punctuationMark[pronouns().length % punctuationMark.length]}
   </span>
 }
 
