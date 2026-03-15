@@ -13,7 +13,7 @@ export default function PaintRoute() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [goto, setGoto] = createSignal("/gallery")
 
-  const random = useRandom()
+  const { random, SeedEmbed } = useRandom()
 
   const randomColorExcluding = (exclude: number) => {
     const choices = Array.from({ length: PALETTE.length }, (_, i) => i)
@@ -54,6 +54,7 @@ export default function PaintRoute() {
         description="Create pixel art to leave your permanent mark on my website. Like a guestbook!"
         canonical="https://aviva.gay/paint"
       />
+      <SeedEmbed />
       <p>
         Leave your mark. Nothing I'll need to remove, please.
         Sort of like signing a guestbook.
