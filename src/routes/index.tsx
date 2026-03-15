@@ -54,7 +54,7 @@ const Pronoun: Component = props => {
   </span>
 }
 
-const A: ParentComponent<{href: string}> = props => <a href={props.href} class={styles.subtle}>{props.children}</a>
+const A: ParentComponent<{href: string}> = props => <a href={props.href} target="_blank" rel="noopener noreferrer" class={styles.subtle}>{props.children}</a>
 
 // Gallery does enough main thread work inside an effect (canvas painting) to cause FOUC so load it client only
 // this defers rendering to after hydration
@@ -70,7 +70,7 @@ export default function Home() {
     <main>
       <div class={styles.card} ref={landing}>
         <Metadata 
-          description="CS student at UW Madison. We should get in touch!"
+          description="Compiler engineer. We should get in touch!"
           canonical="https://aviva.gay"
         />
         <h1>Aviva Ruben</h1>
@@ -80,7 +80,8 @@ export default function Home() {
       <div class={styles.page} ref={details}>
         <NavArrow goto={() => landing} direction="up" />
         <p>
-          Studying CS at UW Madison. <Pronoun /> I love backpacking, ttrpgs, programming.
+          I do my best to work on compilers. <Pronoun /> I love backpacking, running, ttrpgs, board games, programming.
+          Sometimes I take photos or make earrings with beads.
           We should get in touch!
         </p>
         <Toml.File>
@@ -88,16 +89,15 @@ export default function Home() {
             <Toml.KV key="bluesky" val="aviva.gay" link="https://deer.social/profile/did:plc:jx4g6baqkwdlonylsetvpu7c" />
             <Toml.KV key="discord" val="a.viv.a" />
             <Toml.KV key="github" val="a-viv-a" link="https://github.com/a-viv-a" />
+            <Toml.KV key="tangled" val="aviva.gay" link="https://tangled.org/did:plc:jx4g6baqkwdlonylsetvpu7c" />
             <Toml.Comment>ask for phone/signal!</Toml.Comment>
             <Toml.KV key="email" val="aviva@rubenfamily.com" link="mailto:aviva@rubenfamily.com" />
           </Toml.Group>
         </Toml.File>
         <p>
         You can see what I'm working on right now on my <A href="https://github.com/a-viv-a">github</A>,
-        like the <A href="https://github.com/a-viv-a/nixfiles">nixfiles</A> for my laptop,
-        the <A href="https://github.com/a-viv-a/sight">source for this website</A> or{" "}
-        <A href="https://github.com/a-viv-a/deer-social">the source for deer.social</A>, my bluesky social app soft fork.
-        I sometimes write <A href="https://whtwnd.com/aviva.gay">blog posts on whitewind</A> (atproto based blogging).
+        including the <A href="https://github.com/a-viv-a/sight">source for this website</A>.
+        I've written one <A href="https://whtwnd.com/aviva.gay">blog post on whitewind</A>, I'd like to write more about PL.
         </p>
         {/*
         suspense will trip when awaiting the import

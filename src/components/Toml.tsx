@@ -18,7 +18,7 @@ export const KV: Component<{ key: string, val: string, link?: string }> = props 
     <span class={styles.key}>{props.key}</span>
     <span class={styles.val}>={" "}
     <Show when={props.link} fallback={<span>"{props.val}"</span>}>{link =>
-      <a href={link()} class={styles.val}>"{props.val}"</a>
+      <a href={link()} target="_blank" rel="noopener noreferrer" class={styles.val}>"{props.val}"</a>
     }</Show>
     </span>
   </>
