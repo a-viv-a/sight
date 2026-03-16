@@ -8,8 +8,8 @@ export const manifest: PhotoManifest = {
       "title": "ART 176",
       "slug": "176",
       "path": "176",
-      "blurb": "An intro to digital photography class I took at UW Madison.\nMy section was taught by Jami Balicki <3",
-      "blurbHtml": "<p>An intro to digital photography class I took at UW Madison.\nMy section was taught by <a href=\"https://www.instagram.com/jblici_photography/\">Jami Balicki</a> &lt;3</p>\n",
+      "blurb": "An intro to digital photography class I took at UW Madison.\nSome of the photos I'm really proud of aren't included here, ask to see them in person!\nMy section was taught by Jami Balicki <3",
+      "blurbHtml": "<p>An intro to digital photography class I took at UW Madison.\nSome of the photos I&#39;m really proud of aren&#39;t included here, ask to see them in person!\nMy section was taught by <a href=\"https://www.instagram.com/jblici_photography/\">Jami Balicki</a> &lt;3</p>\n",
       "sortOrder": 0,
       "children": [
         "176/pa2",
