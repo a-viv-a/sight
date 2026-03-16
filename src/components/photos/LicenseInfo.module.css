@@ -1,0 +1,15 @@
+.license {
+  font-family: var(--font-mono);
+  font-size: var(--s-2);
+  color: var(--color-mid);
+}
+
+.license a {
+  color: var(--color-mid);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.license a:hover {
+  color: var(--color-lightish);
+}

@@ -1,0 +1,84 @@
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #1a1a1a;
+  color: var(--color-lightish);
+}
+
+.sidebar {
+  background: #111;
+  border-inline-end: 1px solid #2a2a2a;
+  overflow: hidden;
+}
+
+.main {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.menuBtn {
+  display: none;
+}
+
+.overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    inset: 0;
+    width: 280px;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+  }
+
+  .menuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: var(--s-1);
+    left: var(--s-1);
+    z-index: 101;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+
+  .menuIcon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: var(--color-lightish);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+  }
+
+  .menuBtnOpen .menuIcon {
+    stroke: var(--color-light);
+  }
+}

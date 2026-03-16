@@ -1,0 +1,95 @@
+.lightbox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.imageArea {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-1);
+  min-height: 0;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-2) var(--s-1);
+  flex-shrink: 0;
+}
+
+.navGroup {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  color: var(--color-mid);
+  text-decoration: none;
+}
+
+.navBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-light);
+}
+
+.arrow {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.infoGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+
+.infoBtn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--s-1);
+  color: var(--color-mid);
+  border: 1px solid var(--color-darkish);
+}
+
+.infoBtn:hover {
+  color: var(--color-light);
+  border-color: var(--color-mid);
+}
+
+.infoBtnActive {
+  color: var(--color-light);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-mid);
+}

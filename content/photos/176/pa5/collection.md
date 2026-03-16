@@ -1,0 +1,43 @@
+---
+title: "PA5"
+slug: pa5
+cover: "01"
+license: "CC BY-NC-SA 4.0"
+licenseUrl: "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+sortOrder: 0
+photos:
+  - file: "01"
+    source: "176/PA5/crit/crit 01.png"
+    title: ""
+    alt: ""
+  - file: "02"
+    source: "176/PA5/crit/crit 02.png"
+    title: ""
+    alt: ""
+  - file: "03"
+    source: "176/PA5/crit/crit 03.png"
+    title: ""
+    alt: ""
+  - file: "04"
+    source: "176/PA5/crit/crit 04.png"
+    title: ""
+    alt: ""
+  - file: "05"
+    source: "176/PA5/crit/crit 05.png"
+    title: ""
+    alt: ""
+  - file: "06"
+    source: "176/PA5/crit/crit 06.png"
+    title: ""
+    alt: ""
+  - file: "07"
+    source: "176/PA5/crit/crit 07.png"
+    title: ""
+    alt: ""
+  - file: "08"
+    source: "176/PA5/crit/crit 08.png"
+    title: ""
+    alt: ""
+---
+
+Assignment about exploring light and shadow.

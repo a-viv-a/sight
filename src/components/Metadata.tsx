@@ -25,6 +25,7 @@ const Metadata: Component<{
   title?: string,
   description?: string,
   canonical?: Url,
+  image?: string,
 }> = props => <>
   <Title>{read(props, "title")}</Title>
   <Og key="title" params={props} />
@@ -34,6 +35,9 @@ const Metadata: Component<{
   }</Show>
   <Show when={props.canonical}>{href =>
     <Link rel="canonical" href={href()}/>
+  }</Show>
+  <Show when={props.image}>{src =>
+    <Meta property="og:image" content={src()} />
   }</Show>
 </>
 export default Metadata

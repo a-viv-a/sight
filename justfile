@@ -30,5 +30,11 @@ typegen:
 check:
     tsc --noEmit --watch --skipLibCheck
 
+photos *flags:
+    npx tsx scripts/process-photos.ts /run/media/aviva/shroom/photography/ {{flags}}
+
+photos-init image_dir slug title *flags:
+    npx tsx scripts/process-photos.ts init {{image_dir}} --slug={{slug}} --title="{{title}}" {{flags}}
+
 test *flags:
     vitest --exclude ".direnv/**" {{flags}}

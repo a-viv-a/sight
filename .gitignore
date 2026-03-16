@@ -30,6 +30,9 @@ gitignore
 .DS_Store
 Thumbs.db
 
+# photo originals (web-optimized versions in public/photos/ are committed)
+originals/
+
 # wrangler files
 .wrangler
 .dev.vars
