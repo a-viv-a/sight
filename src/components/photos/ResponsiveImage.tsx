@@ -22,7 +22,7 @@ const ResponsiveImage: Component<{
         {(photo) => (
           <picture>
             <source
-              type="image/webp"
+              type="image/avif"
               srcset={`${photo.sizes.sm.url} ${photo.sizes.sm.width}w, ${photo.sizes.md.url} ${photo.sizes.md.width}w, ${photo.sizes.full.url} ${photo.sizes.full.width}w`}
               sizes={
                 props.mode === "thumbnail"

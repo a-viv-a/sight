@@ -1,6 +1,8 @@
 import { readdir, readFile, mkdir, stat, writeFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 import sharp from "sharp";
+
+sharp.concurrency(1);
 import exifr from "exifr";
 import matter from "gray-matter";
 import { marked } from "marked";
@@ -18,7 +20,7 @@ const SIZES = [
   { name: "640", maxDimension: 640 },
 ] as const;
 
-const WEBP_QUALITY = 85;
+const AVIF_QUALITY = 75;
 const PLACEHOLDER_WIDTH = 32;
 const CONTENT_DIR = join(import.meta.dirname!, "..", "content", "photos");
 const PUBLIC_DIR = join(import.meta.dirname!, "..", "public", "photos");
@@ -146,8 +148,8 @@ async function processImage(
 
   for (const size of SIZES) {
     const filename = size.maxDimension
-      ? `${size.maxDimension}.webp`
-      : "full.webp";
+      ? `${size.maxDimension}.avif`
+      : "full.avif";
     const outputPath = join(outputDir, filename);
 
     const exists = !force && (await stat(outputPath).catch(() => null));
@@ -180,7 +182,7 @@ async function processImage(
     }
 
     const buffer = await pipeline
-      .webp({ quality: WEBP_QUALITY, effort: 6 })
+      .avif({ quality: AVIF_QUALITY, effort: 6, chromaSubsampling: "4:4:4" })
       .toBuffer();
 
     await writeFile(outputPath, buffer);
@@ -393,7 +395,7 @@ async function processAll(sourceDir: string, force: boolean) {
     `found ${Object.keys(collections).length} collections, ${photoEntries.length} photos`
   );
 
-  const CONCURRENCY = 4;
+  const CONCURRENCY = 16;
 
   const jobs = photoEntries.map(({ entry, collectionPath }) => ({
     photoPath: `${collectionPath}/${entry.file}`,
@@ -413,21 +415,16 @@ async function processAll(sourceDir: string, force: boolean) {
   const photos: Record<string, PhotoData> = {};
   let totalBytes = 0;
 
-  for (let i = 0; i < jobs.length; i += CONCURRENCY) {
-    const batch = jobs.slice(i, i + CONCURRENCY);
-    const results = await Promise.all(
-      batch.map(async (job) => {
-        console.log(`processing ${job.photoPath}...`);
-        const outputDir = join(PUBLIC_DIR, ...job.photoPath.split("/"));
-        const [exif, result] = await Promise.all([
-          extractExif(job.sourcePath),
-          processImage(job.sourcePath, outputDir, force),
-        ]);
-        return { job, exif, result };
-      })
-    );
-
-    for (const { job, exif, result } of results) {
+  let nextIdx = 0;
+  async function worker() {
+    while (nextIdx < jobs.length) {
+      const job = jobs[nextIdx++];
+      console.log(`processing ${job.photoPath}...`);
+      const outputDir = join(PUBLIC_DIR, ...job.photoPath.split("/"));
+      const [exif, result] = await Promise.all([
+        extractExif(job.sourcePath),
+        processImage(job.sourcePath, outputDir, force),
+      ]);
       photos[job.photoPath] = {
         file: job.entry.file,
         path: job.photoPath,
@@ -445,6 +442,8 @@ async function processAll(sourceDir: string, force: boolean) {
       totalBytes += result.sizes.full.bytes;
     }
   }
+
+  await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
 
   const manifest: PhotoManifest = { collections, photos, totalBytes };
 
