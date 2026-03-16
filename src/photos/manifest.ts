@@ -12,11 +12,33 @@ export const manifest: PhotoManifest = {
       "blurbHtml": "<p>An intro to digital photography class I took at UW Madison.\nMy section was taught by <a href=\"https://www.instagram.com/jblici_photography/\">Jami Balicki</a> &lt;3</p>\n",
       "sortOrder": 0,
       "children": [
+        "176/pa2",
         "176/pa3",
         "176/pa5"
       ],
       "photos": [],
       "parent": null
+    },
+    "176/pa2": {
+      "title": "PA2",
+      "slug": "pa2",
+      "path": "176/pa2",
+      "blurb": "Learning how to use a camera!\n\nTook pictures while walking around and at a protest.",
+      "blurbHtml": "<p>Learning how to use a camera!\n<br/>\nTook pictures while walking around and at a protest.</p>\n",
+      "cover": "176/pa2/05",
+      "license": "CC BY-NC-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "sortOrder": 0,
+      "children": [],
+      "photos": [
+        "176/pa2/01",
+        "176/pa2/02",
+        "176/pa2/03",
+        "176/pa2/04",
+        "176/pa2/05",
+        "176/pa2/06"
+      ],
+      "parent": "176"
     },
     "176/pa3": {
       "title": "PA3",
@@ -70,6 +92,240 @@ export const manifest: PhotoManifest = {
     }
   },
   "photos": {
+    "176/pa2/01": {
+      "file": "01",
+      "path": "176/pa2/01",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5057996485061511,
+      "width": 4284,
+      "height": 2845,
+      "placeholder": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAQBQCdASogABUAPzmIvVYvKKajsBgIAeAnCUAAELKZvm8DUfRSl4yxjR3b4kYo1B0AAP6gpgDxfHb0utg3s2ZF68rEo/XcoMxW8Ec1CNEwjiRYly9Uvk2DiTzCf0Phgr4r21oK6EU64oOrAHuTEzkUq2/4RTSi+3uS62Ixswk3vmzIviJ4i6vQimtQagUVEJYmOtggQbkJDAAA",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/250",
+        "iso": 100
+      },
+      "sizes": {
+        "full": {
+          "width": 4284,
+          "height": 2845,
+          "url": "/photos/176/pa2/01/full.webp",
+          "bytes": 816314
+        },
+        "md": {
+          "width": 1200,
+          "height": 797,
+          "url": "/photos/176/pa2/01/1200.webp",
+          "bytes": 126226
+        },
+        "sm": {
+          "width": 640,
+          "height": 425,
+          "url": "/photos/176/pa2/01/640.webp",
+          "bytes": 52448
+        }
+      }
+    },
+    "176/pa2/02": {
+      "file": "02",
+      "path": "176/pa2/02",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5053353658536586,
+      "width": 3950,
+      "height": 2624,
+      "placeholder": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAADQBACdASogABUAPzmEtlOvKCSisAgB4CcJYgDDNBiwItoezXf2nf8GMueN5kb/kAD+PXcEO/ZC/N29Czne1qIuJhb/JVQPr/VEGvLUD2Kbd0j8CrL5vipCOmBqiU6THtElrRiPFTIh2GMxk78dmTqyj0lk+mYl4dQoLtrpTXtAZngR4FA5diSEKEoM0AAA",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/1000",
+        "iso": 100
+      },
+      "sizes": {
+        "full": {
+          "width": 3950,
+          "height": 2624,
+          "url": "/photos/176/pa2/02/full.webp",
+          "bytes": 487172
+        },
+        "md": {
+          "width": 1200,
+          "height": 797,
+          "url": "/photos/176/pa2/02/1200.webp",
+          "bytes": 109792
+        },
+        "sm": {
+          "width": 640,
+          "height": 425,
+          "url": "/photos/176/pa2/02/640.webp",
+          "bytes": 45910
+        }
+      }
+    },
+    "176/pa2/03": {
+      "file": "03",
+      "path": "176/pa2/03",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 0.7815205118554761,
+      "width": 4153,
+      "height": 5314,
+      "placeholder": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAADwBgCdASogACkAPzmKu1cvKSWjsBVYAeAnCWUAyJssBRVu/Rj+Kfocc1WpOomHoTiXE41kb0KQONSuAb6yecVAAP5Ud3JKbZgMgmeFYqQIew+JMDFnCx38ZZiE4C9Psl0T7FUtTd1PpK8PVoaXWcY5dPQD69ybNsNTOgyVeTBuED30NzEZZjH0NL5CLpdRRRaf1b5tGbxxTQm3z/ZupTszGnbwxpmd634V4P4h+GQJSNNrTvGmr4i1TAITigXrcud3aXXWYeGKhe1MxMYCZ37ZO73vGNeohfEazYI5fQBZEj9RNWmWjw3JwtvZ/bxLIkmUZgu3l4ZdSvYac8Hv9qHZECy8uVOEPTIIDAAA",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/100",
+        "iso": 100
+      },
+      "sizes": {
+        "full": {
+          "width": 4153,
+          "height": 5314,
+          "url": "/photos/176/pa2/03/full.webp",
+          "bytes": 724062
+        },
+        "md": {
+          "width": 938,
+          "height": 1200,
+          "url": "/photos/176/pa2/03/1200.webp",
+          "bytes": 96890
+        },
+        "sm": {
+          "width": 500,
+          "height": 640,
+          "url": "/photos/176/pa2/03/640.webp",
+          "bytes": 39720
+        }
+      }
+    },
+    "176/pa2/04": {
+      "file": "04",
+      "path": "176/pa2/04",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5054704595185995,
+      "width": 4128,
+      "height": 2742,
+      "placeholder": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAwCdASogABUAPzmOwFevKaapqAqp4CcJZQDE2BBWxLozbW1i7G4AAPnjeckyiCI0UvebELvBfcn7xENEehmsWhdUT2LtgCX73YQ4ztsW5X+PZAAAAA==",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/1000",
+        "iso": 100
+      },
+      "sizes": {
+        "full": {
+          "width": 4128,
+          "height": 2742,
+          "url": "/photos/176/pa2/04/full.webp",
+          "bytes": 339240
+        },
+        "md": {
+          "width": 1200,
+          "height": 797,
+          "url": "/photos/176/pa2/04/1200.webp",
+          "bytes": 60994
+        },
+        "sm": {
+          "width": 640,
+          "height": 425,
+          "url": "/photos/176/pa2/04/640.webp",
+          "bytes": 24766
+        }
+      }
+    },
+    "176/pa2/05": {
+      "file": "05",
+      "path": "176/pa2/05",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5056939501779358,
+      "width": 4231,
+      "height": 2810,
+      "placeholder": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACwAwCdASogABUAPy2At1OuqCWisAwB0CWJZwAANKFAF8r+55UdQAD5nMqOAYxtbszpaSAVxwe9R/HaK3S6UFBeQg1CBAAA",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "48mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/800",
+        "iso": 400
+      },
+      "sizes": {
+        "full": {
+          "width": 4231,
+          "height": 2810,
+          "url": "/photos/176/pa2/05/full.webp",
+          "bytes": 712120
+        },
+        "md": {
+          "width": 1200,
+          "height": 797,
+          "url": "/photos/176/pa2/05/1200.webp",
+          "bytes": 26108
+        },
+        "sm": {
+          "width": 640,
+          "height": 425,
+          "url": "/photos/176/pa2/05/640.webp",
+          "bytes": 9738
+        }
+      }
+    },
+    "176/pa2/06": {
+      "file": "06",
+      "path": "176/pa2/06",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5055124540628828,
+      "width": 3687,
+      "height": 2449,
+      "placeholder": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAwBACdASogABUAPzmQu1WvKiYjMBgIAeAnCWcAAI91uZIeEwC3J27sdhAA/u50E5xcLki9R0784qNj36TaW0iJcWTJfQbdZsAAAA==",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/60",
+        "iso": 6400
+      },
+      "sizes": {
+        "full": {
+          "width": 3687,
+          "height": 2449,
+          "url": "/photos/176/pa2/06/full.webp",
+          "bytes": 1105562
+        },
+        "md": {
+          "width": 1200,
+          "height": 797,
+          "url": "/photos/176/pa2/06/1200.webp",
+          "bytes": 46328
+        },
+        "sm": {
+          "width": 640,
+          "height": 425,
+          "url": "/photos/176/pa2/06/640.webp",
+          "bytes": 7066
+        }
+      }
+    },
     "176/pa3/01": {
       "file": "01",
       "path": "176/pa3/01",
@@ -845,5 +1101,5 @@ export const manifest: PhotoManifest = {
       }
     }
   },
-  "totalBytes": 29352852
+  "totalBytes": 33537322
 };

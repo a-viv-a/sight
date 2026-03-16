@@ -38,8 +38,8 @@ function CollectionCard(props: { collection: CollectionData }) {
       </Show>
       <div class={styles.cardInfo}>
         <h2 class={styles.cardTitle}>{props.collection.title}</h2>
-        <Show when={props.collection.blurb}>
-          <p class={styles.cardBlurb}>{props.collection.blurb}</p>
+        <Show when={props.collection.blurbHtml}>
+          <div class={styles.cardBlurb} innerHTML={props.collection.blurbHtml} />
         </Show>
         <span class={styles.cardMeta}>
           {photoCount()} photos · {formatBytes(totalBytes())}

@@ -56,6 +56,7 @@ interface CollectionFrontmatter {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function toPlainText(tokens: any[]): string {
   return tokens
+    .filter((t) => t.type !== "html")
     .map((t) => (t.tokens ? toPlainText(t.tokens) : t.text || ""))
     .join("");
 }
