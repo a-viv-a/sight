@@ -37,6 +37,7 @@ const Metadata: Component<{
     <Link rel="canonical" href={href()}/>
   }</Show>
   <Meta property="og:image" content={props.image ?? "/pfp.png"} />
+  <Meta name="twitter:card" content={props.image ? "summary_large_image" : "summary"} />
 </>
 export default Metadata
  
