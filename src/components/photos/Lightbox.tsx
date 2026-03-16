@@ -1,4 +1,4 @@
-import { useNavigate } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 import { Component, Show, createSignal, onMount, onCleanup } from "solid-js";
 import { isServer } from "solid-js/web";
 import type { PhotoData, CollectionData } from "~/photos/types";
@@ -65,22 +65,40 @@ const Lightbox: Component<{
 
       <div class={styles.controls}>
         <div class={styles.navGroup}>
-          <Show when={props.prev}>
-            {(prev) => (
-              <a href={`/photos/${prev().path}`} class={styles.navBtn}>
+          <Show
+            when={props.prev}
+            fallback={
+              <span class={`${styles.navBtn} ${styles.navBtnDisabled}`}>
                 <svg viewBox="0 0 10 10" class={styles.arrow}>
                   <path d="M7,2 L3,5 L7,8" />
                 </svg>
-              </a>
+              </span>
+            }
+          >
+            {(prev) => (
+              <A href={`/photos/${prev().path}`} class={styles.navBtn}>
+                <svg viewBox="0 0 10 10" class={styles.arrow}>
+                  <path d="M7,2 L3,5 L7,8" />
+                </svg>
+              </A>
             )}
           </Show>
-          <Show when={props.next}>
-            {(next) => (
-              <a href={`/photos/${next().path}`} class={styles.navBtn}>
+          <Show
+            when={props.next}
+            fallback={
+              <span class={`${styles.navBtn} ${styles.navBtnDisabled}`}>
                 <svg viewBox="0 0 10 10" class={styles.arrow}>
                   <path d="M3,2 L7,5 L3,8" />
                 </svg>
-              </a>
+              </span>
+            }
+          >
+            {(next) => (
+              <A href={`/photos/${next().path}`} class={styles.navBtn}>
+                <svg viewBox="0 0 10 10" class={styles.arrow}>
+                  <path d="M3,2 L7,5 L3,8" />
+                </svg>
+              </A>
             )}
           </Show>
         </div>

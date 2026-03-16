@@ -66,6 +66,9 @@ const PhotoMeta: Component<{
           )}
         </Show>
       </dl>
+      <Show when={props.photo.process}>
+        <p class={styles.process}>{props.photo.process}</p>
+      </Show>
       </div>
     </>
   );

@@ -54,6 +54,7 @@ photos:
     source: "176/PA3/crit/street 12 (bonus).png"
     title: "12 (bonus)"
     alt: ""
+    process: "Digital composite"
 ---
 
 Assignment where we were instructed to experiment with street photography.

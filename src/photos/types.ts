@@ -24,6 +24,7 @@ export interface PhotoData {
   width: number;
   height: number;
   placeholder: string;
+  process?: string;
   exif: ExifData;
   sizes: {
     full: ImageSize;

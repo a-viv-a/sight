@@ -51,6 +51,12 @@
   color: var(--color-light);
 }
 
+.navBtnDisabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
 .arrow {
   width: 14px;
   height: 14px;

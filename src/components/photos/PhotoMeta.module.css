@@ -48,3 +48,11 @@
 .details dd {
   color: var(--color-lightish);
 }
+
+.process {
+  margin-block-start: var(--s-1);
+  color: var(--color-lightish);
+  font-family: var(--font-mono);
+  font-size: var(--s-1);
+  font-style: italic;
+}

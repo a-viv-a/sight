@@ -31,11 +31,16 @@ const MANIFEST_PATH = join(
 );
 const DEFAULT_SOURCE_ROOT = "/run/media/aviva/shroom/photography";
 
+const LENS_NAMES: Record<number, string> = {
+  154: "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
+};
+
 interface PhotoEntry {
   file: string;
   source: string;
   title?: string;
   alt: string;
+  process?: string;
 }
 
 interface CollectionFrontmatter {
@@ -91,6 +96,9 @@ async function extractExif(sourcePath: string): Promise<ExifData> {
     if (!lens && data.LensProfileName) {
       const match = data.LensProfileName.match(/\((.+)\)/);
       if (match) lens = match[1];
+    }
+    if (!lens && typeof data.LensID === "number") {
+      lens = LENS_NAMES[data.LensID];
     }
     if (!lens) lens = data.Lens ?? undefined;
 
@@ -425,6 +433,7 @@ async function processAll(sourceDir: string, force: boolean) {
         collection: job.collectionPath,
         title: job.entry.title,
         alt: job.entry.alt,
+        process: job.entry.process,
         aspectRatio: result.aspectRatio,
         width: result.width,
         height: result.height,

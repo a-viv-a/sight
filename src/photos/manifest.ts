@@ -8,8 +8,8 @@ export const manifest: PhotoManifest = {
       "title": "ART 176",
       "slug": "176",
       "path": "176",
-      "blurb": "An intro to digital photography class I took at UW Madison. My section was taught by Jami Balicki <3",
-      "blurbHtml": "<p>An intro to digital photography class I took at UW Madison. My section was taught by <a href=\"https://www.instagram.com/jblici_photography/\">Jami Balicki</a> &lt;3</p>\n",
+      "blurb": "An intro to digital photography class I took at UW Madison.\nMy section was taught by Jami Balicki <3",
+      "blurbHtml": "<p>An intro to digital photography class I took at UW Madison.\nMy section was taught by <a href=\"https://www.instagram.com/jblici_photography/\">Jami Balicki</a> &lt;3</p>\n",
       "sortOrder": 0,
       "children": [
         "176/pa3",
@@ -82,7 +82,7 @@ export const manifest: PhotoManifest = {
       "placeholder": "data:image/webp;base64,UklGRg4BAABXRUJQVlA4IAIBAAAwBwCdASogACoAPzmCu1OvKCYisBqqqeAnCWUAzrWz5UtLz762c7cCGGupwmOIPH4jBddy5ShOFUxXZ2BScswhbwAA/f7MIR7uIwWkRGOuDhg2VwHvZNwg/ul54jsE57WehUCmCpeU2n4PbWF0Gmi/StWqRzBYeD22pp8PNarwiMA2+RH6KtkTsyaH0CRgwnAzE0K1wRspOw8ajFEaJj3uYrP/uqSgEehXV7RtR8uSoKOZYqAJDhkq4I1aARsYstS01qs9dUV65DlJV2y3dkGWsbGG6f5UBOBuNTUXieSuTHSbXxS9Qu3Bi96UGu/F/mfICQOzEDJtFpv7NXcHeaygAAA=",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
         "focalLength": "18mm",
         "aperture": "f/4",
         "shutterSpeed": "1/400",
@@ -505,6 +505,7 @@ export const manifest: PhotoManifest = {
       "collection": "176/pa3",
       "title": "12 (bonus)",
       "alt": "",
+      "process": "Digital composite",
       "aspectRatio": 1.4030898876404494,
       "width": 7992,
       "height": 5696,
@@ -621,7 +622,7 @@ export const manifest: PhotoManifest = {
       "placeholder": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAACwBACdASogABgAPzmQvlevKaYjqAqp4CcJagDE2DTeBLuCEbvrsXlEChAaY6ZgAP7yolx7hA2cl8ctU1/Y8Yai5jM6aOSXo+VAgepDdavYVgqF2gjjcCFzP68E8GoySpmOkwqSI3rwkjPZAa9cP6fgQAl/Wet5kXPQAA==",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
         "focalLength": "50mm",
         "aperture": "f/5.6",
         "shutterSpeed": "1/60",
