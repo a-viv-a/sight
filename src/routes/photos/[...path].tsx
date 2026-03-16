@@ -38,8 +38,8 @@ function CollectionCard(props: { collection: CollectionData }) {
       </Show>
       <div class={styles.cardInfo}>
         <h2 class={styles.cardTitle}>{props.collection.title}</h2>
-        <Show when={props.collection.blurbHtml}>
-          <div class={styles.cardBlurb} innerHTML={props.collection.blurbHtml} />
+        <Show when={props.collection.blurb}>
+          <p class={styles.cardBlurb}>{props.collection.blurb}</p>
         </Show>
         <span class={styles.cardMeta}>
           {photoCount()} photos · {formatBytes(totalBytes())}
@@ -127,28 +127,26 @@ export default function PhotosRoute() {
   };
 
   return (
-    <Switch
-      fallback={
-        <>
-          <HttpStatusCode code={404} />
-          <PhotoLayout currentPath="">
+    <PhotoLayout currentPath={currentPath()}>
+      <Switch
+        fallback={
+          <>
+            <HttpStatusCode code={404} />
             <div class={styles.notFound}>
               <h1>not found</h1>
               <p>
                 <A href="/photos">back to photos</A>
               </p>
             </div>
-          </PhotoLayout>
-        </>
-      }
-    >
-      <Match when={resolved()?.type === "index"}>
-        <Metadata
-          title="Photos"
-          description="Photography by Aviva Ruben"
-          canonical="https://aviva.gay/photos"
-        />
-        <PhotoLayout currentPath="">
+          </>
+        }
+      >
+        <Match when={resolved()?.type === "index"}>
+          <Metadata
+            title="Photos"
+            description="Photography by Aviva Ruben"
+            canonical="https://aviva.gay/photos"
+          />
           <div class={styles.index}>
             <h1>Photos</h1>
             <section class={styles.subcollections}>
@@ -157,38 +155,34 @@ export default function PhotosRoute() {
               </For>
             </section>
           </div>
-        </PhotoLayout>
-      </Match>
+        </Match>
 
-      <Match when={asCollection()}>
-        {(r) => (
-          <PhotoLayout currentPath={r().collection.path}>
-            <CollectionView collection={r().collection} />
-          </PhotoLayout>
-        )}
-      </Match>
+        <Match when={asCollection()}>
+          {(r) => <CollectionView collection={r().collection} />}
+        </Match>
 
-      <Match when={asPhoto()}>
-        {(r) => {
-          const adj = () => getAdjacentPhotos(r().photo.path);
-          return (
-            <PhotoLayout currentPath={r().photo.path}>
-              <Metadata
-                title={`${r().photo.title || r().photo.file} — ${r().collection.title}`}
-                description={r().photo.alt}
-                canonical={`https://aviva.gay/photos/${r().photo.path}`}
-                image={r().photo.sizes.md.url}
-              />
-              <Lightbox
-                photo={r().photo}
-                collection={r().collection}
-                prev={adj().prev}
-                next={adj().next}
-              />
-            </PhotoLayout>
-          );
-        }}
-      </Match>
-    </Switch>
+        <Match when={asPhoto()}>
+          {(r) => {
+            const adj = () => getAdjacentPhotos(r().photo.path);
+            return (
+              <>
+                <Metadata
+                  title={`${r().photo.title || r().photo.file} — ${r().collection.title}`}
+                  description={r().photo.alt}
+                  canonical={`https://aviva.gay/photos/${r().photo.path}`}
+                  image={r().photo.sizes.md.url}
+                />
+                <Lightbox
+                  photo={r().photo}
+                  collection={r().collection}
+                  prev={adj().prev}
+                  next={adj().next}
+                />
+              </>
+            );
+          }}
+        </Match>
+      </Switch>
+    </PhotoLayout>
   );
 }

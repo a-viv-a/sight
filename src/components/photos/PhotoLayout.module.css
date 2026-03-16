@@ -5,6 +5,7 @@
   height: 100dvh;
   background-color: #1a1a1a;
   color: var(--color-lightish);
+  color-scheme: dark;
 }
 
 .sidebar {

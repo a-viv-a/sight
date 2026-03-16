@@ -11,10 +11,6 @@ export default function App() {
         <MetaProvider>
           <Title>Aviva Ruben</Title>
           <Meta
-            property="og:image"
-            content="/pfp.png"
-          />
-          <Meta
             property="og:type"
             content="website"
             />
