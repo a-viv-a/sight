@@ -99,3 +99,23 @@
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--color-mid);
 }
+
+.fullscreenIcon {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lightbox:fullscreen,
+.lightbox:-webkit-full-screen {
+  background: #000;
+}
+
+.lightbox:fullscreen .imageArea,
+.lightbox:-webkit-full-screen .imageArea {
+  padding: 0;
+}

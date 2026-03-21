@@ -31,6 +31,9 @@ const Lightbox: Component<{
         case "i":
           setShowMeta((v) => !v);
           break;
+        case "f":
+          toggleFullscreen();
+          break;
       }
     };
 
@@ -38,11 +41,41 @@ const Lightbox: Component<{
     onCleanup(() => window.removeEventListener("keydown", onKeyDown));
   }
 
+  const [isFullscreen, setIsFullscreen] = createSignal(false);
+  const [canFullscreen, setCanFullscreen] = createSignal(false);
+  let lightboxRef!: HTMLDivElement;
+
+  const getFullscreenElement = () =>
+    document.fullscreenElement ?? (document as any).webkitFullscreenElement;
+
+  const toggleFullscreen = () => {
+    if (!canFullscreen()) return;
+    if (getFullscreenElement()) {
+      (document.exitFullscreen ?? (document as any).webkitExitFullscreen).call(document);
+    } else {
+      (lightboxRef.requestFullscreen ?? (lightboxRef as any).webkitRequestFullscreen).call(lightboxRef);
+    }
+  };
+
+  if (!isServer) {
+    const onFullscreenChange = () =>
+      setIsFullscreen(!!getFullscreenElement());
+    onMount(() => {
+      setCanFullscreen(!!(document.documentElement.requestFullscreen ?? (document.documentElement as any).webkitRequestFullscreen));
+      document.addEventListener("fullscreenchange", onFullscreenChange);
+      document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+    });
+    onCleanup(() => {
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", onFullscreenChange);
+    });
+  }
+
   let pointerStartX = 0;
   const SWIPE_THRESHOLD = 50;
 
   return (
-    <div class={styles.lightbox}>
+    <div class={styles.lightbox} ref={lightboxRef}>
       <div
         class={styles.imageArea}
         onPointerDown={(e) => {
@@ -105,6 +138,27 @@ const Lightbox: Component<{
 
         <div class={styles.infoGroup}>
           <LicenseInfo collection={props.collection} />
+          <Show when={canFullscreen}>
+            <button
+              class={styles.infoBtn}
+              classList={{ [styles.infoBtnActive]: isFullscreen() }}
+              onClick={toggleFullscreen}
+              aria-label="Toggle fullscreen"
+            >
+              <svg viewBox="0 0 16 16" class={styles.fullscreenIcon} aria-hidden="true">
+                <Show
+                  when={!isFullscreen()}
+                  fallback={
+                    <>
+                      <path d="M5,1 L1,1 L1,5 M11,1 L15,1 L15,5 M5,15 L1,15 L1,11 M11,15 L15,15 L15,11" />
+                    </>
+                  }
+                >
+                  <path d="M1,5 L1,1 L5,1 M15,5 L15,1 L11,1 M1,11 L1,15 L5,15 M15,11 L15,15 L11,15" />
+                </Show>
+              </svg>
+            </button>
+          </Show>
           <button
             class={styles.infoBtn}
             classList={{ [styles.infoBtnActive]: showMeta() }}
