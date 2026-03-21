@@ -26,6 +26,7 @@ const Metadata: Component<{
   description?: string,
   canonical?: Url,
   image?: string,
+  themeColor?: string,
 }> = props => <>
   <Title>{read(props, "title")}</Title>
   <Og key="title" params={props} />
@@ -38,6 +39,9 @@ const Metadata: Component<{
   }</Show>
   <Meta property="og:image" content={props.image ?? "/pfp.png"} />
   <Meta name="twitter:card" content={props.image ? "summary_large_image" : "summary"} />
+  <Show when={props.themeColor}>{color =>
+    <Meta name="theme-color" content={color()} />
+  }</Show>
 </>
 export default Metadata
  

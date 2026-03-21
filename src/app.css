@@ -48,6 +48,10 @@ body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; } /* Ch
     color: var(--color-dark);
 }
 
+:root:has([data-theme="dark"]) {
+    background-color: #1a1a1a;
+}
+
 code {
   font-family: var(--font-mono);
 }

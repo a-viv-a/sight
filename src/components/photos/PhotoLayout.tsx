@@ -9,7 +9,7 @@ const PhotoLayout: Component<{
   const [sidebarOpen, setSidebarOpen] = createSignal(false);
 
   return (
-    <div class={styles.layout}>
+    <div class={styles.layout} data-theme="dark">
       <button
         class={styles.menuBtn}
         classList={{ [styles.menuBtnOpen]: sidebarOpen() }}

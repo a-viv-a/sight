@@ -67,6 +67,7 @@ function CollectionView(props: { collection: CollectionData }) {
         description={props.collection.blurb.slice(0, 200) || undefined}
         canonical={`https://aviva.gay/photos/${props.collection.path}`}
         image={coverPhoto()?.sizes.md.url}
+        themeColor="#1a1a1a"
       />
 
       <div class={styles.collectionHero}>
@@ -146,6 +147,7 @@ export default function PhotosRoute() {
             title="Photos"
             description="Photography by Aviva Ruben"
             canonical="https://aviva.gay/photos"
+            themeColor="#1a1a1a"
           />
           <div class={styles.index}>
             <h1>Photos</h1>
@@ -171,6 +173,7 @@ export default function PhotosRoute() {
                   description={r().photo.alt}
                   canonical={`https://aviva.gay/photos/${r().photo.path}`}
                   image={r().photo.sizes.md.url}
+                  themeColor="#1a1a1a"
                 />
                 <Lightbox
                   photo={r().photo}
