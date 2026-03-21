@@ -61,7 +61,7 @@ function CollectionView(props: { collection: CollectionData }) {
   };
 
   return (
-    <div class={styles.collectionView}>
+    <div class={styles.collectionView} data-page={children().length > 0 ? "index" : undefined}>
       <Metadata
         title={props.collection.title}
         description={props.collection.blurb.slice(0, 200) || undefined}
@@ -149,7 +149,7 @@ export default function PhotosRoute() {
             canonical="https://aviva.gay/photos"
             themeColor="#1a1a1a"
           />
-          <div class={styles.index}>
+          <div class={styles.index} data-page="index">
             <h1>Photos</h1>
             <section class={styles.subcollections}>
               <For each={getTopLevelCollections()}>

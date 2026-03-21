@@ -6,6 +6,7 @@
   background-color: #1a1a1a;
   color: var(--color-lightish);
   color-scheme: dark;
+  timeline-scope: --main-scroll;
 }
 
 .sidebar {
@@ -17,6 +18,7 @@
 .main {
   overflow-y: auto;
   min-height: 0;
+  scroll-timeline: --main-scroll block;
 }
 
 .menuBtn {
@@ -64,10 +66,32 @@
     width: 36px;
     height: 36px;
     border: none;
-    border-radius: 6px;
+    border-radius: 50%;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
     cursor: pointer;
+  }
+
+  .layout:has([data-page="index"]) .menuBtn {
+    top: calc(var(--s1) + 2px);
+    left: var(--s1);
+    border-radius: 6px;
+    animation: menu-scroll ease-out both;
+    animation-timeline: --main-scroll;
+    animation-range: 0px 48px;
+  }
+
+  @keyframes menu-scroll {
+    from {
+      top: calc(var(--s1) + 2px);
+      left: var(--s1);
+      border-radius: 6px;
+    }
+    to {
+      top: var(--s-1);
+      left: var(--s-1);
+      border-radius: 50%;
+    }
   }
 
   .menuIcon {

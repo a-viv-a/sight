@@ -19,6 +19,13 @@
   margin-block-end: var(--s1);
 }
 
+@media (max-width: 768px) {
+  [data-page="index"] > h1,
+  [data-page="index"] .collectionInfo h1 {
+    padding-inline-start: calc(36px + var(--s-2));
+  }
+}
+
 @media (max-width: 720px) {
   .collectionHero {
     grid-template-columns: 1fr;

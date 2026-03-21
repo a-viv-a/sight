@@ -5,6 +5,12 @@
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  .browser {
+    padding-block-start: calc(var(--s1) + 36px + var(--s-2));
+  }
+}
+
 .root {
   display: block;
   padding: var(--s-2) var(--s-3);
