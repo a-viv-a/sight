@@ -36,5 +36,8 @@ photos *flags:
 photos-init image_dir slug title *flags:
     npx tsx scripts/process-photos.ts init {{image_dir}} --slug={{slug}} --title="{{title}}" {{flags}}
 
+moderate *args:
+    npx tsx scripts/moderate.ts {{args}}
+
 test *flags:
     vitest --exclude ".direnv/**" {{flags}}
