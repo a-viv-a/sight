@@ -70,6 +70,12 @@
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
     cursor: pointer;
+    transition: transform 0.2s ease, left 0.2s ease, top 0.2s ease,
+      border-radius 0.2s ease;
+  }
+
+  .menuBtnOpen {
+    transform: translateX(calc(280px - 36px - 2 * var(--s-1)));
   }
 
   .layout:has([data-page="index"]) .menuBtn {
@@ -79,6 +85,13 @@
     animation: menu-scroll ease-out both;
     animation-timeline: --main-scroll;
     animation-range: 0px 48px;
+  }
+
+  .layout:has([data-page="index"]) .menuBtn.menuBtnOpen {
+    animation: none;
+    top: var(--s-1);
+    left: var(--s-1);
+    border-radius: 50%;
   }
 
   @keyframes menu-scroll {
