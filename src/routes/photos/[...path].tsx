@@ -20,21 +20,32 @@ import type { CollectionData } from "~/photos/types";
 import styles from "./photos.module.css";
 
 function CollectionCard(props: { collection: CollectionData }) {
-  const coverPhoto = () =>
-    props.collection.cover
-      ? manifest.photos[props.collection.cover]
-      : undefined;
+  const coverPhotos = () =>
+    props.collection.covers
+      .map((c) => manifest.photos[c])
+      .filter((p) => p != null);
   const totalBytes = () => getCollectionTotalBytes(props.collection.path);
   const photoCount = () => countPhotosRecursive(props.collection.path);
 
   return (
     <A href={`/photos/${props.collection.path}`} class={styles.card}>
-      <Show when={coverPhoto()}>
-        {(photo) => (
-          <div class={styles.cardImage}>
-            <ResponsiveImage photo={photo()} mode="thumbnail" />
-          </div>
-        )}
+      <Show
+        when={coverPhotos().length >= 3}
+        fallback={
+          <Show when={coverPhotos()[0]}>
+            {(photo) => (
+              <div class={styles.cardImage}>
+                <ResponsiveImage photo={photo()} mode="thumbnail" />
+              </div>
+            )}
+          </Show>
+        }
+      >
+        <div class={styles.cardMosaic}>
+          <For each={coverPhotos().slice(0, 3)}>
+            {(photo) => <ResponsiveImage photo={photo} mode="thumbnail" />}
+          </For>
+        </div>
       </Show>
       <div class={styles.cardInfo}>
         <h2 class={styles.cardTitle}>{props.collection.title}</h2>
@@ -51,10 +62,10 @@ function CollectionCard(props: { collection: CollectionData }) {
 
 function CollectionView(props: { collection: CollectionData }) {
   const children = () => getChildren(props.collection.path);
-  const coverPhoto = () =>
-    props.collection.cover
-      ? manifest.photos[props.collection.cover]
-      : undefined;
+  const coverPhoto = () => {
+    const first = props.collection.covers[0];
+    return first ? manifest.photos[first] : undefined;
+  };
   const firstPhoto = () => {
     const first = props.collection.photos[0];
     return first ? manifest.photos[first] : undefined;
@@ -70,38 +81,56 @@ function CollectionView(props: { collection: CollectionData }) {
         themeColor="#1a1a1a"
       />
 
-      <div class={styles.collectionHero}>
-        <Show when={coverPhoto()}>
-          {(cover) => (
-            <A
-              href={`/photos/${(firstPhoto() ?? cover()).path}`}
-              class={styles.coverLink}
-            >
-              <ResponsiveImage photo={cover()} mode="thumbnail" />
-            </A>
-          )}
-        </Show>
-
-        <div class={styles.collectionInfo}>
-          <h1>{props.collection.title}</h1>
-          <div class={styles.collectionMeta}>
-            <LicenseInfo collection={props.collection} />
-            <span class={styles.sizeInfo}>
-              {countPhotosRecursive(props.collection.path)} photos · {formatBytes(getCollectionTotalBytes(props.collection.path))}
-            </span>
+      <Show
+        when={children().length === 0}
+        fallback={
+          <div class={styles.collectionInfo}>
+            <h1>{props.collection.title}</h1>
+            <div class={styles.collectionMeta}>
+              <LicenseInfo collection={props.collection} />
+              <span class={styles.sizeInfo}>
+                {countPhotosRecursive(props.collection.path)} photos · {formatBytes(getCollectionTotalBytes(props.collection.path))}
+              </span>
+            </div>
+            <Show when={props.collection.blurbHtml}>
+              <div class={styles.blurb} innerHTML={props.collection.blurbHtml} />
+            </Show>
           </div>
-          <Show when={props.collection.blurbHtml}>
-            <div class={styles.blurb} innerHTML={props.collection.blurbHtml} />
-          </Show>
-          <Show when={firstPhoto()}>
-            {(photo) => (
-              <A href={`/photos/${photo().path}`} class={styles.startLink}>
-                View collection →
+        }
+      >
+        <div class={styles.collectionHero}>
+          <Show when={coverPhoto()}>
+            {(cover) => (
+              <A
+                href={`/photos/${(firstPhoto() ?? cover()).path}`}
+                class={styles.coverLink}
+              >
+                <ResponsiveImage photo={cover()} mode="thumbnail" />
               </A>
             )}
           </Show>
+
+          <div class={styles.collectionInfo}>
+            <h1>{props.collection.title}</h1>
+            <div class={styles.collectionMeta}>
+              <LicenseInfo collection={props.collection} />
+              <span class={styles.sizeInfo}>
+                {countPhotosRecursive(props.collection.path)} photos · {formatBytes(getCollectionTotalBytes(props.collection.path))}
+              </span>
+            </div>
+            <Show when={props.collection.blurbHtml}>
+              <div class={styles.blurb} innerHTML={props.collection.blurbHtml} />
+            </Show>
+            <Show when={firstPhoto()}>
+              {(photo) => (
+                <A href={`/photos/${photo().path}`} class={styles.startLink}>
+                  View collection →
+                </A>
+              )}
+            </Show>
+          </div>
         </div>
-      </div>
+      </Show>
 
       <Show when={children().length > 0}>
         <section class={styles.subcollections}>

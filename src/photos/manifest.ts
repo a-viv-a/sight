@@ -10,6 +10,11 @@ export const manifest: PhotoManifest = {
       "path": "176",
       "blurb": "An intro to digital photography class I took at UW Madison.\nSome of the photos I'm really proud of aren't included here, ask to see them in person!\nMy section was taught by Jami Balicki <3",
       "blurbHtml": "<p>An intro to digital photography class I took at UW Madison.\nSome of the photos I&#39;m really proud of aren&#39;t included here, ask to see them in person!\nMy section was taught by <a href=\"https://www.instagram.com/jblici_photography/\">Jami Balicki</a> &lt;3</p>\n",
+      "covers": [
+        "176/pa2/05",
+        "176/pa5/01",
+        "176/pa3/01"
+      ],
       "sortOrder": 0,
       "children": [
         "176/pa2",
@@ -25,7 +30,9 @@ export const manifest: PhotoManifest = {
       "path": "176/pa2",
       "blurb": "Learning how to use a camera!\n\nTook pictures while walking around and at a protest.",
       "blurbHtml": "<p>Learning how to use a camera!\n<br/>\nTook pictures while walking around and at a protest.</p>\n",
-      "cover": "176/pa2/05",
+      "covers": [
+        "176/pa2/05"
+      ],
       "license": "CC BY-NC-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
       "sortOrder": 0,
@@ -46,7 +53,9 @@ export const manifest: PhotoManifest = {
       "path": "176/pa3",
       "blurb": "Assignment where we were instructed to experiment with street photography.\nApproaching random people and asking to take their picture pushed me out of my comfort zone, but it was really fun and I love some of these photos!",
       "blurbHtml": "<p>Assignment where we were instructed to experiment with street photography.\nApproaching random people and asking to take their picture pushed me out of my comfort zone, but it was really fun and I love some of these photos!</p>\n",
-      "cover": "176/pa3/01",
+      "covers": [
+        "176/pa3/01"
+      ],
       "license": "CC BY-NC-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
       "sortOrder": 0,
@@ -73,7 +82,9 @@ export const manifest: PhotoManifest = {
       "path": "176/pa5",
       "blurb": "Assignment about exploring light and shadow.",
       "blurbHtml": "<p>Assignment about exploring light and shadow.</p>\n",
-      "cover": "176/pa5/01",
+      "covers": [
+        "176/pa5/01"
+      ],
       "license": "CC BY-NC-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
       "sortOrder": 0,
@@ -92,42 +103,42 @@ export const manifest: PhotoManifest = {
     }
   },
   "photos": {
-    "176/pa2/04": {
-      "file": "04",
-      "path": "176/pa2/04",
-      "collection": "176/pa2",
+    "176/pa3/01": {
+      "file": "01",
+      "path": "176/pa3/01",
+      "collection": "176/pa3",
       "title": "",
       "alt": "",
-      "aspectRatio": 1.5054704595185995,
-      "width": 4128,
-      "height": 2742,
-      "placeholder": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAwCdASogABUAPzmOwFevKaapqAqp4CcJZQDE2BBWxLozbW1i7G4AAPnjeckyiCI0UvebELvBfcn7xENEehmsWhdUT2LtgCX73YQ4ztsW5X+PZAAAAA==",
+      "aspectRatio": 0.764230498945889,
+      "width": 2175,
+      "height": 2846,
+      "placeholder": "data:image/webp;base64,UklGRg4BAABXRUJQVlA4IAIBAAAwBwCdASogACoAPzmCu1OvKCYisBqqqeAnCWUAzrWz5UtLz762c7cCGGupwmOIPH4jBddy5ShOFUxXZ2BScswhbwAA/f7MIR7uIwWkRGOuDhg2VwHvZNwg/ul54jsE57WehUCmCpeU2n4PbWF0Gmi/StWqRzBYeD22pp8PNarwiMA2+RH6KtkTsyaH0CRgwnAzE0K1wRspOw8ajFEaJj3uYrP/uqSgEehXV7RtR8uSoKOZYqAJDhkq4I1aARsYstS01qs9dUV65DlJV2y3dkGWsbGG6f5UBOBuNTUXieSuTHSbXxS9Qu3Bi96UGu/F/mfICQOzEDJtFpv7NXcHeaygAAA=",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "18.0-55.0 mm f/3.5-5.6",
-        "focalLength": "55mm",
-        "aperture": "f/5.6",
-        "shutterSpeed": "1/1000",
-        "iso": 100
+        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
+        "focalLength": "18mm",
+        "aperture": "f/4",
+        "shutterSpeed": "1/400",
+        "iso": 320
       },
       "sizes": {
         "full": {
-          "width": 4128,
-          "height": 2742,
-          "url": "/photos/176/pa2/04/full.avif",
-          "bytes": 253523
+          "width": 2175,
+          "height": 2846,
+          "url": "/photos/176/pa3/01/full.avif",
+          "bytes": 699898
         },
         "md": {
-          "width": 1200,
-          "height": 797,
-          "url": "/photos/176/pa2/04/1200.avif",
-          "bytes": 52910
+          "width": 917,
+          "height": 1200,
+          "url": "/photos/176/pa3/01/1200.avif",
+          "bytes": 182280
         },
         "sm": {
-          "width": 640,
-          "height": 425,
-          "url": "/photos/176/pa2/04/640.avif",
-          "bytes": 23543
+          "width": 489,
+          "height": 640,
+          "url": "/photos/176/pa3/01/640.avif",
+          "bytes": 66642
         }
       }
     },
@@ -170,45 +181,6 @@ export const manifest: PhotoManifest = {
         }
       }
     },
-    "176/pa3/01": {
-      "file": "01",
-      "path": "176/pa3/01",
-      "collection": "176/pa3",
-      "title": "",
-      "alt": "",
-      "aspectRatio": 0.764230498945889,
-      "width": 2175,
-      "height": 2846,
-      "placeholder": "data:image/webp;base64,UklGRg4BAABXRUJQVlA4IAIBAAAwBwCdASogACoAPzmCu1OvKCYisBqqqeAnCWUAzrWz5UtLz762c7cCGGupwmOIPH4jBddy5ShOFUxXZ2BScswhbwAA/f7MIR7uIwWkRGOuDhg2VwHvZNwg/ul54jsE57WehUCmCpeU2n4PbWF0Gmi/StWqRzBYeD22pp8PNarwiMA2+RH6KtkTsyaH0CRgwnAzE0K1wRspOw8ajFEaJj3uYrP/uqSgEehXV7RtR8uSoKOZYqAJDhkq4I1aARsYstS01qs9dUV65DlJV2y3dkGWsbGG6f5UBOBuNTUXieSuTHSbXxS9Qu3Bi96UGu/F/mfICQOzEDJtFpv7NXcHeaygAAA=",
-      "exif": {
-        "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "18mm",
-        "aperture": "f/4",
-        "shutterSpeed": "1/400",
-        "iso": 320
-      },
-      "sizes": {
-        "full": {
-          "width": 2175,
-          "height": 2846,
-          "url": "/photos/176/pa3/01/full.avif",
-          "bytes": 699898
-        },
-        "md": {
-          "width": 917,
-          "height": 1200,
-          "url": "/photos/176/pa3/01/1200.avif",
-          "bytes": 182280
-        },
-        "sm": {
-          "width": 489,
-          "height": 640,
-          "url": "/photos/176/pa3/01/640.avif",
-          "bytes": 66642
-        }
-      }
-    },
     "176/pa2/02": {
       "file": "02",
       "path": "176/pa2/02",
@@ -245,6 +217,45 @@ export const manifest: PhotoManifest = {
           "height": 425,
           "url": "/photos/176/pa2/02/640.avif",
           "bytes": 51111
+        }
+      }
+    },
+    "176/pa2/04": {
+      "file": "04",
+      "path": "176/pa2/04",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5054704595185995,
+      "width": 4128,
+      "height": 2742,
+      "placeholder": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAwCdASogABUAPzmOwFevKaapqAqp4CcJZQDE2BBWxLozbW1i7G4AAPnjeckyiCI0UvebELvBfcn7xENEehmsWhdUT2LtgCX73YQ4ztsW5X+PZAAAAA==",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/1000",
+        "iso": 100
+      },
+      "sizes": {
+        "full": {
+          "width": 4128,
+          "height": 2742,
+          "url": "/photos/176/pa2/04/full.avif",
+          "bytes": 253523
+        },
+        "md": {
+          "width": 1200,
+          "height": 797,
+          "url": "/photos/176/pa2/04/1200.avif",
+          "bytes": 52910
+        },
+        "sm": {
+          "width": 640,
+          "height": 425,
+          "url": "/photos/176/pa2/04/640.avif",
+          "bytes": 23543
         }
       }
     },
@@ -404,84 +415,6 @@ export const manifest: PhotoManifest = {
         }
       }
     },
-    "176/pa2/03": {
-      "file": "03",
-      "path": "176/pa2/03",
-      "collection": "176/pa2",
-      "title": "",
-      "alt": "",
-      "aspectRatio": 0.7815205118554761,
-      "width": 4153,
-      "height": 5314,
-      "placeholder": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAADwBgCdASogACkAPzmKu1cvKSWjsBVYAeAnCWUAyJssBRVu/Rj+Kfocc1WpOomHoTiXE41kb0KQONSuAb6yecVAAP5Ud3JKbZgMgmeFYqQIew+JMDFnCx38ZZiE4C9Psl0T7FUtTd1PpK8PVoaXWcY5dPQD69ybNsNTOgyVeTBuED30NzEZZjH0NL5CLpdRRRaf1b5tGbxxTQm3z/ZupTszGnbwxpmd634V4P4h+GQJSNNrTvGmr4i1TAITigXrcud3aXXWYeGKhe1MxMYCZ37ZO73vGNeohfEazYI5fQBZEj9RNWmWjw3JwtvZ/bxLIkmUZgu3l4ZdSvYac8Hv9qHZECy8uVOEPTIIDAAA",
-      "exif": {
-        "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "18.0-55.0 mm f/3.5-5.6",
-        "focalLength": "55mm",
-        "aperture": "f/5.6",
-        "shutterSpeed": "1/100",
-        "iso": 100
-      },
-      "sizes": {
-        "full": {
-          "width": 4153,
-          "height": 5314,
-          "url": "/photos/176/pa2/03/full.avif",
-          "bytes": 620909
-        },
-        "md": {
-          "width": 938,
-          "height": 1200,
-          "url": "/photos/176/pa2/03/1200.avif",
-          "bytes": 99463
-        },
-        "sm": {
-          "width": 500,
-          "height": 640,
-          "url": "/photos/176/pa2/03/640.avif",
-          "bytes": 46222
-        }
-      }
-    },
-    "176/pa5/02": {
-      "file": "02",
-      "path": "176/pa5/02",
-      "collection": "176/pa5",
-      "title": "",
-      "alt": "",
-      "aspectRatio": 1.5056179775280898,
-      "width": 4288,
-      "height": 2848,
-      "placeholder": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABwBACdASogABUAPzmGvlavKCajsBgIAeAnCWwAxvQwmWJwkW1soYcGT6qSTAD+7qCwQFm53v4poDUh6gONSDbMS47ZnwpuG/p5yH83yFo+aMQ3AN3cLDfy+zK4jvoAuxmwQ3XM28f9f3az2NgAjecIqnAIDLCtq/qIfFAA",
-      "exif": {
-        "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "46mm",
-        "aperture": "f/5.6",
-        "shutterSpeed": "1/60",
-        "iso": 1000
-      },
-      "sizes": {
-        "full": {
-          "width": 4288,
-          "height": 2848,
-          "url": "/photos/176/pa5/02/full.avif",
-          "bytes": 260983
-        },
-        "md": {
-          "width": 1200,
-          "height": 797,
-          "url": "/photos/176/pa5/02/1200.avif",
-          "bytes": 36980
-        },
-        "sm": {
-          "width": 640,
-          "height": 425,
-          "url": "/photos/176/pa5/02/640.avif",
-          "bytes": 13182
-        }
-      }
-    },
     "176/pa5/04": {
       "file": "04",
       "path": "176/pa5/04",
@@ -560,120 +493,42 @@ export const manifest: PhotoManifest = {
         }
       }
     },
-    "176/pa5/06": {
-      "file": "06",
-      "path": "176/pa5/06",
+    "176/pa5/02": {
+      "file": "02",
+      "path": "176/pa5/02",
       "collection": "176/pa5",
       "title": "",
       "alt": "",
-      "aspectRatio": 1.468092954629288,
-      "width": 3980,
-      "height": 2711,
-      "placeholder": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADwBACdASogABYAPzmOuVavKaUjqA1R4CcJYwCw7A9K9eBik6+9EMTKbHjpeWDFhfAA+eqRQliUCY9FCjLqliq67/rHvBe7UxGZ7dniJ6gCJzQuHYZ2Wxen/IUYkWYczT5fTHSPN+7dQkBtGCF0MXb7ZxPq5+qodvcM0qcMynqrxrCs1u1WwL1LHElSzrIBKSAAAA==",
+      "aspectRatio": 1.5056179775280898,
+      "width": 4288,
+      "height": 2848,
+      "placeholder": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABwBACdASogABUAPzmGvlavKCajsBgIAeAnCWwAxvQwmWJwkW1soYcGT6qSTAD+7qCwQFm53v4poDUh6gONSDbMS47ZnwpuG/p5yH83yFo+aMQ3AN3cLDfy+zK4jvoAuxmwQ3XM28f9f3az2NgAjecIqnAIDLCtq/qIfFAA",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
         "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "18mm",
-        "aperture": "f/4.5",
-        "shutterSpeed": "1/4",
-        "iso": 2000
+        "focalLength": "46mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/60",
+        "iso": 1000
       },
       "sizes": {
         "full": {
-          "width": 3980,
-          "height": 2711,
-          "url": "/photos/176/pa5/06/full.avif",
-          "bytes": 181660
+          "width": 4288,
+          "height": 2848,
+          "url": "/photos/176/pa5/02/full.avif",
+          "bytes": 260983
         },
         "md": {
           "width": 1200,
-          "height": 817,
-          "url": "/photos/176/pa5/06/1200.avif",
-          "bytes": 34028
+          "height": 797,
+          "url": "/photos/176/pa5/02/1200.avif",
+          "bytes": 36980
         },
         "sm": {
           "width": 640,
-          "height": 436,
-          "url": "/photos/176/pa5/06/640.avif",
-          "bytes": 15672
-        }
-      }
-    },
-    "176/pa3/04": {
-      "file": "04",
-      "path": "176/pa3/04",
-      "collection": "176/pa3",
-      "title": "",
-      "alt": "",
-      "aspectRatio": 1,
-      "width": 5380,
-      "height": 5380,
-      "placeholder": "data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAADwBQCdASogACAAPzmEvVcvJ6YjsBgIAeAnCWMAwPzmuH65Gvh31sigdSrEsKhzTn+uJEorUJAWAAD+72rOo1sa14Tol9OFsCY3iV0wSvHm3FUDBbrm2tusGvUb1NPaCbe3jZ8KRE8gRc5GYokYkqScZBTC4dl783tJnEl6J//fH7Oi0TYCPMrWaHEqCpMuHGjTO/03aM/LlpGSbaYVUIHcRqbVhw5sU2rOixIm64KEtA/Dt9eLQYU9jxSkOMPXwib7Hr/IFKqB4miJcBgFNb9A/vhzAUTbmM//mmAjt/+RkX4q0enx6mmGxGEJxlwAAAA=",
-      "exif": {
-        "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "26mm",
-        "aperture": "f/4.2",
-        "shutterSpeed": "1/4000",
-        "iso": 500
-      },
-      "sizes": {
-        "full": {
-          "width": 5380,
-          "height": 5380,
-          "url": "/photos/176/pa3/04/full.avif",
-          "bytes": 1466562
-        },
-        "md": {
-          "width": 1200,
-          "height": 1200,
-          "url": "/photos/176/pa3/04/1200.avif",
-          "bytes": 116849
-        },
-        "sm": {
-          "width": 640,
-          "height": 640,
-          "url": "/photos/176/pa3/04/640.avif",
-          "bytes": 50847
-        }
-      }
-    },
-    "176/pa3/10": {
-      "file": "10",
-      "path": "176/pa3/10",
-      "collection": "176/pa3",
-      "title": "",
-      "alt": "",
-      "aspectRatio": 1,
-      "width": 5633,
-      "height": 5633,
-      "placeholder": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4IO4AAABQBgCdASogACAAPzmKulWvKSWjKA1R4CcJZQDMX6gT4hZSCfXFoWVMGLmTFQX8ZEg4fL5MSCMFWT7IgAD8j+r/a6ohLigd4vnZoMbCMZyKtgDmUIaEMS00nLkBfCFPH4qB5ZdQrjXvQONhojaeCAJGFDO279jxo0P4DtbbigSrCujHVblgQhAYFOmA2zHZetqtxy7Oh+8tMUeanjg8LTw6zNGCL0UOb0QP8RvuREy/q7sd8dnBznNOr7euhLNEeMf6TVYRUvjzAIVBt2cGTDu4nIlKjvoi/i7Bc81Sv/QW7TVjH1uuS0wKaJgKAAAA",
-      "exif": {
-        "camera": "NIKON CORPORATION NIKON D5000",
-        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "34mm",
-        "aperture": "f/5",
-        "shutterSpeed": "1/640",
-        "iso": 200
-      },
-      "sizes": {
-        "full": {
-          "width": 5633,
-          "height": 5633,
-          "url": "/photos/176/pa3/10/full.avif",
-          "bytes": 1110906
-        },
-        "md": {
-          "width": 1200,
-          "height": 1200,
-          "url": "/photos/176/pa3/10/1200.avif",
-          "bytes": 116268
-        },
-        "sm": {
-          "width": 640,
-          "height": 640,
-          "url": "/photos/176/pa3/10/640.avif",
-          "bytes": 52574
+          "height": 425,
+          "url": "/photos/176/pa5/02/640.avif",
+          "bytes": 13182
         }
       }
     },
@@ -716,6 +571,84 @@ export const manifest: PhotoManifest = {
         }
       }
     },
+    "176/pa2/03": {
+      "file": "03",
+      "path": "176/pa2/03",
+      "collection": "176/pa2",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 0.7815205118554761,
+      "width": 4153,
+      "height": 5314,
+      "placeholder": "data:image/webp;base64,UklGRhgBAABXRUJQVlA4IAwBAADwBgCdASogACkAPzmKu1cvKSWjsBVYAeAnCWUAyJssBRVu/Rj+Kfocc1WpOomHoTiXE41kb0KQONSuAb6yecVAAP5Ud3JKbZgMgmeFYqQIew+JMDFnCx38ZZiE4C9Psl0T7FUtTd1PpK8PVoaXWcY5dPQD69ybNsNTOgyVeTBuED30NzEZZjH0NL5CLpdRRRaf1b5tGbxxTQm3z/ZupTszGnbwxpmd634V4P4h+GQJSNNrTvGmr4i1TAITigXrcud3aXXWYeGKhe1MxMYCZ37ZO73vGNeohfEazYI5fQBZEj9RNWmWjw3JwtvZ/bxLIkmUZgu3l4ZdSvYac8Hv9qHZECy8uVOEPTIIDAAA",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "18.0-55.0 mm f/3.5-5.6",
+        "focalLength": "55mm",
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/100",
+        "iso": 100
+      },
+      "sizes": {
+        "full": {
+          "width": 4153,
+          "height": 5314,
+          "url": "/photos/176/pa2/03/full.avif",
+          "bytes": 620909
+        },
+        "md": {
+          "width": 938,
+          "height": 1200,
+          "url": "/photos/176/pa2/03/1200.avif",
+          "bytes": 99463
+        },
+        "sm": {
+          "width": 500,
+          "height": 640,
+          "url": "/photos/176/pa2/03/640.avif",
+          "bytes": 46222
+        }
+      }
+    },
+    "176/pa3/04": {
+      "file": "04",
+      "path": "176/pa3/04",
+      "collection": "176/pa3",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1,
+      "width": 5380,
+      "height": 5380,
+      "placeholder": "data:image/webp;base64,UklGRvwAAABXRUJQVlA4IPAAAADwBQCdASogACAAPzmEvVcvJ6YjsBgIAeAnCWMAwPzmuH65Gvh31sigdSrEsKhzTn+uJEorUJAWAAD+72rOo1sa14Tol9OFsCY3iV0wSvHm3FUDBbrm2tusGvUb1NPaCbe3jZ8KRE8gRc5GYokYkqScZBTC4dl783tJnEl6J//fH7Oi0TYCPMrWaHEqCpMuHGjTO/03aM/LlpGSbaYVUIHcRqbVhw5sU2rOixIm64KEtA/Dt9eLQYU9jxSkOMPXwib7Hr/IFKqB4miJcBgFNb9A/vhzAUTbmM//mmAjt/+RkX4q0enx6mmGxGEJxlwAAAA=",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
+        "focalLength": "26mm",
+        "aperture": "f/4.2",
+        "shutterSpeed": "1/4000",
+        "iso": 500
+      },
+      "sizes": {
+        "full": {
+          "width": 5380,
+          "height": 5380,
+          "url": "/photos/176/pa3/04/full.avif",
+          "bytes": 1466562
+        },
+        "md": {
+          "width": 1200,
+          "height": 1200,
+          "url": "/photos/176/pa3/04/1200.avif",
+          "bytes": 116849
+        },
+        "sm": {
+          "width": 640,
+          "height": 640,
+          "url": "/photos/176/pa3/04/640.avif",
+          "bytes": 50847
+        }
+      }
+    },
     "176/pa5/05": {
       "file": "05",
       "path": "176/pa5/05",
@@ -755,81 +688,81 @@ export const manifest: PhotoManifest = {
         }
       }
     },
-    "176/pa5/08": {
-      "file": "08",
-      "path": "176/pa5/08",
+    "176/pa5/06": {
+      "file": "06",
+      "path": "176/pa5/06",
       "collection": "176/pa5",
       "title": "",
       "alt": "",
-      "aspectRatio": 1.3016151685393258,
-      "width": 3707,
-      "height": 2848,
-      "placeholder": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAQBQCdASogABkAPzmOuVcvKaUjqA1R4CcJQBUeiLjt3btt4wZOzGbzHEwtbw0OgzoAAP7P2R72ZJOQZp6Z9k5GUOWuygZF0MITEhOui1YVGDKpUklLuAdV6l1pLhusM/DH892lYTtZHrsALhAn+PldrMJ4OloW/O0WXNXFGm914AkWbDcIuuvxLrMyLdWGIJ0jVJEr7N5pdTq9n8AAAA==",
+      "aspectRatio": 1.468092954629288,
+      "width": 3980,
+      "height": 2711,
+      "placeholder": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADwBACdASogABYAPzmOuVavKaUjqA1R4CcJYwCw7A9K9eBik6+9EMTKbHjpeWDFhfAA+eqRQliUCY9FCjLqliq67/rHvBe7UxGZ7dniJ6gCJzQuHYZ2Wxen/IUYkWYczT5fTHSPN+7dQkBtGCF0MXb7ZxPq5+qodvcM0qcMynqrxrCs1u1WwL1LHElSzrIBKSAAAA==",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
         "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "40mm",
-        "aperture": "f/5.3",
-        "shutterSpeed": "1/1250",
-        "iso": 250
+        "focalLength": "18mm",
+        "aperture": "f/4.5",
+        "shutterSpeed": "1/4",
+        "iso": 2000
       },
       "sizes": {
         "full": {
-          "width": 3707,
-          "height": 2848,
-          "url": "/photos/176/pa5/08/full.avif",
-          "bytes": 737685
+          "width": 3980,
+          "height": 2711,
+          "url": "/photos/176/pa5/06/full.avif",
+          "bytes": 181660
         },
         "md": {
           "width": 1200,
-          "height": 922,
-          "url": "/photos/176/pa5/08/1200.avif",
-          "bytes": 84407
+          "height": 817,
+          "url": "/photos/176/pa5/06/1200.avif",
+          "bytes": 34028
         },
         "sm": {
           "width": 640,
-          "height": 492,
-          "url": "/photos/176/pa5/08/640.avif",
-          "bytes": 31010
+          "height": 436,
+          "url": "/photos/176/pa5/06/640.avif",
+          "bytes": 15672
         }
       }
     },
-    "176/pa5/07": {
-      "file": "07",
-      "path": "176/pa5/07",
-      "collection": "176/pa5",
+    "176/pa3/10": {
+      "file": "10",
+      "path": "176/pa3/10",
+      "collection": "176/pa3",
       "title": "",
       "alt": "",
-      "aspectRatio": 1.5246742992499014,
-      "width": 3862,
-      "height": 2533,
-      "placeholder": "data:image/webp;base64,UklGRtIAAABXRUJQVlA4IMYAAAAQBgCdASogABUAPzmKulYvKSWjsBgIAeAnCWwAnTLevPmgACc15pFhwNbfMsPSATDyf7oYPAUwXwAA/p1UPEphV3dd1GY9SfdUGCiHfN5UwSpl16E1Orqd/gb18vwHpRwElReSAyfoyuFkyXr9kKtmhANojmLaChr+9j0GrfAofOy3PVBsMQek9XlJcXm2MivlpuG9t3NBwUr9GCNXfTP+UIsHOd1pCaX/9FcKKZWQB9ldGJEBx1wRH+lpb3voIRnEN8gAAAA=",
+      "aspectRatio": 1,
+      "width": 5633,
+      "height": 5633,
+      "placeholder": "data:image/webp;base64,UklGRvoAAABXRUJQVlA4IO4AAABQBgCdASogACAAPzmKulWvKSWjKA1R4CcJZQDMX6gT4hZSCfXFoWVMGLmTFQX8ZEg4fL5MSCMFWT7IgAD8j+r/a6ohLigd4vnZoMbCMZyKtgDmUIaEMS00nLkBfCFPH4qB5ZdQrjXvQONhojaeCAJGFDO279jxo0P4DtbbigSrCujHVblgQhAYFOmA2zHZetqtxy7Oh+8tMUeanjg8LTw6zNGCL0UOb0QP8RvuREy/q7sd8dnBznNOr7euhLNEeMf6TVYRUvjzAIVBt2cGTDu4nIlKjvoi/i7Bc81Sv/QW7TVjH1uuS0wKaJgKAAAA",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
         "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
-        "focalLength": "26mm",
-        "aperture": "f/4.2",
-        "shutterSpeed": "1/2500",
-        "iso": 250
+        "focalLength": "34mm",
+        "aperture": "f/5",
+        "shutterSpeed": "1/640",
+        "iso": 200
       },
       "sizes": {
         "full": {
-          "width": 3862,
-          "height": 2533,
-          "url": "/photos/176/pa5/07/full.avif",
-          "bytes": 1092848
+          "width": 5633,
+          "height": 5633,
+          "url": "/photos/176/pa3/10/full.avif",
+          "bytes": 1110906
         },
         "md": {
           "width": 1200,
-          "height": 787,
-          "url": "/photos/176/pa5/07/1200.avif",
-          "bytes": 272135
+          "height": 1200,
+          "url": "/photos/176/pa3/10/1200.avif",
+          "bytes": 116268
         },
         "sm": {
           "width": 640,
-          "height": 420,
-          "url": "/photos/176/pa5/07/640.avif",
-          "bytes": 119972
+          "height": 640,
+          "url": "/photos/176/pa3/10/640.avif",
+          "bytes": 52574
         }
       }
     },
@@ -872,6 +805,84 @@ export const manifest: PhotoManifest = {
         }
       }
     },
+    "176/pa5/07": {
+      "file": "07",
+      "path": "176/pa5/07",
+      "collection": "176/pa5",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.5246742992499014,
+      "width": 3862,
+      "height": 2533,
+      "placeholder": "data:image/webp;base64,UklGRtIAAABXRUJQVlA4IMYAAAAQBgCdASogABUAPzmKulYvKSWjsBgIAeAnCWwAnTLevPmgACc15pFhwNbfMsPSATDyf7oYPAUwXwAA/p1UPEphV3dd1GY9SfdUGCiHfN5UwSpl16E1Orqd/gb18vwHpRwElReSAyfoyuFkyXr9kKtmhANojmLaChr+9j0GrfAofOy3PVBsMQek9XlJcXm2MivlpuG9t3NBwUr9GCNXfTP+UIsHOd1pCaX/9FcKKZWQB9ldGJEBx1wRH+lpb3voIRnEN8gAAAA=",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
+        "focalLength": "26mm",
+        "aperture": "f/4.2",
+        "shutterSpeed": "1/2500",
+        "iso": 250
+      },
+      "sizes": {
+        "full": {
+          "width": 3862,
+          "height": 2533,
+          "url": "/photos/176/pa5/07/full.avif",
+          "bytes": 1092848
+        },
+        "md": {
+          "width": 1200,
+          "height": 787,
+          "url": "/photos/176/pa5/07/1200.avif",
+          "bytes": 272135
+        },
+        "sm": {
+          "width": 640,
+          "height": 420,
+          "url": "/photos/176/pa5/07/640.avif",
+          "bytes": 119972
+        }
+      }
+    },
+    "176/pa5/08": {
+      "file": "08",
+      "path": "176/pa5/08",
+      "collection": "176/pa5",
+      "title": "",
+      "alt": "",
+      "aspectRatio": 1.3016151685393258,
+      "width": 3707,
+      "height": 2848,
+      "placeholder": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAQBQCdASogABkAPzmOuVcvKaUjqA1R4CcJQBUeiLjt3btt4wZOzGbzHEwtbw0OgzoAAP7P2R72ZJOQZp6Z9k5GUOWuygZF0MITEhOui1YVGDKpUklLuAdV6l1pLhusM/DH892lYTtZHrsALhAn+PldrMJ4OloW/O0WXNXFGm914AkWbDcIuuvxLrMyLdWGIJ0jVJEr7N5pdTq9n8AAAA==",
+      "exif": {
+        "camera": "NIKON CORPORATION NIKON D5000",
+        "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
+        "focalLength": "40mm",
+        "aperture": "f/5.3",
+        "shutterSpeed": "1/1250",
+        "iso": 250
+      },
+      "sizes": {
+        "full": {
+          "width": 3707,
+          "height": 2848,
+          "url": "/photos/176/pa5/08/full.avif",
+          "bytes": 737685
+        },
+        "md": {
+          "width": 1200,
+          "height": 922,
+          "url": "/photos/176/pa5/08/1200.avif",
+          "bytes": 84407
+        },
+        "sm": {
+          "width": 640,
+          "height": 492,
+          "url": "/photos/176/pa5/08/640.avif",
+          "bytes": 31010
+        }
+      }
+    },
     "176/pa3/02": {
       "file": "02",
       "path": "176/pa3/02",
@@ -908,6 +919,39 @@ export const manifest: PhotoManifest = {
           "height": 440,
           "url": "/photos/176/pa3/02/640.avif",
           "bytes": 57119
+        }
+      }
+    },
+    "176/pa3/12": {
+      "file": "12",
+      "path": "176/pa3/12",
+      "collection": "176/pa3",
+      "title": "12 (bonus)",
+      "alt": "",
+      "process": "Digital composite",
+      "aspectRatio": 1.4030898876404494,
+      "width": 7992,
+      "height": 5696,
+      "placeholder": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAADwBACdASogABcAPzmKu1avKSWjsBgIAeAnCWMAAHwfG00GX8pGg2iK+eFISVyf9/gA/txxKeA8azfmJbp+EeDTfJE3xv1yEaGxLDyl4bI3pARvc60tBkMR9E68yF2bHUDdSkCny8IiInNzUcao8jqxYi6h6zrTo+8kYdwN8CABotJTG3D+6dNWJiczVaMXxS6eSVsIEBYaC16mZUcyDi76lAIxin8eweX6zHyRoZaVOEStpSzd4w26MTTF/XoK1kwAAA==",
+      "exif": {},
+      "sizes": {
+        "full": {
+          "width": 7992,
+          "height": 5696,
+          "url": "/photos/176/pa3/12/full.avif",
+          "bytes": 2306713
+        },
+        "md": {
+          "width": 1200,
+          "height": 855,
+          "url": "/photos/176/pa3/12/1200.avif",
+          "bytes": 111089
+        },
+        "sm": {
+          "width": 640,
+          "height": 456,
+          "url": "/photos/176/pa3/12/640.avif",
+          "bytes": 43133
         }
       }
     },
@@ -950,42 +994,42 @@ export const manifest: PhotoManifest = {
         }
       }
     },
-    "176/pa3/08": {
-      "file": "08",
-      "path": "176/pa3/08",
+    "176/pa3/09": {
+      "file": "09",
+      "path": "176/pa3/09",
       "collection": "176/pa3",
       "title": "",
       "alt": "",
       "aspectRatio": 1.5056179775280898,
       "width": 8576,
       "height": 5696,
-      "placeholder": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACwBACdASogABUAPzmSv1mvKaYjqAgB4CcJYwC+SFafN8MwjJsa+JOzKWBru4CgAP70KKgUjXXte+oBPA9/1ZZQH+f27nh4x0e4y7mv6iW/RvNmxlDv8K8lJ1AdlLRWDXIlQdU5V7b6SyiM3swQgiM7qr9usARqu7klKvWQ4bFB/bf06b75FamkAAA=",
+      "placeholder": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABwBACdASogABUAPzmGulOvKSWisAgB4CcJYwDBzCnX+pq4G4ZqJcoWHIvDwAD+7IdhEZiCV5Es5vZnBDYBg3ZljO7nwfzc34xHjJ7CFJtCLTXuHaPdLcy9cU8otaJPf0pRTIlWTd/QAA==",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
         "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
         "focalLength": "18mm",
         "aperture": "f/4",
-        "shutterSpeed": "1/4000",
-        "iso": 320
+        "shutterSpeed": "1/200",
+        "iso": 1000
       },
       "sizes": {
         "full": {
           "width": 8576,
           "height": 5696,
-          "url": "/photos/176/pa3/08/full.avif",
-          "bytes": 2615195
+          "url": "/photos/176/pa3/09/full.avif",
+          "bytes": 3706304
         },
         "md": {
           "width": 1200,
           "height": 797,
-          "url": "/photos/176/pa3/08/1200.avif",
-          "bytes": 88286
+          "url": "/photos/176/pa3/09/1200.avif",
+          "bytes": 211755
         },
         "sm": {
           "width": 640,
           "height": 425,
-          "url": "/photos/176/pa3/08/640.avif",
-          "bytes": 29054
+          "url": "/photos/176/pa3/09/640.avif",
+          "bytes": 80682
         }
       }
     },
@@ -1028,75 +1072,42 @@ export const manifest: PhotoManifest = {
         }
       }
     },
-    "176/pa3/12": {
-      "file": "12",
-      "path": "176/pa3/12",
-      "collection": "176/pa3",
-      "title": "12 (bonus)",
-      "alt": "",
-      "process": "Digital composite",
-      "aspectRatio": 1.4030898876404494,
-      "width": 7992,
-      "height": 5696,
-      "placeholder": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAADwBACdASogABcAPzmKu1avKSWjsBgIAeAnCWMAAHwfG00GX8pGg2iK+eFISVyf9/gA/txxKeA8azfmJbp+EeDTfJE3xv1yEaGxLDyl4bI3pARvc60tBkMR9E68yF2bHUDdSkCny8IiInNzUcao8jqxYi6h6zrTo+8kYdwN8CABotJTG3D+6dNWJiczVaMXxS6eSVsIEBYaC16mZUcyDi76lAIxin8eweX6zHyRoZaVOEStpSzd4w26MTTF/XoK1kwAAA==",
-      "exif": {},
-      "sizes": {
-        "full": {
-          "width": 7992,
-          "height": 5696,
-          "url": "/photos/176/pa3/12/full.avif",
-          "bytes": 2306713
-        },
-        "md": {
-          "width": 1200,
-          "height": 855,
-          "url": "/photos/176/pa3/12/1200.avif",
-          "bytes": 111089
-        },
-        "sm": {
-          "width": 640,
-          "height": 456,
-          "url": "/photos/176/pa3/12/640.avif",
-          "bytes": 43133
-        }
-      }
-    },
-    "176/pa3/09": {
-      "file": "09",
-      "path": "176/pa3/09",
+    "176/pa3/08": {
+      "file": "08",
+      "path": "176/pa3/08",
       "collection": "176/pa3",
       "title": "",
       "alt": "",
       "aspectRatio": 1.5056179775280898,
       "width": 8576,
       "height": 5696,
-      "placeholder": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABwBACdASogABUAPzmGulOvKSWisAgB4CcJYwDBzCnX+pq4G4ZqJcoWHIvDwAD+7IdhEZiCV5Es5vZnBDYBg3ZljO7nwfzc34xHjJ7CFJtCLTXuHaPdLcy9cU8otaJPf0pRTIlWTd/QAA==",
+      "placeholder": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACwBACdASogABUAPzmSv1mvKaYjqAgB4CcJYwC+SFafN8MwjJsa+JOzKWBru4CgAP70KKgUjXXte+oBPA9/1ZZQH+f27nh4x0e4y7mv6iW/RvNmxlDv8K8lJ1AdlLRWDXIlQdU5V7b6SyiM3swQgiM7qr9usARqu7klKvWQ4bFB/bf06b75FamkAAA=",
       "exif": {
         "camera": "NIKON CORPORATION NIKON D5000",
         "lens": "Nikon AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR",
         "focalLength": "18mm",
         "aperture": "f/4",
-        "shutterSpeed": "1/200",
-        "iso": 1000
+        "shutterSpeed": "1/4000",
+        "iso": 320
       },
       "sizes": {
         "full": {
           "width": 8576,
           "height": 5696,
-          "url": "/photos/176/pa3/09/full.avif",
-          "bytes": 3706304
+          "url": "/photos/176/pa3/08/full.avif",
+          "bytes": 2615195
         },
         "md": {
           "width": 1200,
           "height": 797,
-          "url": "/photos/176/pa3/09/1200.avif",
-          "bytes": 211755
+          "url": "/photos/176/pa3/08/1200.avif",
+          "bytes": 88286
         },
         "sm": {
           "width": 640,
           "height": 425,
-          "url": "/photos/176/pa3/09/640.avif",
-          "bytes": 80682
+          "url": "/photos/176/pa3/08/640.avif",
+          "bytes": 29054
         }
       }
     }

@@ -48,7 +48,7 @@ interface PhotoEntry {
 interface CollectionFrontmatter {
   title: string;
   slug: string;
-  cover?: string;
+  cover?: string | string[];
   license?: string;
   licenseUrl?: string;
   sortOrder?: number;
@@ -302,7 +302,10 @@ async function findCollections(
     path,
     blurb: content.trim() ? toPlainText(marked.lexer(content.trim())) : "",
     blurbHtml: content.trim() ? (marked.parse(content.trim()) as string) : "",
-    cover: fm.cover ? `${path}/${fm.cover}` : photoRefs[0],
+    covers: (fm.cover
+      ? (Array.isArray(fm.cover) ? fm.cover : [fm.cover]).map(String).map((c) => `${path}/${c}`)
+      : photoRefs.slice(0, 1)
+    ),
     license: fm.license,
     licenseUrl: fm.licenseUrl,
     sortOrder: fm.sortOrder ?? 0,

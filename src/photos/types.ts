@@ -39,7 +39,7 @@ export interface CollectionData {
   path: string;
   blurb: string;
   blurbHtml: string;
-  cover?: string;
+  covers: string[];
   license?: string;
   licenseUrl?: string;
   sortOrder: number;

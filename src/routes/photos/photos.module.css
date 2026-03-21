@@ -32,6 +32,10 @@
   }
 }
 
+.collectionInfo {
+  margin-block-end: var(--s1);
+}
+
 .collectionInfo h1 {
   font-size: var(--s2);
   font-weight: 700;
@@ -77,6 +81,7 @@
   text-decoration: none;
   border-radius: 6px;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(#fff, #fff);
   background: #222;
   transition: background 0.15s ease;
   break-inside: avoid;
@@ -93,6 +98,39 @@
 
 .cardImage img {
   width: 100%;
+  display: block;
+}
+
+.cardMosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  aspect-ratio: 3 / 2;
+}
+
+.cardMosaic > * {
+  aspect-ratio: unset !important;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cardMosaic > :last-child {
+  grid-column: 2;
+  grid-row: 1 / -1;
+}
+
+.cardMosaic picture {
+  position: absolute;
+  inset: 0;
+}
+
+.cardMosaic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
   display: block;
 }
 

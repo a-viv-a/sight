@@ -1,6 +1,10 @@
 ---
 title: "ART 176"
 slug: 176
+cover:
+  - "pa2/05"
+  - "pa5/01"
+  - "pa3/01"
 sortOrder: 0
 ---
 
